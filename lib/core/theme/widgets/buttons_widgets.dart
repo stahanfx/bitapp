@@ -76,10 +76,10 @@ class BitAppButtonIcon extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+        padding: const EdgeInsets.fromLTRB(0, 7, 10, 7),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(12.r),
             color: bitAppColorWhite,
           ),
           width: 40.w,

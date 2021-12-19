@@ -1,8 +1,9 @@
-import 'package:bitapp/core/services/api/files/files_api_clients.dart';
 import 'package:bitapp/core/services/file/image_services.dart';
+import 'package:bitapp/core/theme/styles/font_style.dart';
 import 'package:bitapp/core/theme/styles/global_style.dart';
 import 'package:bitapp/core/theme/widgets/buttons_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
@@ -18,6 +19,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bitAppColorBackgroun,
       appBar: AppBar(
+        title: BitAppFonts.head_2(value: 'Главная', color: bitAppColorBlack),
         actions: [
           BitAppButtonIcon.appBar(
               onPressed: () {
@@ -70,13 +72,13 @@ class _PostRowWidget extends StatelessWidget {
             children: [
               // ignore: sized_box_for_whitespace
               Container(
-                width: 40,
-                height: 40,
+                width: 40.w,
+                height: 40.h,
                 child: GetImageApi(id: catalog.picture as String),
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: 10.w),
               Text(catalog.name as String),
-              const SizedBox(height: 100),
+              SizedBox(height: 70.h),
             ],
           ),
         )

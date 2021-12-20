@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ProductListModel with ChangeNotifier {
   var catalogsList = <Catalog>[];
-  var productList = <Product>[];
+  // var productList = <Product>[];
 
   Future<void> getCatalog(filter, select) async {
     final category =

@@ -93,7 +93,7 @@ class _PostRowWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-          onTap: () => print(catalog.picture),
+          onTap: () => print(catalog.id),
           child: Column(
             children: [
               // ignore: sized_box_for_whitespace

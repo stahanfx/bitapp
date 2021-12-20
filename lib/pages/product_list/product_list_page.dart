@@ -1,25 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/core/services/file/image_services.dart';
 import 'package:bitapp/core/theme/styles/font_style.dart';
 import 'package:bitapp/core/theme/styles/global_style.dart';
 import 'package:bitapp/core/theme/widgets/buttons_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-// ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
-import 'home_page_model.dart';
+import 'product_list_page_model.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class ProductList extends StatelessWidget {
+  int categoryId;
+  ProductList({
+    Key? key,
+    required this.categoryId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<HomePageModel>();
+    final provider = context.watch<ProductListModel>();
     final catalogs = provider.catalogsList;
 
     if (provider.catalogsList.isEmpty) {
-      provider.getCatalog({'SECTION_ID': 'false', 'IBLOCK_ID': '26'}, 'light');
+      provider.getCatalog(
+          {'SECTION_ID': '$categoryId', 'IBLOCK_ID': '26'}, 'light');
     }
 
     return Scaffold(
@@ -86,7 +91,7 @@ class _PostRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<HomePageModel>();
+    final provider = context.watch<ProductListModel>();
     final catalogs = provider.catalogsList;
     final catalog = catalogs[index];
     return Column(

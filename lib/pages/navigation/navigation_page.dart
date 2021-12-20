@@ -3,6 +3,7 @@ import 'package:bitapp/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+// ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
 import 'navigation_page_model.dart';

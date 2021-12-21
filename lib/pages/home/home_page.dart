@@ -1,10 +1,14 @@
+import 'package:bitapp/core/services/api/api_path.dart';
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/core/services/file/image_services.dart';
 import 'package:bitapp/core/theme/styles/font_style.dart';
 import 'package:bitapp/core/theme/styles/global_style.dart';
 import 'package:bitapp/core/theme/widgets/buttons_widgets.dart';
+import 'package:bitapp/pages/product_list/product_list_page.dart';
+import 'package:bitapp/pages/product_list/product_list_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
@@ -19,7 +23,8 @@ class HomePage extends StatelessWidget {
     final catalogs = provider.catalogsList;
 
     if (provider.catalogsList.isEmpty) {
-      provider.getCatalog({'SECTION_ID': 'false', 'IBLOCK_ID': '26'}, 'light');
+      provider.getCatalog(
+          {'SECTION_ID': 'false', 'IBLOCK_ID': baseTradeCatalog}, 'light');
     }
 
     return Scaffold(
@@ -42,7 +47,7 @@ class HomePage extends StatelessWidget {
               color: Colors.redAccent,
             ),
           ),
-          _CAtalogScroll(catalogs: catalogs),
+          SizedBox(height: 150, child: _CAtalogScroll(catalogs: catalogs)),
         ],
       ),
     );
@@ -87,29 +92,46 @@ class _PostRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<HomePageModel>();
-    final catalogs = provider.catalogsList;
-    final catalog = catalogs[index];
+    final catalogList = provider.catalogsList;
+    final catalog = catalogList[index];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-          onTap: () => print(catalog.id),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(create: (_) => ProductListModel()),
+                  ChangeNotifierProvider(create: (_) => ProductListModel()),
+                ],
+                child: ProductList(
+                  categoryId: catalog.id,
+                ),
+              ),
+            ),
+          ),
           child: Column(
             children: [
               // ignore: sized_box_for_whitespace
               Container(
-                width: 70.w,
-                height: 70.h,
+                width: 60.w,
+                height: 60.h,
                 child: GetImageApi(id: catalog.picture as String),
               ),
               SizedBox(width: 70.w),
               Container(
-                width: 100,
+                width: 80,
                 height: 50,
-                // child: Text(
-                //   catalog.name as String,
-                //   textAlign: TextAlign.center,
-                // ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: BitAppFonts.capt_1_2(
+                    textAlign: TextAlign.center,
+                    value: catalog.name as String,
+                    color: bitAppColorBlack,
+                  ),
+                ),
               ),
               SizedBox(width: 100.h),
             ],

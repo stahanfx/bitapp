@@ -3,22 +3,30 @@ import 'package:bitapp/core/services/api/files/files_api_clients.dart';
 import 'package:flutter/material.dart';
 
 class GetImageApi extends StatelessWidget {
-  final String id;
-  const GetImageApi({
+  dynamic id;
+  GetImageApi({
     Key? key,
     required this.id,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<String>(
-      future: getImage(id),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return Container();
-        //const CircularProgressIndicator();
-        return Image.network(snapshot.data as String);
-      },
-    );
+    if (id == null) {
+      return Image.asset('assets/images/no-image.png');
+    } else {
+      return FutureBuilder<String>(
+        future: getImage(id),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return Container();
+          //const CircularProgressIndicator();
+          if (snapshot.data != null) {
+            return Image.network(snapshot.data as String);
+          } else {
+            return Image.asset('assets/images/no-image.png');
+          }
+        },
+      );
+    }
   }
 
   Future<String> getImage(id) async {

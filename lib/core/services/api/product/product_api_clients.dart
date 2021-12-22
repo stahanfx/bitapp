@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:bitapp/core/services/api/_example/_example_model.dart';
 import 'package:bitapp/core/services/api/api_path.dart';
 
 import '../api_query.dart';

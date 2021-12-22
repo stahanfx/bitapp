@@ -8,7 +8,7 @@ class HomePageModel with ChangeNotifier {
   Future<void> getCatalog(filter, select) async {
     final category =
         await ApiCatalog(filter: filter, select: select).getCatalogs();
-    catalogsList += category.result;
+    catalogsList += category.result!;
     notifyListeners();
   }
 

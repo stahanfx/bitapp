@@ -4,14 +4,29 @@ import 'package:bitapp/core/services/api/product/product_api_clients.dart';
 import 'package:bitapp/core/services/api/product/product_model.dart';
 import 'package:flutter/material.dart';
 
-class ProductListModel with ChangeNotifier {
+class CatalogModel with ChangeNotifier {
   var catalogsList = <Catalog>[];
   var productList = <Product>[];
 
   Future<void> getCatalog(filter, select) async {
     final category =
         await ApiCatalog(filter: filter, select: select).getCatalogs();
-    catalogsList += category.result;
+    if (category.result != null) {
+      catalogsList += category.result!;
+    } else {
+      catalogsList.clear();
+    }
+    notifyListeners();
+  }
+
+  Future getCatalogOne(filter, select) async {
+    final category =
+        await ApiCatalog(filter: filter, select: select).getCatalogs();
+    if (category.result != null) {
+      catalogsList += category.result!;
+    } else {
+      catalogsList.clear();
+    }
     notifyListeners();
   }
 
@@ -21,11 +36,6 @@ class ProductListModel with ChangeNotifier {
       // select: select,
     ).getData();
     productList += product.result;
-    notifyListeners();
-  }
-
-  void clearCatalog() {
-    catalogsList = <Catalog>[];
     notifyListeners();
   }
 }

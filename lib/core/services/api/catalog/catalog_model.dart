@@ -4,8 +4,8 @@ part 'catalog_model.g.dart';
 
 @JsonSerializable()
 class CatalogResponse {
-  int status;
-  List<Catalog> result;
+  int? status;
+  List<Catalog>? result;
 
   CatalogResponse({
     required this.status,

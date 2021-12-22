@@ -8,9 +8,9 @@ part of 'catalog_model.dart';
 
 CatalogResponse _$CatalogResponseFromJson(Map<String, dynamic> json) =>
     CatalogResponse(
-      status: json['status'] as int,
-      result: (json['result'] as List<dynamic>)
-          .map((e) => Catalog.fromJson(e as Map<String, dynamic>))
+      status: json['status'] as int?,
+      result: (json['result'] as List<dynamic>?)
+          ?.map((e) => Catalog.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

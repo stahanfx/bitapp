@@ -1,4 +1,6 @@
+import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/core/theme/styles/global_style.dart';
+import 'package:bitapp/pages/catalog/catalog_page.dart';
 import 'package:bitapp/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
@@ -25,6 +27,7 @@ class _MyHomePageState extends State<NavigationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bitAppColorBackgroun,
       extendBody: true,
       body: _getBody(),
       bottomNavigationBar: _buildOriginDesign(),
@@ -80,10 +83,20 @@ class _MyHomePageState extends State<NavigationPage> {
 
   Widget _getBody() {
     List<Widget> pages = [
-      Container(
-        alignment: Alignment.center,
-        child: const HomePage(),
+      Navigator(
+        onGenerateRoute: (settings) {
+          Widget page = HomePage();
+          if (settings.name == "home/catalog")
+            page = CatalogPage(
+              argument: settings.arguments,
+            );
+          return MaterialPageRoute(builder: (_) => page);
+        },
       ),
+      // Container(
+      //   alignment: Alignment.center,
+      //   child: const HomePage(),
+      // ),
       Container(
         alignment: Alignment.center,
         child: const Text(

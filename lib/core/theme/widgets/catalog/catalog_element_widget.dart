@@ -24,7 +24,7 @@ class CatalogElementWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 6),
-            child: Container(
+            child: SizedBox(
               width: 60,
               height: 24,
               // color: Colors.red,

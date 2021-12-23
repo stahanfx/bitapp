@@ -13,6 +13,7 @@ class CatalogModel with ChangeNotifier {
         await ApiCatalog(filter: filter, select: select).getCatalogs();
     if (category.result != null) {
       catalogsList += category.result!;
+      return category.result;
     } else {
       catalogsList.clear();
     }

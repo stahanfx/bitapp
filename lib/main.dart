@@ -1,35 +1,32 @@
 import 'package:bitapp/core/theme/styles/global_style.dart';
 import 'package:bitapp/pages/catalog/catalog_page.dart';
 import 'package:bitapp/pages/home/home_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'core/services/api/api_path.dart';
-import 'core/services/api/catalog/catalog_model.dart';
 import 'load_app.dart';
 import 'pages/catalog/catalog_page_model.dart';
-import 'pages/home/home_page_model.dart';
 import 'pages/navigation/navigation_page_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  // await EasyLocalization.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  EasyLocalization.logger.enableBuildModes = [];
   runApp(
-    const MyApp(),
-    //   EasyLocalization(
-    //   child: const MyApp(),
-    //   supportedLocales: const [
-    //     Locale('ru', 'RU'),
-    //     Locale('en', 'US'),
-    //   ],
-    //   fallbackLocale: const Locale('ru', 'RU'),
-    //   path: 'assets/translations',
-    // ),
+    EasyLocalization(
+      child: const MyApp(),
+      supportedLocales: const [
+        Locale('ru', 'RU'),
+        Locale('en', 'US'),
+      ],
+      fallbackLocale: const Locale('ru', 'RU'),
+      path: 'assets/translations',
+    ),
   );
 }
 
@@ -47,9 +44,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => NavigationPageModel()),
         ],
         child: MaterialApp(
-          // localizationsDelegates: context.localizationDelegates,
-          // supportedLocales: context.supportedLocales,
-          // locale: context.locale,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
           theme: ThemeData(
             textTheme:
                 GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
@@ -69,7 +66,9 @@ class MyApp extends StatelessWidget {
             'loader': (context) => const LoadApp(),
             // When navigating to the "secondScreen" route, build the SecondScreen widget.
             'home': (context) => const HomePage(),
-            'home/catalog': (context) => const CatalogPage(),
+            'home/catalog': (context) => CatalogPage(
+                  argument: null,
+                ),
           },
         ),
       ),

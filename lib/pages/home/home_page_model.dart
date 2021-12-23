@@ -14,6 +14,5 @@ class HomePageModel with ChangeNotifier {
 
   void clearCatalog() {
     catalogsList = <Catalog>[];
-    notifyListeners();
   }
 }

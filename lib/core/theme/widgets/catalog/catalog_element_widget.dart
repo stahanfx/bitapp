@@ -17,15 +17,15 @@ class CatalogElementWidget extends StatelessWidget {
         children: [
           // ignore: sized_box_for_whitespace
           Container(
-            width: 70,
-            height: 70,
+            width: 40,
+            height: 40,
             // color: Colors.red,
             child: GetImageApi(id: catalog.picture),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.only(top: 6),
             child: Container(
-              width: 70,
+              width: 60,
               height: 24,
               // color: Colors.red,
               child: BitAppFonts.capt_1_2(

@@ -103,7 +103,7 @@ class BitAppFonts extends StatelessWidget {
   const BitAppFonts.capt_1_2({
     Key? key,
     required this.value,
-    this.fontSize = 10,
+    this.fontSize = 8,
     this.fontWeight = FontWeight.w400,
     required this.color,
     this.textAlign = TextAlign.start,

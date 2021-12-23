@@ -8,7 +8,7 @@ class CatalogModel with ChangeNotifier {
   var catalogsList = <Catalog>[];
   var productList = <Product>[];
 
-  Future<void> getCatalog(filter, select) async {
+  Future getCatalog(filter, select) async {
     final category =
         await ApiCatalog(filter: filter, select: select).getCatalogs();
     if (category.result != null) {
@@ -16,10 +16,10 @@ class CatalogModel with ChangeNotifier {
     } else {
       catalogsList.clear();
     }
-    notifyListeners();
+    // notifyListeners();
   }
 
-  Future getCatalogOne(filter, select) async {
+  Future getCatalogRe(filter, select) async {
     final category =
         await ApiCatalog(filter: filter, select: select).getCatalogs();
     if (category.result != null) {
@@ -27,7 +27,12 @@ class CatalogModel with ChangeNotifier {
     } else {
       catalogsList.clear();
     }
-    notifyListeners();
+    // notifyListeners();
+  }
+
+  Future clearCatalog() async {
+    catalogsList.clear();
+    // notifyListeners();
   }
 
   Future<void> getProduct(filter, select) async {

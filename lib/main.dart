@@ -8,8 +8,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'core/services/api/api_path.dart';
+import 'core/services/api/catalog/catalog_model.dart';
 import 'load_app.dart';
 import 'pages/catalog/catalog_page_model.dart';
+import 'pages/home/home_page_model.dart';
+import 'pages/navigation/navigation_page_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +44,7 @@ class MyApp extends StatelessWidget {
       builder: () => MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => CatalogModel()),
+          ChangeNotifierProvider(create: (_) => NavigationPageModel()),
         ],
         child: MaterialApp(
           // localizationsDelegates: context.localizationDelegates,

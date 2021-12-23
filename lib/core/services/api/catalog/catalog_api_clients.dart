@@ -7,7 +7,7 @@ import '../api_query.dart';
 import 'catalog_model.dart';
 
 class ApiCatalog {
-  Map<String, String> filter;
+  Map<String, dynamic> filter;
   String select;
   final client = HttpClient();
 

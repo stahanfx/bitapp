@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return Center(child: Text('Loading....'));
+          // return Center(child: Text('Loading....'));
           default:
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');

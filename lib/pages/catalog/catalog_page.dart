@@ -51,7 +51,7 @@ class _CatalogPageState extends State<CatalogPage> {
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return Center(child: Text('Loading....'));
+          // return Center(child: Text('Loading....'));
           default:
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');

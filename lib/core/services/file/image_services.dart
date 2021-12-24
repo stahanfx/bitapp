@@ -31,8 +31,7 @@ class GetImageApi extends StatelessWidget {
   }
 
   Future<String> getImage(id) async {
-    var file = await ApiFile(id: id).getFile();
-    var imageUrl = '$siteUrl${file.result}';
+    var imageUrl = '$siteUrl${id}';
     return imageUrl;
   }
 }

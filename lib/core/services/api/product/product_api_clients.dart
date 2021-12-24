@@ -15,7 +15,7 @@ class ApiProduct {
     // required this.select,
   });
 
-  Future<ProductResponse> getData() async {
+  Future<ProductResponse> getProduct() async {
     final url = Uri(
       scheme: baseSheme,
       host: baseHost,
@@ -32,7 +32,7 @@ class ApiProduct {
         .toList()
         .then((value) => value.join())
         .then((v) => jsonDecode(v) as Map<String, dynamic>);
-    final catalog = ProductResponse.fromJson(json);
-    return catalog;
+    final responseData = ProductResponse.fromJson(json);
+    return responseData;
   }
 }

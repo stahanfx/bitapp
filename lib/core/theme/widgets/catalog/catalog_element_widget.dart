@@ -20,7 +20,7 @@ class CatalogElementWidget extends StatelessWidget {
             width: 40,
             height: 40,
             // color: Colors.red,
-            child: GetImageApi(id: catalog.picture),
+            child: GetImageApi(image: catalog.picture),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 6),

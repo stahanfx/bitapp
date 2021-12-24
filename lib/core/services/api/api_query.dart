@@ -19,7 +19,7 @@ queryGenerator({
 }
 
 queryGenerator2({
-  required Map<String, String> filter,
+  required Map<String, dynamic> filter,
   // required String select,
 }) {
   var filterList = [];

@@ -13,8 +13,9 @@ import 'package:bitapp/core/theme/widgets/catalog/catalog_element_widget.dart';
 import 'catalog_page_model.dart';
 
 class CatalogPage extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final argument;
-  CatalogPage({
+  const CatalogPage({
     Key? key,
     required this.argument,
   }) : super(key: key);
@@ -28,20 +29,35 @@ class _CatalogPageState extends State<CatalogPage> {
 //Фргументы
 // - Обьявляем переменные модели
   var catalogListModel = <Catalog>[];
+  var productListModel = <Product>[];
 
 //Обьявляем методы
 // - Методы локальной модели
   Future<void> _getLocalModel(argument) async {
-    final model = context.watch<CatalogModel>();
+    final provider = context.watch<CatalogModel>();
+
     catalogListModel.clear();
-    final catalogListData = await model.getCatalog(
+    final catalogListData = await provider.getCatalog(
         {'SECTION_ID': '$argument', 'IBLOCK_ID': baseTradeCatalog}, 'light');
     if (catalogListData != null) {
       catalogListModel += catalogListData;
     }
-  }
 
-//Методы глобальной модели
+    // productListModel.clear();
+    final productListData = await provider.getProduct(
+        {'SECTION_ID': '$argument', 'IBLOCK_ID': baseTradeCatalog}, 'light');
+    if (productListData != null) {
+      productListModel += productListData;
+    }
+    for (var element in catalogListModel) {
+      final productListData = await provider.getProduct(
+          {'SECTION_ID': '${element.id}', 'IBLOCK_ID': baseTradeCatalog},
+          'light');
+      if (productListData != null) {
+        productListModel += productListData;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +67,10 @@ class _CatalogPageState extends State<CatalogPage> {
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-          // return Center(child: Text('Loading....'));
+            return const Center(
+              child: SizedBox(
+                  height: 30, width: 30, child: CircularProgressIndicator()),
+            );
           default:
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
@@ -74,6 +93,9 @@ class _CatalogPageState extends State<CatalogPage> {
                     _CatalogListBuilder(
                       catalogListModel: catalogListModel,
                     ),
+                    _ProductListBuilder(
+                      productListModel: productListModel,
+                    )
                   ],
                 ),
               );
@@ -84,6 +106,7 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 }
 
+// ignore: must_be_immutable
 class _CatalogListBuilder extends StatelessWidget {
   List<Catalog> catalogListModel;
   _CatalogListBuilder({
@@ -142,13 +165,12 @@ class _CatalogListElementBuilder extends StatelessWidget {
 }
 
 // ignore: unused_element
-class _ProductGrid extends StatelessWidget {
-  const _ProductGrid({
+class _ProductListBuilder extends StatelessWidget {
+  List<Product> productListModel;
+  _ProductListBuilder({
     Key? key,
-    required this.products,
+    required this.productListModel,
   }) : super(key: key);
-
-  final List<Product> products;
 
   @override
   Widget build(BuildContext context) {
@@ -162,27 +184,30 @@ class _ProductGrid extends StatelessWidget {
           mainAxisSpacing: 20,
         ),
         scrollDirection: Axis.vertical,
-        itemCount: products.length,
+        itemCount: productListModel.length,
         itemBuilder: (BuildContext context, int index) {
-          return _ProductGridWidget(index: index);
+          return _ProductListElementBuilder(
+            index: index,
+            catalogsList: productListModel,
+          );
         },
       ),
     );
   }
 }
 
-class _ProductGridWidget extends StatelessWidget {
+class _ProductListElementBuilder extends StatelessWidget {
   final int index;
-  const _ProductGridWidget({
+  final List<Product> catalogsList;
+  const _ProductListElementBuilder({
     Key? key,
     required this.index,
+    required this.catalogsList,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<CatalogModel>();
-    final productList = provider.productList;
-    final product = productList[index];
+    final product = catalogsList[index];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -190,30 +215,49 @@ class _ProductGridWidget extends StatelessWidget {
           height: 234,
           child: GestureDetector(
             onTap: () {},
-            child: Column(
-              children: [
-                // ignore: sized_box_for_whitespace
-                GetImageApi(id: product.previewPicture),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: BitAppFonts.capt_1_2(
-                    textAlign: TextAlign.center,
-                    value: product.name as String,
-                    color: bitAppColorBlack,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: BitAppFonts.body_1_1(
-                    textAlign: TextAlign.center,
-                    value: product.price as String,
-                    color: bitAppColorBlack,
-                  ),
-                ),
-              ],
-            ),
+            child: ProductElementWidget(product: product),
           ),
         )
+      ],
+    );
+  }
+}
+
+class ProductElementWidget extends StatelessWidget {
+  const ProductElementWidget({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // ignore: sized_box_for_whitespace
+        Center(
+          child: SizedBox(
+              height: 150,
+              width: 150,
+              child: GetImageApi(image: product.previewPicture)),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: BitAppFonts.capt_1_2(
+            textAlign: TextAlign.center,
+            value: product.name as String,
+            color: bitAppColorBlack,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: BitAppFonts.body_1_1(
+            textAlign: TextAlign.center,
+            value: product.price as String,
+            color: bitAppColorBlack,
+          ),
+        ),
       ],
     );
   }

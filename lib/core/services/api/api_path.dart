@@ -13,5 +13,5 @@ class ApiPatchFile {
 }
 
 class ApiPatchProduct {
-  static String productGet() => '$baseApiAddress/sale.product.list';
+  static String productGet() => '$baseApiAddress/product.trade.list';
 }

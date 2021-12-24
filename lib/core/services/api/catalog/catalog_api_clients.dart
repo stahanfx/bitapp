@@ -11,10 +11,7 @@ class ApiCatalog {
   String select;
   final client = HttpClient();
 
-  ApiCatalog({
-    required this.filter,
-    required this.select,
-  });
+  ApiCatalog({required this.filter, required this.select, s});
 
   Future<CatalogResponse> getCatalogs() async {
     final url = Uri(
@@ -30,7 +27,7 @@ class ApiCatalog {
         .toList()
         .then((value) => value.join())
         .then((v) => jsonDecode(v) as Map<String, dynamic>);
-    final catalog = CatalogResponse.fromJson(json);
-    return catalog;
+    final responseData = CatalogResponse.fromJson(json);
+    return responseData;
   }
 }

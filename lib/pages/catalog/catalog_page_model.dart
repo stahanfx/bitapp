@@ -20,28 +20,16 @@ class CatalogModel with ChangeNotifier {
     // notifyListeners();
   }
 
-  Future getCatalogRe(filter, select) async {
-    final category =
-        await ApiCatalog(filter: filter, select: select).getCatalogs();
-    if (category.result != null) {
-      catalogsList += category.result!;
-    } else {
-      catalogsList.clear();
-    }
-    // notifyListeners();
-  }
-
-  Future clearCatalog() async {
-    catalogsList.clear();
-    // notifyListeners();
-  }
-
-  Future<void> getProduct(filter, select) async {
+  Future getProduct(filter, select) async {
     final product = await ApiProduct(
       filter: filter,
       // select: select,
-    ).getData();
-    productList += product.result;
-    notifyListeners();
+    ).getProduct();
+    if (product.result != null) {
+      productList += product.result;
+      return product.result;
+    } else {
+      catalogsList.clear();
+    }
   }
 }

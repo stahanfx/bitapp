@@ -1,5 +1,4 @@
 import 'package:bitapp/core/theme/styles/global_style.dart';
-import 'package:bitapp/core/theme/widgets/catalog/catalog_element_widget.dart';
 import 'package:bitapp/pages/catalog/catalog_page.dart';
 import 'package:bitapp/pages/home/home_page.dart';
 import 'package:easy_localization/easy_localization.dart';

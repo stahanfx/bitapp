@@ -78,13 +78,7 @@ class BitAppButtonIcon extends StatelessWidget {
       height: 32.h,
       child: GestureDetector(
         onTap: onPressed,
-        child: Container(
-          // decoration: BoxDecoration(
-          // borderRadius: BorderRadius.circular(12.r),
-          // color: bitAppColorWhite,
-          // ),
-          child: Icon(icon),
-        ),
+        child: Icon(icon),
       ),
     );
   }

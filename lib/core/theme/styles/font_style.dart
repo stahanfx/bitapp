@@ -117,6 +117,7 @@ class BitAppFonts extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize.sp,
         fontWeight: fontWeight,
+        color: color,
       ),
     );
   }

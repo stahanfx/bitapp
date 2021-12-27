@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:font_awesome_flutter/src/fa_duotone_icon.dart';
 
 void main() {
   testWidgets('Colors are in the correct order', (WidgetTester tester) async {

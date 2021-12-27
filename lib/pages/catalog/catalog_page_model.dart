@@ -25,6 +25,7 @@ class CatalogPageModel with ChangeNotifier {
       filter: filter,
       // select: select,
     ).getProduct();
+    // ignore: unnecessary_null_comparison
     if (product.result != null) {
       productList += product.result;
       return product.result;

@@ -4,7 +4,6 @@ import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/core/services/file/image_services.dart';
 import 'package:bitapp/core/theme/styles/font_style.dart';
 import 'package:bitapp/core/theme/styles/global_style.dart';
-import 'package:bitapp/pages/catalog/catalog_page.dart';
 
 // ignore: must_be_immutable
 class CatalogListBuilder extends StatelessWidget {

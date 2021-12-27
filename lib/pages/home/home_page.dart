@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var catalogListModel = <Catalog>[];
 
-  Future<void> _getLocalModel() async {
+  Future<void> _getModel() async {
     final model = context.watch<HomePageModel>();
     catalogListModel.clear();
     final catalogListData = await model.getCatalog(
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _getLocalModel(),
+      future: _getModel(),
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:

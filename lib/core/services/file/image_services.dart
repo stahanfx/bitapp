@@ -1,5 +1,4 @@
 import 'package:bitapp/core/services/api/api_path.dart';
-import 'package:bitapp/core/services/api/files/files_api_clients.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -31,7 +30,7 @@ class GetImageApi extends StatelessWidget {
   }
 
   Future<String> getImage(id) async {
-    var imageUrl = '$siteUrl${image}';
+    var imageUrl = '$siteUrl$image';
     return imageUrl;
   }
 }

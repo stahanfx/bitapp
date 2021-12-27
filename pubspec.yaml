@@ -72,7 +72,9 @@ dev_dependencies:
 # The following section is specific to Flutter.
 dependency_overrides:
   font_awesome_flutter:
-    path: /Applications/flutter/bitapp/font_awesome
+    path: /Applications/flutter/BitApp/bitapp/font_awesome
+    # path: /Applications/flutter/bitapp/font_awesome
+    
 
 
 flutter:

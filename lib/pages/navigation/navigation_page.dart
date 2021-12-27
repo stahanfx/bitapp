@@ -1,4 +1,3 @@
-import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/core/theme/styles/global_style.dart';
 import 'package:bitapp/core/theme/widgets/catalog/catalog_element_widget.dart';
 import 'package:bitapp/pages/catalog/catalog_page.dart';

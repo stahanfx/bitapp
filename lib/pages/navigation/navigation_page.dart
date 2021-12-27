@@ -1,10 +1,12 @@
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/core/theme/styles/global_style.dart';
+import 'package:bitapp/core/theme/widgets/catalog/catalog_element_widget.dart';
 import 'package:bitapp/pages/catalog/catalog_page.dart';
 import 'package:bitapp/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
@@ -45,28 +47,30 @@ class _MyHomePageState extends State<NavigationPage> {
           topLeft: Radius.circular(36.r),
         ),
         child: CustomNavigationBar(
-          iconSize: 30.0.w,
+          iconSize: 26.0.w,
           selectedColor: Colors.white,
           strokeColor: Colors.white,
           unSelectedColor: const Color(0x90ffffff),
           backgroundColor: bitAppColorActiveButton,
           items: [
             CustomNavigationBarItem(
-              icon: const Icon(Icons.home),
+              icon: const Icon(FontAwesomeIcons.home),
             ),
             CustomNavigationBarItem(
-              icon: const Icon(Icons.lightbulb_outline),
+              icon: const Icon(FontAwesomeIcons.grid2),
             ),
             CustomNavigationBarItem(
-              icon: const Icon(Icons.shopping_cart),
+              icon: const Icon(
+                FontAwesomeIcons.bagShopping,
+              ),
               badgeCount: basketCount,
               showBadge: _badgeShows[2],
             ),
             CustomNavigationBarItem(
-              icon: const Icon(Icons.search),
+              icon: const Icon(FontAwesomeIcons.heart),
             ),
             CustomNavigationBarItem(
-              icon: const Icon(Icons.account_circle),
+              icon: const Icon(FontAwesomeIcons.user),
             ),
           ],
           currentIndex: _currentIndex,
@@ -85,18 +89,15 @@ class _MyHomePageState extends State<NavigationPage> {
     List<Widget> pages = [
       Navigator(
         onGenerateRoute: (settings) {
-          Widget page = HomePage();
-          if (settings.name == "home/catalog")
+          Widget page = const HomePage();
+          if (settings.name == "home/catalog") {
             page = CatalogPage(
-              argument: settings.arguments,
+              argument: settings.arguments as Argument,
             );
+          }
           return MaterialPageRoute(builder: (_) => page);
         },
       ),
-      // Container(
-      //   alignment: Alignment.center,
-      //   child: const HomePage(),
-      // ),
       Container(
         alignment: Alignment.center,
         child: const Text(

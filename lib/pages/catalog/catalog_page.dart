@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:bitapp/core/services/api/api_path.dart';
@@ -14,7 +15,7 @@ import 'catalog_page_model.dart';
 
 class CatalogPage extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
-  final argument;
+  final Argument? argument;
   const CatalogPage({
     Key? key,
     required this.argument,
@@ -34,8 +35,7 @@ class _CatalogPageState extends State<CatalogPage> {
 //Обьявляем методы
 // - Методы локальной модели
   Future<void> _getLocalModel(argument) async {
-    final provider = context.watch<CatalogModel>();
-
+    final provider = context.watch<CatalogPageModel>();
     catalogListModel.clear();
     final catalogListData = await provider.getCatalog(
         {'SECTION_ID': '$argument', 'IBLOCK_ID': baseTradeCatalog}, 'light');
@@ -61,9 +61,9 @@ class _CatalogPageState extends State<CatalogPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('Инициализатор CatalogPage запущен');
+    Argument arg = widget.argument as Argument;
     return FutureBuilder(
-      future: _getLocalModel(widget.argument),
+      future: _getLocalModel(arg.id),
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -78,20 +78,72 @@ class _CatalogPageState extends State<CatalogPage> {
               return Scaffold(
                 backgroundColor: bitAppColorBackgroun,
                 appBar: AppBar(
-                  title: BitAppFonts.head_2(
-                      value: 'Категории', color: bitAppColorBlack),
+                  title: BitAppFonts.body_2_2(
+                      value: '${arg.title}', color: bitAppColorBlack),
+                  leading: GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: bitAppColorWhite,
+                        ),
+                        child: BitAppButtonIcon.appBar(
+                            onPressed: () {},
+                            icon: FontAwesomeIcons.chevronLeft),
+                      ),
+                    ),
+                  ),
+                  // BitAppButtonIcon.appBar(
+                  //   onPressed: () => Navigator.of(context).pop(),
+                  //   icon: FontAwesomeIcons.chevronLeft,
+                  // ),
                   actions: [
-                    BitAppButtonIcon.appBar(
-                        onPressed: () {}, icon: Icons.print),
-                    BitAppButtonIcon.appBar(
-                        onPressed: () {}, icon: Icons.clear),
+                    GestureDetector(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Container(
+                          width: 36,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: bitAppColorWhite,
+                          ),
+                          child: BitAppButtonIcon.appBar(
+                              onPressed: () {}, icon: Icons.search),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: bitAppColorWhite,
+                        ),
+                        child: Row(
+                          children: [
+                            SizedBox(width: 5),
+                            // BitAppButtonIcon.appBar(
+                            //     onPressed: () {},
+                            //     icon: FontAwesomeIcons.filterList),
+                            SizedBox(width: 5),
+                            BitAppFonts.capt_1_1(
+                                value: 'Фильтр', color: bitAppColorBlack),
+                            SizedBox(width: 10),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10),
                   ],
                 ),
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    _CatalogListBuilder(
-                      catalogListModel: catalogListModel,
+                    CatalogListBuilder(
+                      model: catalogListModel,
                     ),
                     _ProductListBuilder(
                       productListModel: productListModel,
@@ -106,63 +158,23 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 }
 
-// ignore: must_be_immutable
-class _CatalogListBuilder extends StatelessWidget {
-  List<Catalog> catalogListModel;
-  _CatalogListBuilder({
-    Key? key,
-    required this.catalogListModel,
-  }) : super(key: key);
+// Route _createRoute(catalog) {
+//   return PageRouteBuilder(
+//     pageBuilder: (context, animation, secondaryAnimation) =>
+//         CatalogPage(argument: catalog),
+//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//       const begin = Offset(0.0, 1.0);
+//       const end = Offset.zero;
+//       final tween = Tween(begin: begin, end: end);
+//       final offsetAnimation = animation.drive(tween);
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 120,
-      child: ListView.builder(
-        cacheExtent: 800,
-        scrollDirection: Axis.horizontal,
-        itemCount: catalogListModel.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _CatalogListElementBuilder(
-            index: index,
-            catalogsList: catalogListModel,
-            // catalogList: dataTest,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _CatalogListElementBuilder extends StatelessWidget {
-  final int index;
-  final List<Catalog> catalogsList;
-  const _CatalogListElementBuilder({
-    Key? key,
-    required this.index,
-    required this.catalogsList,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final catalog = catalogsList[index];
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              'home/catalog',
-              arguments: catalog.id,
-            );
-          },
-          child: CatalogElementWidget(catalog: catalog),
-        ),
-      ],
-    );
-  }
-}
+//       return SlideTransition(
+//         position: offsetAnimation,
+//         child: child,
+//       );
+//     },
+//   );
+// }
 
 // ignore: unused_element
 class _ProductListBuilder extends StatelessWidget {
@@ -175,7 +187,7 @@ class _ProductListBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 550,
+      height: 600,
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 200,

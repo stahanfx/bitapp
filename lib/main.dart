@@ -1,4 +1,5 @@
 import 'package:bitapp/core/theme/styles/global_style.dart';
+import 'package:bitapp/core/theme/widgets/catalog/catalog_element_widget.dart';
 import 'package:bitapp/pages/catalog/catalog_page.dart';
 import 'package:bitapp/pages/home/home_page.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -10,6 +11,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'load_app.dart';
 import 'pages/catalog/catalog_page_model.dart';
+import 'pages/home/home_page_model.dart';
 import 'pages/navigation/navigation_page_model.dart';
 
 Future<void> main() async {
@@ -40,8 +42,9 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: () => MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => CatalogModel()),
+          ChangeNotifierProvider(create: (_) => CatalogPageModel()),
           ChangeNotifierProvider(create: (_) => NavigationPageModel()),
+          ChangeNotifierProvider(create: (_) => HomePageModel()),
         ],
         child: MaterialApp(
           localizationsDelegates: context.localizationDelegates,
@@ -52,6 +55,7 @@ class MyApp extends StatelessWidget {
                 GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
             backgroundColor: bitAppColorBackgroun,
             appBarTheme: AppBarTheme(
+                toolbarTextStyle: TextStyle(color: bitAppColorBlack),
                 iconTheme: IconThemeData(color: bitAppColorBlack),
                 backgroundColor: bitAppColorBackgroun,
                 elevation: 0,
@@ -66,9 +70,7 @@ class MyApp extends StatelessWidget {
             'loader': (context) => const LoadApp(),
             // When navigating to the "secondScreen" route, build the SecondScreen widget.
             'home': (context) => const HomePage(),
-            'home/catalog': (context) => CatalogPage(
-                  argument: null,
-                ),
+            'home/catalog': (context) => const CatalogPage(argument: null),
           },
         ),
       ),

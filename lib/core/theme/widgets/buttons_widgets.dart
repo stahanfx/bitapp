@@ -73,17 +73,16 @@ class BitAppButtonIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 7, 10, 7),
+    return SizedBox(
+      width: 32.w,
+      height: 32.h,
+      child: GestureDetector(
+        onTap: onPressed,
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
-            color: bitAppColorWhite,
-          ),
-          width: 40.w,
-          height: 40.h,
+          // decoration: BoxDecoration(
+          // borderRadius: BorderRadius.circular(12.r),
+          // color: bitAppColorWhite,
+          // ),
           child: Icon(icon),
         ),
       ),

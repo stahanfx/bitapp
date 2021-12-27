@@ -4,7 +4,7 @@ import 'package:bitapp/core/services/api/product/product_api_clients.dart';
 import 'package:bitapp/core/services/api/product/product_model.dart';
 import 'package:flutter/material.dart';
 
-class CatalogModel with ChangeNotifier {
+class CatalogPageModel with ChangeNotifier {
   var catalogsList = <Catalog>[];
   var productList = <Product>[];
 

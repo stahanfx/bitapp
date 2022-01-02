@@ -1,21 +1,18 @@
+import 'package:bitapp/core/services/api/global_parametrs.dart';
+import 'package:bitapp/core/theme/styles/sized_style.dart';
+import 'package:bitapp/core/theme/widgets/catalog/product_element_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'package:bitapp/core/services/api/api_path.dart';
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/core/services/api/product/product_model.dart';
-import 'package:bitapp/core/services/file/image_services.dart';
-import 'package:bitapp/core/theme/styles/font_style.dart';
-import 'package:bitapp/core/theme/styles/global_style.dart';
-import 'package:bitapp/core/theme/widgets/buttons_widgets.dart';
+import 'package:bitapp/core/theme/styles/color_style.dart';
 import 'package:bitapp/core/theme/widgets/catalog/catalog_element_widget.dart';
 
 import 'catalog_page_model.dart';
+import 'catalog_page_widget.dart';
 
 class CatalogPage extends StatefulWidget {
-  // ignore: prefer_typing_uninitialized_variables
   final Argument? argument;
   const CatalogPage({
     Key? key,
@@ -27,14 +24,9 @@ class CatalogPage extends StatefulWidget {
 }
 
 class _CatalogPageState extends State<CatalogPage> {
-//Инициализируем базовые данные
-//Фргументы
-// - Обьявляем переменные модели
   var catalogListModel = <Catalog>[];
   var productListModel = <Product>[];
 
-//Обьявляем методы
-// - Методы локальной модели
   Future<void> _getModel(argument) async {
     final provider = context.watch<CatalogPageModel>();
     catalogListModel.clear();
@@ -63,89 +55,33 @@ class _CatalogPageState extends State<CatalogPage> {
   @override
   Widget build(BuildContext context) {
     Argument argument = widget.argument as Argument;
+
     return FutureBuilder(
       future: _getModel(argument.id),
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return const Center(
+            return Center(
               child: SizedBox(
-                  height: 30, width: 30, child: CircularProgressIndicator()),
+                height: AppSize().h10 * 3,
+                width: AppSize().w10 * 3,
+                child: const CircularProgressIndicator(),
+              ),
             );
           default:
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
               return Scaffold(
-                backgroundColor: bitAppColorBackgroun,
-                appBar: AppBar(
-                  title: BitAppFonts.body_2_2(
-                      value: '${argument.title}', color: bitAppColorBlack),
-                  leading: GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: bitAppColorWhite,
-                        ),
-                        child: BitAppButtonIcon.appBar(
-                            onPressed: () {},
-                            icon: FontAwesomeIcons.chevronLeft),
-                      ),
-                    ),
-                  ),
-                  actions: [
-                    GestureDetector(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Container(
-                          width: 36,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: bitAppColorWhite,
-                          ),
-                          child: BitAppButtonIcon.appBar(
-                              onPressed: () {}, icon: Icons.search),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10.w),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: bitAppColorWhite,
-                        ),
-                        child: Row(
-                          children: [
-                            SizedBox(width: 5.w),
-                            // BitAppButtonIcon.appBar(
-                            //     onPressed: () {},
-                            //     icon: FontAwesomeIcons.filterList),
-                            SizedBox(width: 5.w),
-                            BitAppFonts.capt_1_1(
-                                value: 'Фильтр', color: bitAppColorBlack),
-                            SizedBox(width: 10.w),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10.w),
-                  ],
-                ),
-                body: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CatalogListBuilder(
-                      model: catalogListModel,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: _ProductListBuilder(
-                        productListModel: productListModel,
+                backgroundColor: AppColor().backgroun,
+                body: CustomScrollView(
+                  slivers: [
+                    CatalogAppBar(
+                        argument: argument, catalogListModel: catalogListModel),
+                    _ProductBuilder(productListModel: productListModel),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: AppSize().h10 * 9,
                       ),
                     )
                   ],
@@ -158,132 +94,34 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 }
 
-// ignore: must_be_immutable
-class _ProductListBuilder extends StatelessWidget {
-  List<Product> productListModel;
-  _ProductListBuilder({
+class _ProductBuilder extends StatelessWidget {
+  final List<Product> productListModel;
+  const _ProductBuilder({
     Key? key,
     required this.productListModel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6),
-            child: BitAppFonts.capt_1_1(
-              value: 'Найдено ${productListModel.length.toString()} товаров',
-              color: bitAppColorBlack,
-            ),
-          ),
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(horizontal: AppSize().h10),
+      sliver: SliverGrid(
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: AppSize().w10 * 20,
+          mainAxisSpacing: AppSize().w10,
+          crossAxisSpacing: AppSize().w10,
+          childAspectRatio: 0.743,
         ),
-        SizedBox(
-          height: 600,
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              childAspectRatio: 2 / 2.75,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-            ),
-            scrollDirection: Axis.vertical,
-            itemCount: productListModel.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Column(
-                children: [
-                  _ProductListElementBuilder(
-                    index: index,
-                    catalogsList: productListModel,
-                  ),
-                ],
-              );
-            },
-          ),
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            final product = productListModel[index];
+            return GestureDetector(
+              onTap: () {},
+              child: ProductElementWidget(product: product),
+            );
+          },
+          childCount: productListModel.length,
         ),
-      ],
-    );
-  }
-}
-
-class _ProductListElementBuilder extends StatelessWidget {
-  final int index;
-  final List<Product> catalogsList;
-  const _ProductListElementBuilder({
-    Key? key,
-    required this.index,
-    required this.catalogsList,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final product = catalogsList[index];
-    return GestureDetector(
-      onTap: () {},
-      child: ProductElementWidget(product: product),
-    );
-  }
-}
-
-class ProductElementWidget extends StatelessWidget {
-  const ProductElementWidget({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
-
-  final Product product;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: bitAppColorWhite,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: Offset(0, 1), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // ignore: sized_box_for_whitespace
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: SizedBox(
-                  width: 130,
-                  height: 130,
-                  child: Center(
-                      child: GetImageApi(image: product.previewPicture))),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SizedBox(
-              height: 32,
-              child: BitAppFonts.capt_1_1(
-                textAlign: TextAlign.start,
-                value: product.name as String,
-                color: bitAppColorBlack,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: BitAppFonts.body_1_1(
-              value: product.price as String,
-              color: bitAppColorActiveButton,
-            ),
-          ),
-        ],
       ),
     );
   }

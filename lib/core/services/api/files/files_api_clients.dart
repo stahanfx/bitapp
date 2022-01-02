@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bitapp/core/services/api/api_path.dart';
 
+import '../global_parametrs.dart';
 import 'files_model.dart';
 
 class ApiFile {

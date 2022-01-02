@@ -1,8 +1,7 @@
-import 'package:bitapp/core/theme/styles/global_style.dart';
+import 'package:bitapp/core/theme/styles/color_style.dart';
 import 'package:bitapp/pages/catalog/catalog_page.dart';
 import 'package:bitapp/pages/home/home_page.dart';
 import 'package:easy_localization/easy_localization.dart';
-// import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -52,22 +51,18 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             textTheme:
                 GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
-            backgroundColor: bitAppColorBackgroun,
+            backgroundColor: AppColor().backgroun,
             appBarTheme: AppBarTheme(
-                toolbarTextStyle: TextStyle(color: bitAppColorBlack),
-                iconTheme: IconThemeData(color: bitAppColorBlack),
-                backgroundColor: bitAppColorBackgroun,
+                toolbarTextStyle: TextStyle(color: AppColor().black),
+                iconTheme: IconThemeData(color: AppColor().black),
+                backgroundColor: AppColor().backgroun,
                 elevation: 0,
-                titleTextStyle: TextStyle(
-                  color: bitAppColorBlack,
-                )),
+                titleTextStyle: TextStyle(color: AppColor().black)),
             primarySwatch: Colors.blue,
           ),
           initialRoute: 'loader',
           routes: {
-            // When navigating to the "homeScreen" route, build the HomeScreen widget.
             'loader': (context) => const LoadApp(),
-            // When navigating to the "secondScreen" route, build the SecondScreen widget.
             'home': (context) => const HomePage(),
             'home/catalog': (context) => const CatalogPage(argument: null),
           },

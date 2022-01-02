@@ -1,11 +1,10 @@
+import 'package:bitapp/core/services/api/global_parametrs.dart';
+import 'package:bitapp/core/theme/styles/sized_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:bitapp/core/services/api/api_path.dart';
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/core/theme/styles/font_style.dart';
-import 'package:bitapp/core/theme/styles/global_style.dart';
-import 'package:bitapp/core/theme/widgets/buttons_widgets.dart';
+import 'package:bitapp/core/theme/styles/color_style.dart';
 import 'package:bitapp/core/theme/widgets/catalog/catalog_element_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -36,28 +35,37 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-          // return Center(child: Text('Loading....'));
+            return const Center(child: Text('Loading....'));
           default:
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
               return Scaffold(
-                backgroundColor: bitAppColorBackgroun,
+                backgroundColor: AppColor().backgroun,
                 appBar: AppBar(
-                  title: BitAppFonts.head_2(
-                      value: 'Главная', color: bitAppColorBlack),
+                  title: Container(
+                    alignment: Alignment.centerLeft,
+                    child:
+                        AppFonts.b20(value: 'Главная', color: AppColor().black),
+                  ),
                   actions: [
-                    BitAppButtonIcon.appBar(
-                        onPressed: () {}, icon: FontAwesomeIcons.filter),
-                    SizedBox(width: 10.w)
+                    Padding(
+                      padding: EdgeInsets.only(right: AppSize().w10),
+                      child: CircleAvatar(
+                        backgroundColor: AppColor().white,
+                        child: IconButton(
+                          icon: Icon(FontAwesomeIcons.filter,
+                              size: AppSize().h10 * 2),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CatalogListBuilder(
-                      model: catalogListModel,
-                    ),
+                    CatalogListBuilder(model: catalogListModel),
                   ],
                 ),
               );

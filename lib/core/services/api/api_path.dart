@@ -1,8 +1,4 @@
-const String baseSheme = 'http';
-const String baseHost = '192.168.1.82';
-const String baseApiAddress = 'bitapi';
-const String siteUrl = '$baseSheme://$baseHost';
-const String baseTradeCatalog = '26';
+import 'package:bitapp/core/services/api/global_parametrs.dart';
 
 class ApiPatchCatalog {
   static String categoryList() => '$baseApiAddress/catalog.trade.list';

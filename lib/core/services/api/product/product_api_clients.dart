@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bitapp/core/services/api/api_path.dart';
 
 import '../api_query.dart';
+import '../global_parametrs.dart';
 import 'product_model.dart';
 
 class ApiProduct {

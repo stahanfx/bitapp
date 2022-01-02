@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:bitapp/core/services/api/api_path.dart';
 
 import '../api_query.dart';
+import '../global_parametrs.dart';
 import 'catalog_model.dart';
 
 class ApiCatalog {

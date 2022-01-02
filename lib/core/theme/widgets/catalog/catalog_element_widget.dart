@@ -1,9 +1,10 @@
+import 'package:bitapp/core/theme/styles/sized_style.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/core/services/file/image_services.dart';
 import 'package:bitapp/core/theme/styles/font_style.dart';
-import 'package:bitapp/core/theme/styles/global_style.dart';
+import 'package:bitapp/core/theme/styles/color_style.dart';
 
 // ignore: must_be_immutable
 class CatalogListBuilder extends StatelessWidget {
@@ -80,32 +81,28 @@ class CatalogElementWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10),
-      child: Column(
-        children: [
-          // ignore: sized_box_for_whitespace
-          Container(
-            width: 50,
-            height: 40,
-            // color: Colors.red,
-            child: GetImageApi(image: catalog.picture),
+    return Column(
+      children: [
+        SizedBox(
+          width: AppSize().w10 * 4,
+          height: AppSize().h10 * 4,
+          child: GetImageApi(image: catalog.picture),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+            top: AppSize().h10 * 0.6,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: SizedBox(
-              width: 60,
-              height: 18,
-              // color: Colors.red,
-              child: BitAppFonts.capt_1_2(
-                textAlign: TextAlign.center,
-                value: catalog.name as String,
-                color: bitAppColorBlack,
-              ),
+          child: SizedBox(
+            width: AppSize().w10 * 6,
+            height: AppSize().h10 * 2,
+            child: AppFonts.t8(
+              textAlign: TextAlign.center,
+              value: catalog.name as String,
+              color: AppColor().black,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

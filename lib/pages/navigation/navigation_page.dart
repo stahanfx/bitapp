@@ -1,20 +1,19 @@
-import 'package:bitapp/core/theme/styles/global_style.dart';
-import 'package:bitapp/core/theme/widgets/catalog/catalog_element_widget.dart';
-import 'package:bitapp/pages/catalog/catalog_page.dart';
-import 'package:bitapp/pages/home/home_page.dart';
-import 'package:flutter/material.dart';
+import 'package:bitapp/core/theme/styles/sized_style.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
+import 'package:bitapp/core/theme/styles/color_style.dart';
+import 'package:bitapp/core/theme/widgets/catalog/catalog_element_widget.dart';
+import 'package:bitapp/pages/catalog/catalog_page.dart';
+import 'package:bitapp/pages/home/home_page.dart';
+
 import 'navigation_page_model.dart';
 
 class NavigationPage extends StatefulWidget {
-  const NavigationPage({
-    Key? key,
-  }) : super(key: key);
+  const NavigationPage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -28,29 +27,29 @@ class _MyHomePageState extends State<NavigationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bitAppColorBackgroun,
+      backgroundColor: AppColor().backgroun,
       extendBody: true,
-      body: _getBody(),
-      bottomNavigationBar: _buildOriginDesign(),
+      body: _getPage(),
+      bottomNavigationBar: _getDesign(),
     );
   }
 
-  Widget _buildOriginDesign() {
+  Widget _getDesign() {
     final provider = context.watch<NavigationPageModel>();
     final basketCount = provider.basketCount;
     return SizedBox(
-      height: 78.h,
+      height: AppSize().h10 * 8,
       child: ClipRRect(
         borderRadius: BorderRadius.only(
-          topRight: Radius.circular(36.r),
-          topLeft: Radius.circular(36.r),
+          topRight: Radius.circular(AppSize().r10 * 4),
+          topLeft: Radius.circular(AppSize().r10 * 4),
         ),
         child: CustomNavigationBar(
-          iconSize: 26.0.w,
+          iconSize: AppSize().h10 * 2.2,
           selectedColor: Colors.white,
           strokeColor: Colors.white,
           unSelectedColor: const Color(0x90ffffff),
-          backgroundColor: bitAppColorActiveButton,
+          backgroundColor: AppColor().activeButton,
           items: [
             CustomNavigationBarItem(
               icon: const Icon(FontAwesomeIcons.home),
@@ -59,9 +58,7 @@ class _MyHomePageState extends State<NavigationPage> {
               icon: const Icon(FontAwesomeIcons.grid2),
             ),
             CustomNavigationBarItem(
-              icon: const Icon(
-                FontAwesomeIcons.bagShopping,
-              ),
+              icon: const Icon(FontAwesomeIcons.bagShopping),
               badgeCount: basketCount,
               showBadge: _badgeShows[2],
             ),
@@ -84,15 +81,13 @@ class _MyHomePageState extends State<NavigationPage> {
     );
   }
 
-  Widget _getBody() {
+  Widget _getPage() {
     List<Widget> pages = [
       Navigator(
         onGenerateRoute: (settings) {
           Widget page = const HomePage();
           if (settings.name == "home/catalog") {
-            page = CatalogPage(
-              argument: settings.arguments as Argument,
-            );
+            page = CatalogPage(argument: settings.arguments as Argument);
           }
           return MaterialPageRoute(builder: (_) => page);
         },

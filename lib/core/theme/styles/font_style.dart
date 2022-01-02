@@ -3,14 +3,14 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BitAppFonts extends StatelessWidget {
+class AppFonts extends StatelessWidget {
   final String value;
   final double fontSize;
   final FontWeight fontWeight;
   final Color color;
   final TextAlign textAlign;
 
-  const BitAppFonts.title_1({
+  const AppFonts.b40({
     Key? key,
     required this.value,
     this.fontSize = 40,
@@ -19,7 +19,7 @@ class BitAppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const BitAppFonts.title_2({
+  const AppFonts.b32({
     Key? key,
     required this.value,
     this.fontSize = 32,
@@ -28,7 +28,7 @@ class BitAppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const BitAppFonts.title_3({
+  const AppFonts.b24({
     Key? key,
     required this.value,
     this.fontSize = 24,
@@ -37,7 +37,7 @@ class BitAppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const BitAppFonts.head_1({
+  const AppFonts.b20({
     Key? key,
     required this.value,
     this.fontSize = 20,
@@ -46,7 +46,7 @@ class BitAppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const BitAppFonts.head_2({
+  const AppFonts.b18({
     Key? key,
     required this.value,
     this.fontSize = 18,
@@ -55,7 +55,7 @@ class BitAppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const BitAppFonts.body_1_1({
+  const AppFonts.b16({
     Key? key,
     required this.value,
     this.fontSize = 16,
@@ -64,7 +64,7 @@ class BitAppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const BitAppFonts.body_1_2({
+  const AppFonts.t16({
     Key? key,
     required this.value,
     this.fontSize = 16,
@@ -73,7 +73,7 @@ class BitAppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const BitAppFonts.body_2_1({
+  const AppFonts.b14({
     Key? key,
     required this.value,
     this.fontSize = 14,
@@ -82,7 +82,7 @@ class BitAppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const BitAppFonts.body_2_2({
+  const AppFonts.t14({
     Key? key,
     required this.value,
     this.fontSize = 14,
@@ -91,7 +91,7 @@ class BitAppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const BitAppFonts.capt_1_1({
+  const AppFonts.b12({
     Key? key,
     required this.value,
     this.fontSize = 12,
@@ -100,7 +100,7 @@ class BitAppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const BitAppFonts.capt_1_2({
+  const AppFonts.t8({
     Key? key,
     required this.value,
     this.fontSize = 8,

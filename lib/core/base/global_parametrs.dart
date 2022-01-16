@@ -4,10 +4,23 @@ class AppSettings {
   static const String baseApiAddress = 'bitapi';
   static const String siteUrl = '$baseSheme://$baseHost';
   static const String baseTradeCatalog = '38';
+
+//TODO: Перевести на ENUM
+
   //‘horisontal' or 'vertical’
   static const String categoryViewTupe = 'horisontal';
-  //‘horisontal' or 'vertical’
-  static const String categoryHomeViewTupe = 'horisontal';
-  //'Y' or 'N'
   static const String categoryAllChildrenProduct = 'N';
+
+//Настройки отображения
+//Главная
+  //Категории: verticaltext -
+  static const String homeCategoryViewType = 'verticaltext';
+  //Appbar: light
+  static const String homeAppbarViewType = 'light';
+
+//Каталог
+  //Категории: verticaltext - sliverAppBar - verticalTwoText
+  static const String catalogCategiryViewType = 'verticalTwoText';
+  //Appbar: light
+  static const String catalogAppbarViewType = 'light';
 }

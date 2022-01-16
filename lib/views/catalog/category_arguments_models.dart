@@ -1,8 +1,8 @@
-class ArgumentCatalogBase {
+class CategoryArgument {
   String? title;
   String? id;
 
-  ArgumentCatalogBase(
+  CategoryArgument(
     this.title,
     this.id,
   );

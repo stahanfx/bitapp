@@ -1,5 +1,5 @@
-import 'package:bitapp/views/catalog/catalog_page_model.dart';
-import 'package:bitapp/views/home/home_page_model.dart';
+import 'package:bitapp/views/catalog/catalog_model.dart';
+import 'package:bitapp/views/home/home_model.dart';
 import 'package:bitapp/views/navigation/navigation_page_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

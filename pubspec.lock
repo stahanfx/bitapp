@@ -318,7 +318,7 @@ packages:
   font_awesome_flutter:
     dependency: "direct overridden"
     description:
-      path: "/Applications/flutter/bitapp/font_awesome"
+      path: "/Applications/flutter/BitApp/bitapp/font_awesome"
       relative: false
     source: path
     version: "10.0.0-beta"

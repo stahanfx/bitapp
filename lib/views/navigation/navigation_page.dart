@@ -1,6 +1,6 @@
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/sized_style.dart';
-import 'package:bitapp/theme/widgets/catalog/catalog_arguments_models.dart';
+import 'package:bitapp/views/catalog/category_arguments_models.dart';
 import 'package:bitapp/views/catalog/catalog_page.dart';
 import 'package:bitapp/views/home/home_page.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
@@ -87,7 +87,7 @@ class _MyHomePageState extends State<NavigationPage> {
           Widget page = const HomePage();
           if (settings.name == "home/catalog") {
             page = CatalogPage(
-              argument: settings.arguments as ArgumentCatalogBase,
+              argument: settings.arguments as CategoryArgument,
             );
           }
           return MaterialPageRoute(builder: (_) => page);

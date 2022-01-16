@@ -11,7 +11,7 @@ class ApiCatalog {
 
   ApiCatalog({required this.filter, required this.select, s});
 
-  Future<CatalogResponse> getCatalogs() async {
+  Future<CategoryResponse> getCategory() async {
     final url = Uri(
       scheme: AppSettings.baseSheme,
       host: AppSettings.baseHost,
@@ -20,7 +20,7 @@ class ApiCatalog {
     );
     final request = await client.get(url.toString());
     final response = await request.data;
-    final responseData = CatalogResponse.fromJson(response);
+    final responseData = CategoryResponse.fromJson(response);
     return responseData;
   }
 }

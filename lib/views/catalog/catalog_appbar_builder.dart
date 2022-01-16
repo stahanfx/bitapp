@@ -3,27 +3,43 @@ import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/theme/styles/button_style.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
-import 'package:bitapp/theme/widgets/catalog/catalog_arguments_models.dart';
-import 'package:bitapp/theme/widgets/catalog/catalog_list_builder_widget.dart';
+import 'package:bitapp/theme/styles/sized_style.dart';
+import 'package:bitapp/views/catalog/category_arguments_models.dart';
+import 'package:bitapp/theme/widgets/category/category_list_builder.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-catalogAppBarBuilder(argument, catalogListModel) {
-  switch (AppSettings.categoryViewTupe) {
-    case 'horisontal':
-      return CatalogNavigationAppbar(
-        argument: argument,
-        catalogListModel: catalogListModel,
-      );
-    case 'vertical':
-      return CatalogLightApppbar(
-        argument: argument,
-      );
-    default:
-      return CatalogNavigationAppbar(
-        argument: argument,
-        catalogListModel: catalogListModel,
-      );
+// ignore: must_be_immutable
+class CatalogPageAppBarBuilder extends StatelessWidget
+    with PreferredSizeWidget {
+  List<Category> catalogListModel;
+  CategoryArgument argument;
+  CatalogPageAppBarBuilder(
+      {Key? key, required this.argument, required this.catalogListModel})
+      : super(key: key);
+
+  @override
+  Size get preferredSize => Size.fromHeight(AppSize().h10 * 2);
+
+  @override
+  Widget build(BuildContext context) {
+    switch (AppSettings.catalogAppbarViewType) {
+      case 'horisontal':
+        return CatalogNavigationAppbar(
+          argument: argument,
+          categoryListModel: catalogListModel,
+        );
+      case 'light':
+        return CatalogLightAppbar(
+          argument: argument,
+        );
+      default:
+        return CatalogNavigationAppbar(
+          argument: argument,
+          categoryListModel: catalogListModel,
+        );
+    }
   }
 }
 
@@ -31,16 +47,16 @@ class CatalogNavigationAppbar extends StatelessWidget {
   const CatalogNavigationAppbar({
     Key? key,
     required this.argument,
-    required this.catalogListModel,
+    required this.categoryListModel,
   }) : super(key: key);
 
-  final ArgumentCatalogBase argument;
-  final List<Catalog> catalogListModel;
+  final CategoryArgument argument;
+  final List<Category> categoryListModel;
 
   @override
   Widget build(BuildContext context) {
     double? value;
-    if (catalogListModel.isNotEmpty) {
+    if (categoryListModel.isNotEmpty) {
       value = 130;
     } else {
       value = 0;
@@ -109,7 +125,8 @@ class CatalogNavigationAppbar extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                catalogListBuilder(catalogListModel),
+                CategoryListBuilder(categoryListModel: categoryListModel)
+                    .catalog(),
               ],
             ),
           ),
@@ -119,13 +136,13 @@ class CatalogNavigationAppbar extends StatelessWidget {
   }
 }
 
-class CatalogLightApppbar extends StatelessWidget {
-  const CatalogLightApppbar({
+class CatalogLightAppbar extends StatelessWidget {
+  const CatalogLightAppbar({
     Key? key,
     required this.argument,
   }) : super(key: key);
 
-  final ArgumentCatalogBase argument;
+  final CategoryArgument argument;
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,9 @@
 import 'package:bitapp/core/base/global_parametrs.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/sized_style.dart';
-import 'package:bitapp/theme/widgets/catalog/catalog_arguments_models.dart';
-import 'package:bitapp/theme/widgets/catalog/catalog_list_builder_widget.dart';
+import 'package:bitapp/views/catalog/category_arguments_models.dart';
+
+import 'package:bitapp/theme/widgets/category/category_list_builder.dart';
 import 'package:bitapp/theme/widgets/product/product_vertical_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,11 +11,11 @@ import 'package:provider/provider.dart';
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/core/services/api/product/product_model.dart';
 
-import 'catalog_page_model.dart';
-import 'catalog_appbar_builder_widget.dart';
+import 'catalog_model.dart';
+import 'catalog_appbar_builder.dart';
 
 class CatalogPage extends StatefulWidget {
-  final ArgumentCatalogBase? argument;
+  final CategoryArgument? argument;
   const CatalogPage({
     Key? key,
     required this.argument,
@@ -25,7 +26,7 @@ class CatalogPage extends StatefulWidget {
 }
 
 class _CatalogPageState extends State<CatalogPage> {
-  var catalogListModel = <Catalog>[];
+  var catalogListModel = <Category>[];
   var productListModel = <Product>[];
 
   Future<void> _getModels(argument) async {
@@ -78,7 +79,7 @@ class _CatalogPageState extends State<CatalogPage> {
 
   @override
   Widget build(BuildContext context) {
-    ArgumentCatalogBase argument = widget.argument as ArgumentCatalogBase;
+    CategoryArgument argument = widget.argument as CategoryArgument;
 
     return FutureBuilder(
       future: _getModels(argument.id),
@@ -100,24 +101,15 @@ class _CatalogPageState extends State<CatalogPage> {
                 backgroundColor: AppColor().backgroun,
                 body: CustomScrollView(
                   slivers: [
-                    catalogAppBarBuilder(argument, catalogListModel),
+                    CatalogPageAppBarBuilder(
+                        argument: argument, catalogListModel: catalogListModel),
                     SliverToBoxAdapter(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CatalogVerticalListBuilder(
-                            catalogListModel: catalogListModel,
-                          ),
-                        ],
-                      ),
+                      child: CategoryListBuilder(
+                        categoryListModel: catalogListModel,
+                      ).catalog(),
                     ),
                     ProductGridBuilder(
                       productListModel: productListModel,
-                    ),
-                    SliverToBoxAdapter(
-                      child: SizedBox(
-                        height: AppSize().h10 * 9,
-                      ),
                     ),
                   ],
                 ),

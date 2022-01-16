@@ -1,9 +1,43 @@
+import 'package:bitapp/core/helper/text_clean.dart';
 import 'package:bitapp/core/services/api/product/product_model.dart';
 import 'package:bitapp/core/services/file/image_services.dart';
-import 'package:bitapp/core/theme/styles/font_style.dart';
-import 'package:bitapp/core/theme/styles/color_style.dart';
-import 'package:bitapp/core/theme/styles/sized_style.dart';
+import 'package:bitapp/theme/styles/color_style.dart';
+import 'package:bitapp/theme/styles/font_style.dart';
+import 'package:bitapp/theme/styles/sized_style.dart';
 import 'package:flutter/material.dart';
+
+class ProductGridBuilder extends StatelessWidget {
+  final List<Product> productListModel;
+  const ProductGridBuilder({
+    Key? key,
+    required this.productListModel,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(horizontal: AppSize().h10),
+      sliver: SliverGrid(
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: AppSize().w10 * 20,
+          mainAxisSpacing: AppSize().w10,
+          crossAxisSpacing: AppSize().w10,
+          childAspectRatio: 0.743,
+        ),
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            final product = productListModel[index];
+            return GestureDetector(
+              onTap: () {},
+              child: ProductElementWidget(product: product),
+            );
+          },
+          childCount: productListModel.length,
+        ),
+      ),
+    );
+  }
+}
 
 class ProductElementWidget extends StatelessWidget {
   const ProductElementWidget({
@@ -44,28 +78,24 @@ class ProductElementWidget extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(
-              AppSize().w10,
-              AppSize().h10,
-              AppSize().w10,
-              AppSize().h10,
-            ),
+                AppSize().w10, AppSize().h10, AppSize().w10, AppSize().h10),
             child: AppFonts.b12(
-              value: product.price as String,
+              value: product.price,
               color: AppColor().activeButton,
             ),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(
-              AppSize().w10,
-              AppSize().h10,
-              AppSize().w10,
-              AppSize().h10,
-            ),
+                AppSize().w10, AppSize().h10, AppSize().w10, AppSize().h10),
             child: SizedBox(
               height: AppSize().h10 * 3,
               child: AppFonts.b12(
                 textAlign: TextAlign.start,
-                value: product.name as String,
+                value: TextCleaner(
+                  baseText: product.name.toString(),
+                  repText: '(OUIFLACON)',
+                  newText: '',
+                ).base(),
                 color: AppColor().black,
               ),
             ),

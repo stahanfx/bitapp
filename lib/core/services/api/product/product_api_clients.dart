@@ -1,15 +1,13 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:bitapp/core/services/api/api_path.dart';
+import 'package:dio/dio.dart';
 
-import '../api_query.dart';
-import '../global_parametrs.dart';
+import '../../../base/global_parametrs.dart';
 import 'product_model.dart';
 
 class ApiProduct {
   Map<String, String> filter;
   // String select;
-  final client = HttpClient();
+  final client = Dio();
 
   ApiProduct({
     required this.filter,
@@ -18,22 +16,34 @@ class ApiProduct {
 
   Future<ProductResponse> getProduct() async {
     final url = Uri(
-      scheme: baseSheme,
-      host: baseHost,
+      scheme: AppSettings.baseSheme,
+      host: AppSettings.baseHost,
       path: ApiPatchProduct.productGet(),
-      query: queryGenerator2(
+      query: _queryGenerator(
         filter: filter,
         // select: select,
       ),
     );
-    final request = await client.getUrl(url);
-    final response = await request.close();
-    final json = await response
-        .transform(utf8.decoder)
-        .toList()
-        .then((value) => value.join())
-        .then((v) => jsonDecode(v) as Map<String, dynamic>);
-    final responseData = ProductResponse.fromJson(json);
+    final request = await client.get(url.toString());
+    final response = await request.data;
+    final responseData = ProductResponse.fromJson(response);
     return responseData;
   }
+}
+
+_queryGenerator({
+  required Map<String, dynamic> filter,
+}) {
+  var filterList = [];
+  filter.forEach((key, value) {
+    filterList.add('filter[$key]=$value&');
+  });
+  var filterResult = filterList.join("");
+
+  var list = [
+    filterResult,
+  ];
+
+  var stringList = list.join("");
+  return stringList;
 }

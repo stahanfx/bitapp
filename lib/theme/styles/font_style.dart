@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppFonts extends StatelessWidget {
-  final String value;
+  final String? value;
   final double fontSize;
   final FontWeight fontWeight;
   final Color color;
@@ -91,11 +91,29 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
+  const AppFonts.t12({
+    Key? key,
+    required this.value,
+    this.fontSize = 12,
+    this.fontWeight = FontWeight.w400,
+    required this.color,
+    this.textAlign = TextAlign.start,
+  }) : super(key: key);
+
   const AppFonts.b12({
     Key? key,
     required this.value,
     this.fontSize = 12,
     this.fontWeight = FontWeight.w600,
+    required this.color,
+    this.textAlign = TextAlign.start,
+  }) : super(key: key);
+
+  const AppFonts.t10({
+    Key? key,
+    required this.value,
+    this.fontSize = 10,
+    this.fontWeight = FontWeight.w400,
     required this.color,
     this.textAlign = TextAlign.start,
   }) : super(key: key);
@@ -111,14 +129,18 @@ class AppFonts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      value.tr(),
-      textAlign: textAlign,
-      style: TextStyle(
-        fontSize: fontSize.sp,
-        fontWeight: fontWeight,
-        color: color,
-      ),
-    );
+    if (value != null) {
+      return Text(
+        value!.tr(),
+        textAlign: textAlign,
+        style: TextStyle(
+          fontSize: fontSize.sp,
+          fontWeight: fontWeight,
+          color: color,
+        ),
+      );
+    } else {
+      return const Text('data');
+    }
   }
 }

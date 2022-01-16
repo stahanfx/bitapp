@@ -1,6 +1,6 @@
-import 'package:bitapp/core/theme/styles/color_style.dart';
-import 'package:bitapp/pages/catalog/catalog_page.dart';
-import 'package:bitapp/pages/home/home_page.dart';
+import 'package:bitapp/views/catalog/catalog_page_model.dart';
+import 'package:bitapp/views/home/home_page_model.dart';
+import 'package:bitapp/views/navigation/navigation_page_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,9 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'load_app.dart';
-import 'pages/catalog/catalog_page_model.dart';
-import 'pages/home/home_page_model.dart';
-import 'pages/navigation/navigation_page_model.dart';
+import 'theme/styles/color_style.dart';
+import 'views/catalog/catalog_page.dart';
+import 'views/home/home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,9 +40,9 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: () => MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => CatalogPageModel()),
-          ChangeNotifierProvider(create: (_) => NavigationPageModel()),
-          ChangeNotifierProvider(create: (_) => HomePageModel()),
+          /*_*/ ChangeNotifierProvider(create: (_) => NavigationPageModel()),
+          /*_*/ ChangeNotifierProvider(create: (_) => HomePageModel()),
+          /*_*/ ChangeNotifierProvider(create: (_) => CatalogPageModel()),
         ],
         child: MaterialApp(
           localizationsDelegates: context.localizationDelegates,

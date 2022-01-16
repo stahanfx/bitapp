@@ -1,11 +1,11 @@
-import 'package:bitapp/core/services/api/global_parametrs.dart';
-import 'package:bitapp/core/theme/styles/sized_style.dart';
+import 'package:bitapp/core/base/global_parametrs.dart';
+import 'package:bitapp/theme/styles/color_style.dart';
+import 'package:bitapp/theme/styles/font_style.dart';
+import 'package:bitapp/theme/styles/sized_style.dart';
+import 'package:bitapp/theme/widgets/catalog/catalog_list_builder_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
-import 'package:bitapp/core/theme/styles/font_style.dart';
-import 'package:bitapp/core/theme/styles/color_style.dart';
-import 'package:bitapp/core/theme/widgets/catalog/catalog_element_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'home_page_model.dart';
@@ -18,13 +18,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var catalogListModel = <Catalog>[];
+  List<Catalog> catalogListModel = [];
 
   Future<void> _getModel() async {
     final model = context.watch<HomePageModel>();
-    catalogListModel.clear();
+    // catalogListModel.clear();
     final catalogListData = await model.getCatalog(
-        {'SECTION_ID': 'false', 'IBLOCK_ID': baseTradeCatalog}, 'light');
+        {'SECTION_ID': 'false', 'IBLOCK_ID': AppSettings.baseTradeCatalog},
+        'light');
     catalogListModel += catalogListData;
   }
 
@@ -38,7 +39,10 @@ class _HomePageState extends State<HomePage> {
             return const Center(child: Text('Loading....'));
           default:
             if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(child: Text('Error: ${snapshot.error}')),
+              );
             } else {
               return Scaffold(
                 backgroundColor: AppColor().backgroun,
@@ -46,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                   title: Container(
                     alignment: Alignment.centerLeft,
                     child:
-                        AppFonts.b20(value: 'Главная', color: AppColor().black),
+                        AppFonts.b16(value: 'Главная', color: AppColor().black),
                   ),
                   actions: [
                     Padding(
@@ -65,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CatalogListBuilder(model: catalogListModel),
+                    catalogListBuilder(catalogListModel),
                   ],
                 ),
               );

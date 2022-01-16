@@ -1,6 +1,7 @@
-import 'package:bitapp/core/theme/styles/color_style.dart';
-import 'package:bitapp/core/theme/styles/sized_style.dart';
 import 'package:flutter/material.dart';
+
+import 'color_style.dart';
+import 'sized_style.dart';
 
 class ButtonStyleAppBar {
   final ButtonStyle textButton = ButtonStyle(

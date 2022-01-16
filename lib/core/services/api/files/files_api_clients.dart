@@ -1,14 +1,12 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:bitapp/core/services/api/api_path.dart';
+import 'package:dio/dio.dart';
 
-import '../global_parametrs.dart';
+import '../../../base/global_parametrs.dart';
 import 'files_model.dart';
 
 class ApiFile {
   String id;
-  final client = HttpClient();
+  final client = Dio();
 
   ApiFile({
     required this.id,
@@ -16,19 +14,14 @@ class ApiFile {
 
   Future<FileResponse> getFile() async {
     final url = Uri(
-      scheme: baseSheme,
-      host: baseHost,
+      scheme: AppSettings.baseSheme,
+      host: AppSettings.baseHost,
       path: ApiPatchFile.imageGet(),
       query: 'id=$id',
     );
-    final request = await client.getUrl(url);
-    final response = await request.close();
-    final json = await response
-        .transform(utf8.decoder)
-        .toList()
-        .then((value) => value.join())
-        .then((v) => jsonDecode(v) as Map<String, dynamic>);
-    final file = FileResponse.fromJson(json);
-    return file;
+    final request = await client.get(url.toString());
+    final response = await request.data;
+    final responseData = FileResponse.fromJson(response);
+    return responseData;
   }
 }

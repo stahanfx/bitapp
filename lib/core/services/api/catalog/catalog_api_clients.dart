@@ -1,34 +1,46 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:bitapp/core/services/api/api_path.dart';
+import 'package:dio/dio.dart';
 
-import '../api_query.dart';
-import '../global_parametrs.dart';
+import '../../../base/global_parametrs.dart';
 import 'catalog_model.dart';
 
 class ApiCatalog {
   Map<String, dynamic> filter;
   String select;
-  final client = HttpClient();
+  final client = Dio();
 
   ApiCatalog({required this.filter, required this.select, s});
 
   Future<CatalogResponse> getCatalogs() async {
     final url = Uri(
-      scheme: baseSheme,
-      host: baseHost,
+      scheme: AppSettings.baseSheme,
+      host: AppSettings.baseHost,
       path: ApiPatchCatalog.categoryList(),
-      query: queryGenerator(filter: filter, select: select),
+      query: _queryGenerator(filter: filter, select: select),
     );
-    final request = await client.getUrl(url);
-    final response = await request.close();
-    final json = await response
-        .transform(utf8.decoder)
-        .toList()
-        .then((value) => value.join())
-        .then((v) => jsonDecode(v) as Map<String, dynamic>);
-    final responseData = CatalogResponse.fromJson(json);
+    final request = await client.get(url.toString());
+    final response = await request.data;
+    final responseData = CatalogResponse.fromJson(response);
     return responseData;
   }
+}
+
+_queryGenerator({
+  required Map<String, dynamic> filter,
+  required String select,
+}) {
+  var filterList = [];
+  filter.forEach((key, value) {
+    filterList.add('filter[$key]=$value&');
+  });
+  var filterResult = filterList.join();
+  var selectResult = 'select=$select';
+
+  var list = [
+    filterResult,
+    selectResult,
+  ];
+
+  var stringList = list.join("");
+  return stringList;
 }

@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'product_model.g.dart';
+part 'product_list_model.g.dart';
 
 @JsonSerializable()
 class ProductResponse {
   int status;
-  List<Product> result;
+  List<ProductList> result;
 
   ProductResponse({
     required this.status,
@@ -18,7 +18,7 @@ class ProductResponse {
 }
 
 @JsonSerializable()
-class Product {
+class ProductList {
   @JsonKey(name: 'ID')
   String? id;
   @JsonKey(name: 'DATE_CREATE')
@@ -56,7 +56,7 @@ class Product {
   @JsonKey(name: 'PROPERTIES')
   List<Properties>? properties;
 
-  Product({
+  ProductList({
     required this.id,
     required this.createData,
     required this.iblockID,
@@ -77,7 +77,7 @@ class Product {
     required this.properties,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) =>
+  factory ProductList.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 }

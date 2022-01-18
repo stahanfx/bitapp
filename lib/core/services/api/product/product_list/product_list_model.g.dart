@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product_model.dart';
+part of 'product_list_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -10,7 +10,7 @@ ProductResponse _$ProductResponseFromJson(Map<String, dynamic> json) =>
     ProductResponse(
       status: json['status'] as int,
       result: (json['result'] as List<dynamic>)
-          .map((e) => Product.fromJson(e as Map<String, dynamic>))
+          .map((e) => ProductList.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -20,7 +20,7 @@ Map<String, dynamic> _$ProductResponseToJson(ProductResponse instance) =>
       'result': instance.result,
     };
 
-Product _$ProductFromJson(Map<String, dynamic> json) => Product(
+ProductList _$ProductFromJson(Map<String, dynamic> json) => ProductList(
       id: json['ID'] as String?,
       createData: json['DATE_CREATE'] as String?,
       iblockID: json['IBLOCK_ID'] as String?,
@@ -43,7 +43,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           .toList(),
     );
 
-Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
+Map<String, dynamic> _$ProductToJson(ProductList instance) => <String, dynamic>{
       'ID': instance.id,
       'DATE_CREATE': instance.createData,
       'IBLOCK_ID': instance.iblockID,

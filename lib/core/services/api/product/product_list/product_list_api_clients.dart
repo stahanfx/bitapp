@@ -2,14 +2,14 @@ import 'package:bitapp/core/services/api/api_path.dart';
 import 'package:dio/dio.dart';
 
 import '../../../base/global_parametrs.dart';
-import 'product_model.dart';
+import 'product_list_model.dart';
 
-class ApiProduct {
+class ApiProductList {
   Map<String, String> filter;
   // String select;
   final client = Dio();
 
-  ApiProduct({
+  ApiProductList({
     required this.filter,
     // required this.select,
   });

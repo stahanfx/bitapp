@@ -1,4 +1,5 @@
 import 'package:bitapp/core/base/global_parametrs.dart';
+import 'package:bitapp/core/services/api/product/product_list/product_list_model.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/sized_style.dart';
 import 'package:bitapp/views/catalog/category_arguments_models.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
-import 'package:bitapp/core/services/api/product/product_model.dart';
 
 import 'catalog_model.dart';
 import 'catalog_appbar_builder.dart';
@@ -27,7 +27,7 @@ class CatalogPage extends StatefulWidget {
 
 class _CatalogPageState extends State<CatalogPage> {
   var catalogListModel = <Category>[];
-  var productListModel = <Product>[];
+  var productListModel = <ProductList>[];
 
   Future<void> _getModels(argument) async {
     final provider = context.read<CatalogPageModel>();

@@ -1,12 +1,12 @@
 import 'package:bitapp/core/services/api/catalog/catalog_api_clients.dart';
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
-import 'package:bitapp/core/services/api/product/product_api_clients.dart';
-import 'package:bitapp/core/services/api/product/product_model.dart';
+import 'package:bitapp/core/services/api/product/product_list/product_list_api_clients.dart';
+import 'package:bitapp/core/services/api/product/product_list/product_list_model.dart';
 import 'package:flutter/material.dart';
 
 class HomePageModel with ChangeNotifier {
   var categoryList = <Category>[];
-  var productList = <Product>[];
+  var productList = <ProductList>[];
 
   Future getCategory(filter, select) async {
     final category =
@@ -21,7 +21,7 @@ class HomePageModel with ChangeNotifier {
   }
 
   Future getProduct(filter, select) async {
-    final product = await ApiProduct(
+    final product = await ApiProductList(
       filter: filter,
       // select: select,
     ).getProduct();

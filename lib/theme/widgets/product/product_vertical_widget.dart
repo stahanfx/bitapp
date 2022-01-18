@@ -1,5 +1,5 @@
 import 'package:bitapp/core/helper/text_clean.dart';
-import 'package:bitapp/core/services/api/product/product_model.dart';
+import 'package:bitapp/core/services/api/product_list/product_list_model.dart';
 import 'package:bitapp/core/services/file/image_services.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
@@ -7,7 +7,7 @@ import 'package:bitapp/theme/styles/sized_style.dart';
 import 'package:flutter/material.dart';
 
 class ProductGridBuilder extends StatelessWidget {
-  final List<Product> productListModel;
+  final List<ProductList> productListModel;
   const ProductGridBuilder({
     Key? key,
     required this.productListModel,
@@ -45,7 +45,7 @@ class ProductElementWidget extends StatelessWidget {
     required this.product,
   }) : super(key: key);
 
-  final Product product;
+  final ProductList product;
 
   @override
   Widget build(BuildContext context) {

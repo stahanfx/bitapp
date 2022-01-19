@@ -15,14 +15,14 @@ class HomePageAppBarBuilder extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     switch (AppSettings.homeAppbarViewType) {
       case 'light':
-        return _homeAppBarLight();
+        return _homeAppBarLight(context);
       default:
-        return _homeAppBarLight();
+        return _homeAppBarLight(context);
     }
   }
 }
 
-_homeAppBarLight() {
+_homeAppBarLight(context) {
   return AppBar(
     title: AppFonts.b16(
       value: 'OUIPERFUME',
@@ -39,7 +39,9 @@ _homeAppBarLight() {
         icon: const Icon(
           FontAwesomeIcons.heart,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, 'product');
+        },
       ),
     ],
   );

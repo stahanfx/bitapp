@@ -1,8 +1,7 @@
 import 'package:bitapp/core/services/api/catalog/catalog_api_clients.dart';
 import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
-import 'package:bitapp/core/services/api/product_list/product_list_api_clients.dart';
-
-import 'package:bitapp/core/services/api/product_list/product_list_model.dart';
+import 'package:bitapp/core/services/api/product/product_list/product_list_api_clients.dart';
+import 'package:bitapp/core/services/api/product/product_list/product_list_model.dart';
 import 'package:flutter/material.dart';
 
 class CatalogPageModel with ChangeNotifier {

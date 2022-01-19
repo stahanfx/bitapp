@@ -1,7 +1,6 @@
+import 'package:bitapp/core/base/global_parametrs.dart';
 import 'package:bitapp/core/services/api/api_path.dart';
 import 'package:dio/dio.dart';
-
-import '../../../base/global_parametrs.dart';
 import 'product_list_model.dart';
 
 class ApiProductList {
@@ -14,7 +13,7 @@ class ApiProductList {
     // required this.select,
   });
 
-  Future<ProductResponse> getProduct() async {
+  Future<ProductListResponse> getProduct() async {
     final url = Uri(
       scheme: AppSettings.baseSheme,
       host: AppSettings.baseHost,
@@ -26,7 +25,7 @@ class ApiProductList {
     );
     final request = await client.get(url.toString());
     final response = await request.data;
-    final responseData = ProductResponse.fromJson(response);
+    final responseData = ProductListResponse.fromJson(response);
     return responseData;
   }
 }

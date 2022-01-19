@@ -3,18 +3,18 @@ import 'package:json_annotation/json_annotation.dart';
 part 'product_list_model.g.dart';
 
 @JsonSerializable()
-class ProductResponse {
+class ProductListResponse {
   int status;
   List<ProductList> result;
 
-  ProductResponse({
+  ProductListResponse({
     required this.status,
     required this.result,
   });
 
-  factory ProductResponse.fromJson(Map<String, dynamic> json) =>
-      _$ProductResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$ProductResponseToJson(this);
+  factory ProductListResponse.fromJson(Map<String, dynamic> json) =>
+      _$ProductListResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductListResponseToJson(this);
 }
 
 @JsonSerializable()
@@ -78,8 +78,8 @@ class ProductList {
   });
 
   factory ProductList.fromJson(Map<String, dynamic> json) =>
-      _$ProductFromJson(json);
-  Map<String, dynamic> toJson() => _$ProductToJson(this);
+      _$ProductListFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductListToJson(this);
 }
 
 @JsonSerializable()

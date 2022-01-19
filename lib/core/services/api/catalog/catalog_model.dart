@@ -13,8 +13,8 @@ class CategoryResponse {
   });
 
   factory CategoryResponse.fromJson(Map<String, dynamic> json) =>
-      _$CatalogResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$CatalogResponseToJson(this);
+      _$CategoryResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$CategoryResponseToJson(this);
 }
 
 @JsonSerializable()
@@ -57,6 +57,6 @@ class Category {
   });
 
   factory Category.fromJson(Map<String, dynamic> json) =>
-      _$CatalogFromJson(json);
-  Map<String, dynamic> toJson() => _$CatalogToJson(this);
+      _$CategoryFromJson(json);
+  Map<String, dynamic> toJson() => _$CategoryToJson(this);
 }

@@ -12,4 +12,6 @@ class ApiPatchFile {
 class ApiPatchProduct {
   static String productGet() =>
       '${AppSettings.baseApiAddress}/product.trade.list';
+  static String getProductElement() =>
+      '${AppSettings.baseApiAddress}/product.trade.element';
 }

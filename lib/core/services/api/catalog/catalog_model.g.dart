@@ -6,7 +6,7 @@ part of 'catalog_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CategoryResponse _$CatalogResponseFromJson(Map<String, dynamic> json) =>
+CategoryResponse _$CategoryResponseFromJson(Map<String, dynamic> json) =>
     CategoryResponse(
       status: json['status'] as int?,
       result: (json['result'] as List<dynamic>?)
@@ -14,13 +14,13 @@ CategoryResponse _$CatalogResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$CatalogResponseToJson(CategoryResponse instance) =>
+Map<String, dynamic> _$CategoryResponseToJson(CategoryResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'result': instance.result,
     };
 
-Category _$CatalogFromJson(Map<String, dynamic> json) => Category(
+Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
       id: json['ID'] as String?,
       iblockId: json['IBLOCK_ID'] as String?,
       iblockSectionId: json['IBLOCK_SECTION_ID'] as String?,
@@ -34,7 +34,7 @@ Category _$CatalogFromJson(Map<String, dynamic> json) => Category(
       code: json['CODE'] as String?,
     );
 
-Map<String, dynamic> _$CatalogToJson(Category instance) => <String, dynamic>{
+Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
       'ID': instance.id,
       'IBLOCK_ID': instance.iblockId,
       'IBLOCK_SECTION_ID': instance.iblockSectionId,

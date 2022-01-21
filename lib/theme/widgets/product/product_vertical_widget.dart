@@ -5,6 +5,7 @@ import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
 import 'package:bitapp/theme/styles/sized_style.dart';
 import 'package:bitapp/views/product/product_arguments_models.dart';
+import 'package:bitapp/views/product/product_page.dart';
 import 'package:flutter/material.dart';
 
 class ProductGridBuilder extends StatelessWidget {
@@ -52,7 +53,7 @@ class ProductElementWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, 'product',
+        Navigator.pushNamed(context, 'catalog/product',
             arguments: ProductArgument(product.id));
       },
       child: Container(

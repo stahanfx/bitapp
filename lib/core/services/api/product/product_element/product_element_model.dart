@@ -353,13 +353,13 @@ class SkyVolumeNumber {
 @JsonSerializable()
 class Price {
   @JsonKey(name: 'BASE_PRICE')
-  int? basePrice;
+  double? basePrice;
   @JsonKey(name: 'DISCOUNT_PRICE')
-  int? discountPrice;
+  double? discountPrice;
   @JsonKey(name: 'DISCOUNT')
-  int? doscount;
+  double? doscount;
   @JsonKey(name: 'PERCENT')
-  int? percent;
+  double? percent;
 
   Price({
     required this.basePrice,

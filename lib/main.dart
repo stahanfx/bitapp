@@ -1,6 +1,7 @@
 import 'package:bitapp/views/catalog/catalog_model.dart';
 import 'package:bitapp/views/home/home_model.dart';
 import 'package:bitapp/views/navigation/navigation_page_model.dart';
+import 'package:bitapp/views/product/product_arguments_models.dart';
 import 'package:bitapp/views/product/product_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +43,9 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: () => MultiProvider(
         providers: [
-          /*_*/ ChangeNotifierProvider(create: (_) => NavigationPageModel()),
-          /*_*/ ChangeNotifierProvider(create: (_) => HomePageModel()),
-          /*_*/ ChangeNotifierProvider(create: (_) => CatalogPageModel()),
+          ChangeNotifierProvider(create: (_) => NavigationPageModel()),
+          ChangeNotifierProvider(create: (_) => HomePageModel()),
+          ChangeNotifierProvider(create: (_) => CatalogPageModel()),
           ChangeNotifierProvider(create: (_) => ProductPageModel()),
         ],
         child: MaterialApp(
@@ -67,8 +68,8 @@ class MyApp extends StatelessWidget {
           routes: {
             'loader': (context) => const LoadApp(),
             'home': (context) => const HomePage(),
-            'product': (context) => ProductPage(argument: null),
-            'home/catalog': (context) => const CatalogPage(argument: null),
+            'catalog': (context) => const CatalogPage(argument: null),
+            'catalog/product': (context) => ProductPage(argument: null),
           },
         ),
       ),

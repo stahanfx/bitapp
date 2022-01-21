@@ -262,10 +262,10 @@ Map<String, dynamic> _$SkyVolumeNumberToJson(SkyVolumeNumber instance) =>
     };
 
 Price _$PriceFromJson(Map<String, dynamic> json) => Price(
-      basePrice: json['BASE_PRICE'] as int?,
-      discountPrice: json['DISCOUNT_PRICE'] as int?,
-      doscount: json['DISCOUNT'] as int?,
-      percent: json['PERCENT'] as int?,
+      basePrice: (json['BASE_PRICE'] as num?)?.toDouble(),
+      discountPrice: (json['DISCOUNT_PRICE'] as num?)?.toDouble(),
+      doscount: (json['DISCOUNT'] as num?)?.toDouble(),
+      percent: (json['PERCENT'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{

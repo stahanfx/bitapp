@@ -58,7 +58,7 @@ class CategoryListVerticalText extends StatelessWidget {
           final catalog = catalogListModel[index];
           return GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, 'home/catalog',
+                Navigator.pushNamed(context, 'catalog',
                     arguments: CategoryArgument(catalog.name, catalog.id));
               },
               child: CategoryElementBuilder(catalog: catalog).catalogOneRow());
@@ -99,7 +99,7 @@ class CategoryListTwoVerticalText extends StatelessWidget {
             final catalog = catalogListModel[index];
             return GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, 'home/catalog',
+                  Navigator.pushNamed(context, 'catalog',
                       arguments: CategoryArgument(catalog.name, catalog.id));
                 },
                 child: CategoryElementBuilder(catalog: catalog)

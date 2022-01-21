@@ -72,10 +72,12 @@ class _MyHomePageState extends State<NavigationPage> {
           ],
           currentIndex: _currentIndex,
           onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-              _badgeShows[index] = false;
-            });
+            if (index != _currentIndex) {
+              setState(() {
+                _currentIndex = index;
+                _badgeShows[index] = false;
+              });
+            }
           },
         ),
       ),
@@ -87,12 +89,12 @@ class _MyHomePageState extends State<NavigationPage> {
       Navigator(
         onGenerateRoute: (settings) {
           Widget page = const HomePage();
-          if (settings.name == "home/catalog") {
+          if (settings.name == "catalog") {
             page = CatalogPage(
               argument: settings.arguments as CategoryArgument,
             );
           }
-          if (settings.name == "product") {
+          if (settings.name == "catalog/product") {
             page = ProductPage(argument: settings.arguments as ProductArgument);
           }
           return MaterialPageRoute(builder: (_) => page);

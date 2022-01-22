@@ -31,21 +31,17 @@ class ProductElement {
   String? detailPicture;
   @JsonKey(name: 'DETAIL_TEXT')
   String? detailText;
-
-  @JsonKey(name: 'CML2_MANUFACTURER')
-  Brand? brand;
-
-  @JsonKey(name: 'GENRE_LIST')
-  Gender? gender;
-
-  @JsonKey(name: 'FAMILY_LIST')
-  Family? family;
-
-  @JsonKey(name: 'PROIZVODSTVO')
-  Country? country;
+  @JsonKey(name: 'BRAND')
+  String? brand;
+  @JsonKey(name: 'GENDER')
+  String? gender;
+  @JsonKey(name: 'FAMILY')
+  String? family;
+  @JsonKey(name: 'COUNTRY')
+  String? country;
 
   @JsonKey(name: 'SKU')
-  List<SkuElement>? skuList;
+  List<SkuElement>? skuElement;
 
   ProductElement({
     required this.id,
@@ -58,104 +54,12 @@ class ProductElement {
     required this.gender,
     required this.family,
     required this.country,
-    required this.skuList,
+    required this.skuElement,
   });
 
   factory ProductElement.fromJson(Map<String, dynamic> json) =>
       _$ProductElementFromJson(json);
   Map<String, dynamic> toJson() => _$ProductElementToJson(this);
-}
-
-@JsonSerializable()
-class Brand {
-  @JsonKey(name: 'NAME')
-  String? name;
-  @JsonKey(name: 'ACTIVE')
-  String? active;
-  @JsonKey(name: 'VALUE')
-  String? value;
-
-  Brand({
-    required this.name,
-    required this.active,
-    required this.value,
-  });
-
-  factory Brand.fromJson(Map<String, dynamic> json) => _$BrandFromJson(json);
-  Map<String, dynamic> toJson() => _$BrandToJson(this);
-}
-
-@JsonSerializable()
-class Gender {
-  @JsonKey(name: 'NAME')
-  String? name;
-  @JsonKey(name: 'ACTIVE')
-  String? active;
-  @JsonKey(name: 'VALUE')
-  List<dynamic>? value;
-
-  Gender({
-    required this.name,
-    required this.active,
-    //TODO: Пока ХЗ какой будет результат когда сюда прилетит массив, тестируем)))
-    //Все равно надо потом будет вынести для фильтра
-    required this.value,
-  });
-
-  factory Gender.fromJson(Map<String, dynamic> json) => _$GenderFromJson(json);
-  Map<String, dynamic> toJson() => _$GenderToJson(this);
-}
-
-@JsonSerializable()
-class Family {
-  @JsonKey(name: 'NAME')
-  String? name;
-  @JsonKey(name: 'ACTIVE')
-  String? active;
-  @JsonKey(name: 'VALUE')
-  List<dynamic>? value;
-
-  Family({
-    required this.name,
-    required this.active,
-    required this.value,
-  });
-
-  factory Family.fromJson(Map<String, dynamic> json) => _$FamilyFromJson(json);
-  Map<String, dynamic> toJson() => _$FamilyToJson(this);
-}
-
-@JsonSerializable()
-class Country {
-  @JsonKey(name: 'NAME')
-  String? name;
-  @JsonKey(name: 'ACTIVE')
-  String? active;
-  @JsonKey(name: 'VALUE')
-  String? value;
-
-  Country({
-    required this.name,
-    required this.active,
-    required this.value,
-  });
-
-  factory Country.fromJson(Map<String, dynamic> json) =>
-      _$CountryFromJson(json);
-  Map<String, dynamic> toJson() => _$CountryToJson(this);
-}
-
-@JsonSerializable()
-class SkuList {
-  SkuElement? skuElement;
-
-  SkuList({
-    required this.skuElement,
-  });
-
-  factory SkuList.fromJson(Map<String, dynamic> json) =>
-      _$SkuListFromJson(json);
-  Map<String, dynamic> toJson() => _$SkuListToJson(this);
 }
 
 @JsonSerializable()
@@ -175,8 +79,8 @@ class SkuElement {
   @JsonKey(name: 'PARENT_ID')
   int? skuParentId;
 
-  @JsonKey(name: 'PROPERTIES')
-  Map<String, Properties>? skuProperties;
+  @JsonKey(name: 'PROP')
+  List<SkuListProperties>? skuListProperties;
 
   @JsonKey(name: 'PRICE')
   Price? skuPrice;
@@ -189,7 +93,7 @@ class SkuElement {
     required this.skuDetailPicture,
     required this.skuQuantity,
     required this.skuParentId,
-    required this.skuProperties,
+    required this.skuListProperties,
     required this.skuPrice,
   });
 
@@ -199,43 +103,30 @@ class SkuElement {
 }
 
 @JsonSerializable()
-class Properties {
-  ListProperties? listProperties;
-
-  Properties({
-    required this.listProperties,
-  });
-
-  factory Properties.fromJson(Map<String, dynamic> json) =>
-      _$PropertiesFromJson(json);
-  Map<String, dynamic> toJson() => _$PropertiesToJson(this);
-}
-
-@JsonSerializable()
-class ListProperties {
+class SkuListProperties {
   @JsonKey(name: 'ARTIKUL')
-  VendorCode? vendorCode;
+  SkuPropertiesData? vendorCode;
   @JsonKey(name: 'VID')
-  SkuType? skuType;
+  SkuPropertiesData? skuType;
   @JsonKey(name: 'OBEM')
-  SkyVolume? skuVolume;
+  SkuPropertiesData? skuVolume;
   @JsonKey(name: 'OBEM_CHISLOM')
-  SkyVolumeNumber? skuVolumeNumber;
+  SkuPropertiesData? skuVolumeNumber;
 
-  ListProperties({
+  SkuListProperties({
     required this.vendorCode,
     required this.skuType,
     required this.skuVolume,
     required this.skuVolumeNumber,
   });
 
-  factory ListProperties.fromJson(Map<String, dynamic> json) =>
-      _$ListPropertiesFromJson(json);
-  Map<String, dynamic> toJson() => _$ListPropertiesToJson(this);
+  factory SkuListProperties.fromJson(Map<String, dynamic> json) =>
+      _$SkuListPropertiesFromJson(json);
+  Map<String, dynamic> toJson() => _$SkuListPropertiesToJson(this);
 }
 
 @JsonSerializable()
-class VendorCode {
+class SkuPropertiesData {
   @JsonKey(name: 'ID')
   String? id;
   @JsonKey(name: 'NAME')
@@ -249,7 +140,7 @@ class VendorCode {
   @JsonKey(name: 'VALUE')
   String? value;
 
-  VendorCode({
+  SkuPropertiesData({
     required this.id,
     required this.name,
     required this.active,
@@ -258,96 +149,9 @@ class VendorCode {
     required this.value,
   });
 
-  factory VendorCode.fromJson(Map<String, dynamic> json) =>
-      _$VendorCodeFromJson(json);
-  Map<String, dynamic> toJson() => _$VendorCodeToJson(this);
-}
-
-@JsonSerializable()
-class SkuType {
-  @JsonKey(name: 'ID')
-  String? id;
-  @JsonKey(name: 'NAME')
-  String? name;
-  @JsonKey(name: 'ACTIVE')
-  String? active;
-  @JsonKey(name: 'SEARCHABLE')
-  String? searchable;
-  @JsonKey(name: 'FILTRABLE')
-  String? filtrable;
-  @JsonKey(name: 'VALUE')
-  String? value;
-
-  SkuType({
-    required this.id,
-    required this.name,
-    required this.active,
-    required this.searchable,
-    required this.filtrable,
-    required this.value,
-  });
-
-  factory SkuType.fromJson(Map<String, dynamic> json) =>
-      _$SkuTypeFromJson(json);
-  Map<String, dynamic> toJson() => _$SkuTypeToJson(this);
-}
-
-@JsonSerializable()
-class SkyVolume {
-  @JsonKey(name: 'ID')
-  String? id;
-  @JsonKey(name: 'NAME')
-  String? name;
-  @JsonKey(name: 'ACTIVE')
-  String? active;
-  @JsonKey(name: 'SEARCHABLE')
-  String? searchable;
-  @JsonKey(name: 'FILTRABLE')
-  String? filtrable;
-  @JsonKey(name: 'VALUE')
-  String? value;
-
-  SkyVolume({
-    required this.id,
-    required this.name,
-    required this.active,
-    required this.searchable,
-    required this.filtrable,
-    required this.value,
-  });
-
-  factory SkyVolume.fromJson(Map<String, dynamic> json) =>
-      _$SkyVolumeFromJson(json);
-  Map<String, dynamic> toJson() => _$SkyVolumeToJson(this);
-}
-
-@JsonSerializable()
-class SkyVolumeNumber {
-  @JsonKey(name: 'ID')
-  String? id;
-  @JsonKey(name: 'NAME')
-  String? name;
-  @JsonKey(name: 'ACTIVE')
-  String? active;
-  @JsonKey(name: 'SEARCHABLE')
-  String? searchable;
-  @JsonKey(name: 'FILTRABLE')
-  String? filtrable;
-  @JsonKey(name: 'VALUE')
-  String? value;
-
-  SkyVolumeNumber({
-    required this.id,
-    required this.name,
-    required this.active,
-    required this.searchable,
-    required this.filtrable,
-    required this.value,
-  });
-
-  factory SkyVolumeNumber.fromJson(Map<String, dynamic> json) =>
-      _$SkyVolumeNumberFromJson(json);
-  Map<String, dynamic> toJson() => _$SkyVolumeNumberToJson(this);
+  factory SkuPropertiesData.fromJson(Map<String, dynamic> json) =>
+      _$SkuPropertiesDataFromJson(json);
+  Map<String, dynamic> toJson() => _$SkuPropertiesDataToJson(this);
 }
 
 @JsonSerializable()

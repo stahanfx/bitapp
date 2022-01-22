@@ -112,15 +112,32 @@ class ProductBuilder extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return SizedBox(
-                  // color: index.isOdd ? Colors.white : Colors.black12,
-                  height: 80.0,
-                  child: Center(
-                    child: Text('$index', textScaleFactor: 5),
-                  ),
-                );
+                final sku = productElement.skuElement![index];
+                if (sku.skuQuantity != '0') {
+                  return SizedBox(
+                    // color: index.isOdd ? Colors.white : Colors.black12,
+                    height: 100.0,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 200,
+                          child: Column(
+                            children: [
+                              AppFonts.b12(
+                                  value: sku.skuPrice?.basePrice.toString(),
+                                  color: AppColor().black),
+                              AppFonts.b12(
+                                  value: sku.skuListProperties!["VID"]!.value,
+                                  color: AppColor().black),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                }
               },
-              childCount: productElement.skuList?.length,
+              childCount: productElement.skuElement?.length,
             ),
           ),
           SliverToBoxAdapter(

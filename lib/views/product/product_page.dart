@@ -1,4 +1,6 @@
+import 'package:bitapp/core/helper/text_clean.dart';
 import 'package:bitapp/core/services/file/image_services.dart';
+import 'package:bitapp/theme/styles/button_style.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +87,7 @@ class ProductBuilder extends StatelessWidget {
             pinned: false,
             snap: false,
             floating: false,
-            expandedHeight: 320.0,
+            expandedHeight: 370.0,
             flexibleSpace: FlexibleSpaceBar(
               // title: AppFonts.t12(
               //     value: productElement.name, color: AppColor().black),
@@ -113,37 +115,73 @@ class ProductBuilder extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 final sku = productElement.skuElement![index];
-                if (sku.skuQuantity != '0') {
-                  return SizedBox(
-                    // color: index.isOdd ? Colors.white : Colors.black12,
-                    height: 100.0,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 200,
-                          child: Column(
-                            children: [
-                              AppFonts.b12(
-                                  value: sku.skuPrice?.basePrice.toString(),
-                                  color: AppColor().black),
-                              AppFonts.b12(
-                                  value: sku.skuListProperties!["VID"]!.value,
-                                  color: AppColor().black),
-                            ],
+                final cleanType = TextCleaner(
+                        baseText: sku.skuListProperties!.skuType.toString(),
+                        repText: "&quot;",
+                        newText: "")
+                    .base();
+                return SizedBox(
+                  height: 65.0,
+                  child: Container(
+                    color: Colors.black,
+                    height: 1,
+                    width: double.infinity,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: 270,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // AppFonts.b12(
+                                //     value: "${productElement.name}",
+                                //     color: AppColor().black),
+                                AppFonts.b12(
+                                    value:
+                                        "${TextCleaner(baseText: sku.skuListProperties!.skuType.toString(), repText: "&quot;", newText: "").base()}",
+                                    color: AppColor().black),
+                                AppFonts.t12(
+                                    value:
+                                        "Артикул: ${sku.skuListProperties?.vendorCode}",
+                                    color: AppColor().black),
+                                AppFonts.t12(
+                                    value:
+                                        "Обьем: ${sku.skuListProperties?.skuVolumeNumber}мл",
+                                    color: AppColor().black),
+                                AppFonts.b12(
+                                    value:
+                                        "Цена: ${sku.skuPrice?.discountPrice.toString()}",
+                                    color: AppColor().black),
+                              ],
+                            ),
                           ),
-                        )
-                      ],
+                          ElevatedButton(
+                            style: AppButtonStuleElevated().textButton,
+                            onPressed: () {},
+                            child: Text("В корзину"),
+                          )
+                        ],
+                      ),
                     ),
-                  );
-                }
+                  ),
+                );
+                // }
               },
               childCount: productElement.skuElement?.length,
             ),
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: AppSize().w10, horizontal: AppSize().w10),
+              padding: EdgeInsets.only(
+                top: AppSize().h10,
+                bottom: AppSize().h10 * 10,
+                left: AppSize().w10,
+                right: AppSize().w10,
+              ),
               child: AppFonts.t14(
                   value: productElement.detailText, color: AppColor().black),
             ),

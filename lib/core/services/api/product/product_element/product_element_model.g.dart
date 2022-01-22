@@ -62,9 +62,9 @@ SkuElement _$SkuElementFromJson(Map<String, dynamic> json) => SkuElement(
       skuDetailPicture: json['DETAIL_PICTURE'] as String?,
       skuQuantity: json['QUANTITY'] as String?,
       skuParentId: json['PARENT_ID'] as int?,
-      skuListProperties: (json['PROP'] as List<dynamic>?)
-          ?.map((e) => SkuListProperties.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      skuListProperties: json['PROPERTIES'] == null
+          ? null
+          : SkuProperties.fromJson(json['PROPERTIES'] as Map<String, dynamic>),
       skuPrice: json['PRICE'] == null
           ? null
           : Price.fromJson(json['PRICE'] as Map<String, dynamic>),
@@ -79,53 +79,24 @@ Map<String, dynamic> _$SkuElementToJson(SkuElement instance) =>
       'DETAIL_PICTURE': instance.skuDetailPicture,
       'QUANTITY': instance.skuQuantity,
       'PARENT_ID': instance.skuParentId,
-      'PROP': instance.skuListProperties,
+      'PROPERTIES': instance.skuListProperties,
       'PRICE': instance.skuPrice,
     };
 
-SkuListProperties _$SkuListPropertiesFromJson(Map<String, dynamic> json) =>
-    SkuListProperties(
-      vendorCode: json['ARTIKUL'] == null
-          ? null
-          : SkuPropertiesData.fromJson(json['ARTIKUL'] as Map<String, dynamic>),
-      skuType: json['VID'] == null
-          ? null
-          : SkuPropertiesData.fromJson(json['VID'] as Map<String, dynamic>),
-      skuVolume: json['OBEM'] == null
-          ? null
-          : SkuPropertiesData.fromJson(json['OBEM'] as Map<String, dynamic>),
-      skuVolumeNumber: json['OBEM_CHISLOM'] == null
-          ? null
-          : SkuPropertiesData.fromJson(
-              json['OBEM_CHISLOM'] as Map<String, dynamic>),
+SkuProperties _$SkuPropertiesFromJson(Map<String, dynamic> json) =>
+    SkuProperties(
+      vendorCode: json['ARTIKUL'] as String?,
+      skuType: json['VID'] as String?,
+      skuVolume: json['OBEM'] as String?,
+      skuVolumeNumber: json['OBEM_CHISLOM'] as String?,
     );
 
-Map<String, dynamic> _$SkuListPropertiesToJson(SkuListProperties instance) =>
+Map<String, dynamic> _$SkuPropertiesToJson(SkuProperties instance) =>
     <String, dynamic>{
       'ARTIKUL': instance.vendorCode,
       'VID': instance.skuType,
       'OBEM': instance.skuVolume,
       'OBEM_CHISLOM': instance.skuVolumeNumber,
-    };
-
-SkuPropertiesData _$SkuPropertiesDataFromJson(Map<String, dynamic> json) =>
-    SkuPropertiesData(
-      id: json['ID'] as String?,
-      name: json['NAME'] as String?,
-      active: json['ACTIVE'] as String?,
-      searchable: json['SEARCHABLE'] as String?,
-      filtrable: json['FILTRABLE'] as String?,
-      value: json['VALUE'] as String?,
-    );
-
-Map<String, dynamic> _$SkuPropertiesDataToJson(SkuPropertiesData instance) =>
-    <String, dynamic>{
-      'ID': instance.id,
-      'NAME': instance.name,
-      'ACTIVE': instance.active,
-      'SEARCHABLE': instance.searchable,
-      'FILTRABLE': instance.filtrable,
-      'VALUE': instance.value,
     };
 
 Price _$PriceFromJson(Map<String, dynamic> json) => Price(

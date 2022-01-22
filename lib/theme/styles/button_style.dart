@@ -21,8 +21,11 @@ class ButtonStyleAppBar {
   final ButtonStyle iconTextButton = ElevatedButton.styleFrom();
 }
 
-class ButtonStyleContent {
-  final ButtonStyle textButton = ElevatedButton.styleFrom();
+class AppButtonStuleElevated {
+  final ButtonStyle textButton = ElevatedButton.styleFrom(
+    primary: AppColor().activeButton,
+    elevation: 0,
+  );
   final ButtonStyle iconButton = ElevatedButton.styleFrom();
   final ButtonStyle iconTextButton = ElevatedButton.styleFrom();
 }

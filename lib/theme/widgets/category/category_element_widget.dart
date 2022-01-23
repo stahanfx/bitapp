@@ -1,5 +1,5 @@
 import 'package:bitapp/core/helper/text_clean.dart';
-import 'package:bitapp/core/services/file/image_services.dart';
+import 'package:bitapp/core/services/api/file/image_services.dart';
 import 'package:bitapp/theme/styles/sized_style.dart';
 import 'package:flutter/material.dart';
 

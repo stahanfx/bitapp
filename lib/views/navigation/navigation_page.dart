@@ -1,5 +1,6 @@
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/sized_style.dart';
+import 'package:bitapp/views/basket/basket_page.dart';
 import 'package:bitapp/views/catalog/category_arguments_models.dart';
 import 'package:bitapp/views/catalog/catalog_page.dart';
 import 'package:bitapp/views/home/home_page.dart';
@@ -109,10 +110,7 @@ class _MyHomePageState extends State<NavigationPage> {
       ),
       Container(
         alignment: Alignment.center,
-        child: const Text(
-          "Bags",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
+        child: BasketPage(),
       ),
       Container(
         alignment: Alignment.center,

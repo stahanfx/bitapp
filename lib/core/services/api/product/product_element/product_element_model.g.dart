@@ -102,13 +102,13 @@ Map<String, dynamic> _$SkuPropertiesToJson(SkuProperties instance) =>
 Price _$PriceFromJson(Map<String, dynamic> json) => Price(
       basePrice: (json['BASE_PRICE'] as num?)?.toDouble(),
       discountPrice: (json['DISCOUNT_PRICE'] as num?)?.toDouble(),
-      doscount: (json['DISCOUNT'] as num?)?.toDouble(),
+      discount: (json['DISCOUNT'] as num?)?.toDouble(),
       percent: (json['PERCENT'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
       'BASE_PRICE': instance.basePrice,
       'DISCOUNT_PRICE': instance.discountPrice,
-      'DISCOUNT': instance.doscount,
+      'DISCOUNT': instance.discount,
       'PERCENT': instance.percent,
     };

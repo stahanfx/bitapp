@@ -1,8 +1,10 @@
 import 'package:bitapp/core/helper/text_clean.dart';
-import 'package:bitapp/core/services/file/image_services.dart';
+import 'package:bitapp/core/services/api/basket/basket_api_clients.dart';
+import 'package:bitapp/core/services/api/file/image_services.dart';
 import 'package:bitapp/theme/styles/button_style.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
+import 'package:bitapp/views/basket/basket_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -106,66 +108,78 @@ class ProductBuilder extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   vertical: AppSize().w10, horizontal: AppSize().w10),
               child: Center(
-                child: AppFonts.b16(
+                child: AppFonts.b14(
                     value: productElement.name, color: AppColor().black),
               ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: AppFonts.b14(
+                  value: "Торговые предложения", color: AppColor().black),
             ),
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 final sku = productElement.skuElement![index];
-                final cleanType = TextCleaner(
-                        baseText: sku.skuListProperties!.skuType.toString(),
-                        repText: "&quot;",
-                        newText: "")
-                    .base();
                 return SizedBox(
-                  height: 65.0,
-                  child: Container(
-                    color: Colors.black,
-                    height: 1,
-                    width: double.infinity,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 270,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // AppFonts.b12(
-                                //     value: "${productElement.name}",
-                                //     color: AppColor().black),
-                                AppFonts.b12(
-                                    value:
-                                        "${TextCleaner(baseText: sku.skuListProperties!.skuType.toString(), repText: "&quot;", newText: "").base()}",
-                                    color: AppColor().black),
-                                AppFonts.t12(
-                                    value:
-                                        "Артикул: ${sku.skuListProperties?.vendorCode}",
-                                    color: AppColor().black),
-                                AppFonts.t12(
-                                    value:
-                                        "Обьем: ${sku.skuListProperties?.skuVolumeNumber}мл",
-                                    color: AppColor().black),
-                                AppFonts.b12(
-                                    value:
-                                        "Цена: ${sku.skuPrice?.discountPrice.toString()}",
-                                    color: AppColor().black),
-                              ],
-                            ),
+                  height: 45.0,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 220,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // AppFonts.b12(
+                              //     value: "${productElement.name}",
+                              //     color: AppColor().black),
+                              AppFonts.b12(
+                                  value:
+                                      "${TextCleaner(baseText: sku.skuListProperties!.skuType.toString(), repText: "&quot;", newText: "").base()}",
+                                  color: AppColor().black),
+                              // AppFonts.t12(
+                              //     value:
+                              //         "Артикул: ${sku.skuListProperties?.vendorCode}",
+                              //     color: AppColor().black),
+                              AppFonts.t12(
+                                  value:
+                                      "Обьем: ${sku.skuListProperties?.skuVolumeNumber}мл",
+                                  color: AppColor().black),
+                              AppFonts.b12(
+                                  value:
+                                      "Цена: ${sku.skuPrice?.discountPrice.toString()}",
+                                  color: AppColor().activeButton),
+                            ],
                           ),
-                          ElevatedButton(
-                            style: AppButtonStuleElevated().textButton,
-                            onPressed: () {},
-                            child: Text("В корзину"),
-                          )
-                        ],
-                      ),
+                        ),
+                        ElevatedButton(
+                          style: AppButtonStuleElevated().textButton,
+                          onPressed: () async {
+                            ApiBasketPost(filter: {
+                              'FUSER_ID': await getFuser(),
+                              'PRODUCT_ID': sku.skuId,
+                              'PRICE': sku.skuPrice?.discountPrice,
+                              //TODO: Поправить модель на получение данных(они есть)
+                              'CURRENCY': 'RUB',
+                              //TODO: Добавить в глобальные переменные
+                              'LID': 's1',
+                              'NAME': sku.skuName,
+                              //TODO: Доделать чтоб было круто!
+                              'QUANTITY': 1,
+                              //TODO: Поправить модель на получение данных(они есть)
+                              'CUSTOM_PRICE': 'Y',
+                            }).postProduct();
+                          },
+                          child: Text("В корзину"),
+                        ),
+                      ],
                     ),
                   ),
                 );
@@ -176,8 +190,80 @@ class ProductBuilder extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+              child: AppFonts.b16(
+                  value: "Характеристики", color: AppColor().black),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppFonts.t12(value: "Бренд:", color: AppColor().black),
+                        AppFonts.t12(
+                            value: productElement.brand,
+                            color: AppColor().black),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppFonts.t12(value: "Пол:", color: AppColor().black),
+                        AppFonts.t12(
+                            value: productElement.gender,
+                            color: AppColor().black),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppFonts.t12(
+                            value: "Семейство:", color: AppColor().black),
+                        AppFonts.t12(
+                            value: productElement.family,
+                            color: AppColor().black),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppFonts.t12(
+                            value: "Производство:", color: AppColor().black),
+                        AppFonts.t12(
+                            value: productElement.country,
+                            color: AppColor().black),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+              child: AppFonts.b16(value: "Описание", color: AppColor().black),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
               padding: EdgeInsets.only(
-                top: AppSize().h10,
+                // top: AppSize().h10,
                 bottom: AppSize().h10 * 10,
                 left: AppSize().w10,
                 right: AppSize().w10,

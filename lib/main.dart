@@ -11,6 +11,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'load_app.dart';
 import 'theme/styles/color_style.dart';
+import 'views/basket/basket_page_model.dart';
 import 'views/catalog/catalog_page.dart';
 import 'views/home/home_page.dart';
 import 'views/product/product_page_model.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => HomePageModel()),
           ChangeNotifierProvider(create: (_) => CatalogPageModel()),
           ChangeNotifierProvider(create: (_) => ProductPageModel()),
+          ChangeNotifierProvider(create: (_) => BasketPageModel()),
         ],
         child: MaterialApp(
           localizationsDelegates: context.localizationDelegates,

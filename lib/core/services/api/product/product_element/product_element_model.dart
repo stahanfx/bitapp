@@ -132,14 +132,14 @@ class Price {
   @JsonKey(name: 'DISCOUNT_PRICE')
   double? discountPrice;
   @JsonKey(name: 'DISCOUNT')
-  double? doscount;
+  double? discount;
   @JsonKey(name: 'PERCENT')
   double? percent;
 
   Price({
     required this.basePrice,
     required this.discountPrice,
-    required this.doscount,
+    required this.discount,
     required this.percent,
   });
 

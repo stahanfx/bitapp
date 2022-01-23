@@ -33,6 +33,6 @@ class ApiProductElement {
 _queryGenerator({
   required dynamic id,
 }) {
-  var query = 'id=$id';
+  var query = 'ID=$id';
   return query;
 }

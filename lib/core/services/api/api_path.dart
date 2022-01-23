@@ -15,3 +15,20 @@ class ApiPatchProduct {
   static String getProductElement() =>
       '${AppSettings.baseApiAddress}/product.trade.element';
 }
+
+class ApiPatchBasket {
+  static String getFuser() => '${AppSettings.baseApiAddress}/basket.get.fuser';
+  static String getList() => '${AppSettings.baseApiAddress}/basket.get.list';
+
+  static String postProduct() =>
+      '${AppSettings.baseApiAddress}/basket.post.product';
+
+  static String putProduct() =>
+      '${AppSettings.baseApiAddress}/basket.put.product';
+
+  static String deleteProduct() =>
+      '${AppSettings.baseApiAddress}/basket.delete.product';
+
+  static String deleteAll() =>
+      '${AppSettings.baseApiAddress}/basket.delete.all';
+}

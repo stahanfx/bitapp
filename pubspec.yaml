@@ -55,6 +55,7 @@ dependencies:
   # font_awesome_flutter: ^9.2.0
   flutter_svg: ^1.0.0
   hive_generator: ^1.1.2
+  equatable: ^2.0.3
   
 
 dev_dependencies:
@@ -75,8 +76,8 @@ dev_dependencies:
 # The following section is specific to Flutter.
 dependency_overrides:
   font_awesome_flutter:
-    #path: /Applications/flutter/BitApp/bitapp/font_awesome 
-    path: /Applications/flutter/bitapp/font_awesome
+    path: /Applications/flutter/BitApp/bitapp/font_awesome 
+    #path: /Applications/flutter/bitapp/font_awesome
     
 
 

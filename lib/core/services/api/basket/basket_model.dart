@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'basket_model.g.dart';
@@ -8,7 +9,7 @@ class FuserResponse {
   @JsonKey(name: 'status')
   int? status;
   @JsonKey(name: 'result')
-  int? result;
+  double? result;
 
   FuserResponse({
     required this.status,
@@ -36,7 +37,7 @@ class BasketResponse {
 }
 
 @JsonSerializable()
-class BasketProduct {
+class BasketProduct extends Equatable {
   @JsonKey(name: 'ID')
   String? id;
   @JsonKey(name: 'FUSER_ID')
@@ -46,17 +47,17 @@ class BasketProduct {
   @JsonKey(name: 'NAME')
   String? name;
   @JsonKey(name: 'PRICE')
-  String? price;
+  double? price;
   @JsonKey(name: 'BASE_PRICE')
-  String? basePrice;
+  double? basePrice;
   @JsonKey(name: 'DISCOUNT_PRICE')
-  String? discountPrice;
+  double? discountPrice;
   @JsonKey(name: 'CUSTOM_PRICE')
-  String? customPrice;
+  double? customPrice;
   @JsonKey(name: 'CURRENCY')
   String? currency;
   @JsonKey(name: 'QUANTITY')
-  int? quantity;
+  double? quantity;
 
   BasketProduct({
     required this.id,
@@ -74,4 +75,8 @@ class BasketProduct {
   factory BasketProduct.fromJson(Map<String, dynamic> json) =>
       _$BasketProductFromJson(json);
   Map<String, dynamic> toJson() => _$BasketProductToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id, quantity];
 }

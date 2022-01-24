@@ -1,5 +1,6 @@
-import 'package:bitapp/core/services/api/api_path.dart';
 import 'package:dio/dio.dart';
+
+import 'package:bitapp/core/services/api/api_path.dart';
 
 import '../../../base/global_parametrs.dart';
 import 'basket_model.dart';
@@ -35,6 +36,7 @@ class ApiBasketGet {
     final request = await client.get(url.toString());
     final response = await request.data;
     final responseData = BasketResponse.fromJson(response);
+    print('Мы сходили за моделью корзины');
     return responseData;
   }
 
@@ -82,5 +84,66 @@ class ApiBasketPost {
 
     var stringList = list.join("");
     return stringList;
+  }
+}
+
+class ApiBasketDelete {
+  String id;
+
+  final client = Dio();
+
+  ApiBasketDelete({
+    required this.id,
+  });
+
+  Future deleteProduct() async {
+    final url = Uri(
+      scheme: AppSettings.baseSheme,
+      host: AppSettings.baseHost,
+      path: ApiPatchBasket.deleteProduct(),
+      query: _queryGeneratorDeleteProduct(id: id),
+    );
+    final request = await client.get(url.toString());
+    final response = await request.data;
+    // final responseData = BasketResponse.fromJson(response);
+    return response;
+  }
+
+  _queryGeneratorDeleteProduct({
+    required String id,
+  }) {
+    var filterList = 'ID=$id&';
+    return filterList;
+  }
+}
+
+class ApiBasketPut {
+  String id;
+  double quantity;
+
+  final client = Dio();
+
+  ApiBasketPut({
+    required this.id,
+    required this.quantity,
+  });
+
+  Future putProduct() async {
+    final url = Uri(
+      scheme: AppSettings.baseSheme,
+      host: AppSettings.baseHost,
+      path: ApiPatchBasket.putProduct(),
+      query: _queryGeneratorDeleteProduct(id: id),
+    );
+    final request = await client.get(url.toString());
+    final response = await request.data;
+    return response;
+  }
+
+  _queryGeneratorDeleteProduct({
+    required String id,
+  }) {
+    var filterList = 'ID=$id&QUANTITY=$quantity&';
+    return filterList;
   }
 }

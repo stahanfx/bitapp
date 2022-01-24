@@ -1,6 +1,7 @@
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/sized_style.dart';
 import 'package:bitapp/views/basket/basket_page.dart';
+import 'package:bitapp/views/basket/basket_page_model.dart';
 import 'package:bitapp/views/catalog/category_arguments_models.dart';
 import 'package:bitapp/views/catalog/catalog_page.dart';
 import 'package:bitapp/views/home/home_page.dart';
@@ -24,8 +25,6 @@ class NavigationPage extends StatefulWidget {
 class _MyHomePageState extends State<NavigationPage> {
   int _currentIndex = 0;
 
-  final List<bool> _badgeShows = List<bool>.generate(5, (index) => true);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +36,13 @@ class _MyHomePageState extends State<NavigationPage> {
   }
 
   Widget _getDesign() {
-    final provider = context.watch<NavigationPageModel>();
-    final basketCount = provider.basketCount;
+    final basketProvider = context.watch<BasketPageModel>();
+    final basketCount = basketProvider.basketModel.length;
+
+    List<int> _badgeCounts = List<int>.generate(5, (index) => index);
+
+    List<bool> _badgeShows = List<bool>.generate(5, (index) => true);
+
     return SizedBox(
       height: AppSize().h10 * 8,
       child: ClipRRect(
@@ -47,6 +51,7 @@ class _MyHomePageState extends State<NavigationPage> {
           topLeft: Radius.circular(AppSize().r10 * 4),
         ),
         child: CustomNavigationBar(
+          //TODO: Доделать и переписать на провайдер
           iconSize: AppSize().h10 * 2.2,
           selectedColor: Colors.white,
           strokeColor: Colors.white,
@@ -61,8 +66,8 @@ class _MyHomePageState extends State<NavigationPage> {
             ),
             CustomNavigationBarItem(
               icon: const Icon(FontAwesomeIcons.bagShopping),
-              badgeCount: basketCount,
-              showBadge: _badgeShows[2],
+              badgeCount: _badgeCounts[0],
+              showBadge: _badgeShows[0],
             ),
             CustomNavigationBarItem(
               icon: const Icon(FontAwesomeIcons.heart),
@@ -113,9 +118,16 @@ class _MyHomePageState extends State<NavigationPage> {
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ),
-      Container(
-        alignment: Alignment.center,
-        child: BasketPage(),
+      Navigator(
+        onGenerateRoute: (settings) {
+          Widget page = const BasketPage();
+          if (settings.name == "basket") {
+            page = const BasketPage(
+                // argument: settings.arguments as CategoryArgument,
+                );
+          }
+          return MaterialPageRoute(builder: (_) => page);
+        },
       ),
       Container(
         alignment: Alignment.center,

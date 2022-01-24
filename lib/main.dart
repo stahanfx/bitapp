@@ -1,3 +1,4 @@
+import 'package:bitapp/views/basket/basket_page.dart';
 import 'package:bitapp/views/catalog/catalog_model.dart';
 import 'package:bitapp/views/home/home_model.dart';
 import 'package:bitapp/views/navigation/navigation_page_model.dart';
@@ -71,7 +72,8 @@ class MyApp extends StatelessWidget {
             'loader': (context) => const LoadApp(),
             'home': (context) => const HomePage(),
             'catalog': (context) => const CatalogPage(argument: null),
-            'catalog/product': (context) => ProductPage(argument: null),
+            'catalog/product': (context) => const ProductPage(argument: null),
+            'basket': (context) => const BasketPage(),
           },
         ),
       ),

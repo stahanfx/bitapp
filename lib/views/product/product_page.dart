@@ -71,6 +71,7 @@ class ProductBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<BasketPageModel>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -162,7 +163,7 @@ class ProductBuilder extends StatelessWidget {
                         ElevatedButton(
                           style: AppButtonStuleElevated().textButton,
                           onPressed: () async {
-                            ApiBasketPost(filter: {
+                            await ApiBasketPost(filter: {
                               'FUSER_ID': await getFuser(),
                               'PRODUCT_ID': sku.skuId,
                               'PRICE': sku.skuPrice?.discountPrice,
@@ -176,6 +177,7 @@ class ProductBuilder extends StatelessWidget {
                               //TODO: Поправить модель на получение данных(они есть)
                               'CUSTOM_PRICE': 'Y',
                             }).postProduct();
+                            await provider.getBasketList();
                           },
                           child: Text("В корзину"),
                         ),

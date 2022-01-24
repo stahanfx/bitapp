@@ -9,7 +9,7 @@ part of 'basket_model.dart';
 FuserResponse _$FuserResponseFromJson(Map<String, dynamic> json) =>
     FuserResponse(
       status: json['status'] as int?,
-      result: json['result'] as int?,
+      result: (json['result'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$FuserResponseToJson(FuserResponse instance) =>
@@ -38,12 +38,12 @@ BasketProduct _$BasketProductFromJson(Map<String, dynamic> json) =>
       fuserId: json['FUSER_ID'] as String?,
       productId: json['PRODUCT_ID'] as String?,
       name: json['NAME'] as String?,
-      price: json['PRICE'] as String?,
-      basePrice: json['BASE_PRICE'] as String?,
-      discountPrice: json['DISCOUNT_PRICE'] as String?,
-      customPrice: json['CUSTOM_PRICE'] as String?,
+      price: (json['PRICE'] as num?)?.toDouble(),
+      basePrice: (json['BASE_PRICE'] as num?)?.toDouble(),
+      discountPrice: (json['DISCOUNT_PRICE'] as num?)?.toDouble(),
+      customPrice: (json['CUSTOM_PRICE'] as num?)?.toDouble(),
       currency: json['CURRENCY'] as String?,
-      quantity: json['QUANTITY'] as int?,
+      quantity: (json['QUANTITY'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$BasketProductToJson(BasketProduct instance) =>

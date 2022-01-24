@@ -73,12 +73,17 @@ class _MyHomePageState extends State<NavigationPage> {
           ],
           currentIndex: _currentIndex,
           onTap: (index) {
-            if (index != _currentIndex) {
-              setState(() {
-                _currentIndex = index;
-                _badgeShows[index] = false;
-              });
-            }
+            setState(() {
+              _currentIndex = index;
+              _badgeShows[index] = false;
+            });
+
+            // if (index != _currentIndex) {
+            //   setState(() {
+            //     _currentIndex = index;
+            //     _badgeShows[index] = false;
+            //   });
+            // }
           },
         ),
       ),

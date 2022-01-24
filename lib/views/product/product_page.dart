@@ -125,7 +125,7 @@ class ProductBuilder extends StatelessWidget {
               (BuildContext context, int index) {
                 final sku = productElement.skuElement![index];
                 return SizedBox(
-                  height: 45.0,
+                  height: 50.0,
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Row(

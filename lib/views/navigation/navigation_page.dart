@@ -5,6 +5,7 @@ import 'package:bitapp/views/basket/basket_page_model.dart';
 import 'package:bitapp/views/catalog/category_arguments_models.dart';
 import 'package:bitapp/views/catalog/catalog_page.dart';
 import 'package:bitapp/views/home/home_page.dart';
+import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:bitapp/views/product/product_arguments_models.dart';
 import 'package:bitapp/views/product/product_page.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
@@ -123,6 +124,11 @@ class _MyHomePageState extends State<NavigationPage> {
           Widget page = const BasketPage();
           if (settings.name == "basket") {
             page = const BasketPage(
+                // argument: settings.arguments as CategoryArgument,
+                );
+          }
+          if (settings.name == "basket/location") {
+            page = const LocationPage(
                 // argument: settings.arguments as CategoryArgument,
                 );
           }

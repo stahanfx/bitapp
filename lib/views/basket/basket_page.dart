@@ -30,7 +30,10 @@ class _BasketPageState extends State<BasketPage> {
           IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.check)),
         ],
         leading: IconButton(
-            onPressed: () {}, icon: Icon(FontAwesomeIcons.trashCanList)),
+            onPressed: () {
+              Navigator.pushNamed(context, 'basket/location');
+            },
+            icon: Icon(FontAwesomeIcons.trashCanList)),
         title: AppFonts.b14(value: "Корзина", color: AppColor().black),
       ),
       body: BasketListWidget(),

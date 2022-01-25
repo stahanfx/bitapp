@@ -2,6 +2,8 @@ import 'package:bitapp/views/basket/basket_page.dart';
 import 'package:bitapp/views/catalog/catalog_model.dart';
 import 'package:bitapp/views/home/home_model.dart';
 import 'package:bitapp/views/navigation/navigation_page_model.dart';
+import 'package:bitapp/views/ordering/location/location_page.dart';
+import 'package:bitapp/views/ordering/location/location_page_model.dart';
 import 'package:bitapp/views/product/product_arguments_models.dart';
 import 'package:bitapp/views/product/product_page.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -50,6 +52,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => CatalogPageModel()),
           ChangeNotifierProvider(create: (_) => ProductPageModel()),
           ChangeNotifierProvider(create: (_) => BasketPageModel()),
+          ChangeNotifierProvider(create: (_) => LocationPageModel()),
         ],
         child: MaterialApp(
           localizationsDelegates: context.localizationDelegates,
@@ -74,6 +77,7 @@ class MyApp extends StatelessWidget {
             'catalog': (context) => const CatalogPage(argument: null),
             'catalog/product': (context) => const ProductPage(argument: null),
             'basket': (context) => const BasketPage(),
+            'basket/location': (context) => const LocationPage(),
           },
         ),
       ),

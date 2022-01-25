@@ -16,7 +16,7 @@ class ApiLocation {
       path: ApiPatchDelivery.getLocation(),
       query: _queryGenerator(phrase: phrase),
     );
-    print(url);
+    print('Получили локации с запросом $phrase');
     final request = await client.get(url.toString());
     final response = await request.data;
     final responseData = LocationResponse.fromJson(response);

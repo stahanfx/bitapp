@@ -19,7 +19,6 @@ class LocationPageModel with ChangeNotifier {
     } else {
       locationModel = [];
     }
-    print("Локации обновлены на ");
     notifyListeners();
   }
 }

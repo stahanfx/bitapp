@@ -183,6 +183,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.4"
+  easy_debounce:
+    dependency: "direct main"
+    description:
+      name: easy_debounce
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2+1"
   easy_localization:
     dependency: "direct main"
     description:
@@ -325,7 +332,7 @@ packages:
   font_awesome_flutter:
     dependency: "direct overridden"
     description:
-      path: "/Applications/flutter/BitApp/bitapp/font_awesome"
+      path: "/Applications/flutter/bitapp/font_awesome"
       relative: false
     source: path
     version: "10.0.0-beta"

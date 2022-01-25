@@ -1,14 +1,15 @@
-import 'package:bitapp/core/services/api/basket/basket_api_clients.dart';
-import 'package:bitapp/core/services/api/basket/basket_model.dart';
-import 'package:bitapp/theme/styles/color_style.dart';
-import 'package:bitapp/theme/styles/font_style.dart';
-import 'package:bitapp/views/catalog/catalog_model.dart';
-import 'package:bitapp/views/ordering/location/location_page_model.dart';
+import 'dart:async';
+
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:bitapp/theme/styles/color_style.dart';
+import 'package:bitapp/theme/styles/font_style.dart';
+import 'package:bitapp/views/ordering/location/location_page_model.dart';
 
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key}) : super(key: key);
@@ -22,22 +23,20 @@ class _BasketPageState extends State<LocationPage> {
   late String textData;
 
   @override
+  @override
   Widget build(BuildContext context) {
     final provider = context.read<LocationPageModel>();
 
     // final provider = context.watch<LocationPageModel>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColor().backgroun,
       appBar: AppBar(
         actions: [
           IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.check)),
         ],
         leading: IconButton(
-            onPressed: () {
-              provider.getLocationList(textController.text);
-              print('ok');
-            },
-            icon: Icon(FontAwesomeIcons.trashCanList)),
+            onPressed: () async {}, icon: Icon(FontAwesomeIcons.trashCanList)),
         title: AppFonts.b14(value: "Корзина", color: AppColor().black),
       ),
       body: Column(
@@ -63,6 +62,14 @@ class _BasketPageState extends State<LocationPage> {
                       borderSide: const BorderSide(color: Colors.white),
                       gapPadding: 10.h),
                 ),
+                onChanged: (text) async {
+                  EasyDebounce.debounce(
+                      'my-debouncer', const Duration(seconds: 1), () {
+                    print("Начали");
+                    print("Выполнили");
+                    provider.getLocationList(textController.text);
+                  });
+                },
               ),
             ),
           ),
@@ -77,6 +84,8 @@ class _BasketPageState extends State<LocationPage> {
                     children: [
                       AppFonts.b12(
                           value: location.name, color: AppColor().black),
+                      AppFonts.b12(
+                          value: location.address, color: AppColor().black),
                     ],
                   );
                 },
@@ -89,13 +98,35 @@ class _BasketPageState extends State<LocationPage> {
   }
 }
 
-_calcBasketPrice(List<BasketProduct> data) {
-  double finalCost = 0;
-  data.asMap().forEach((k, v) {
-    var price = v.price;
-    var quant = v.quantity;
-    var costGroup = price! * quant!;
-    finalCost += costGroup;
-  });
-  return finalCost;
+class Debouncer {
+  final Duration delay;
+  late final Timer timer;
+
+  Debouncer(
+    this.delay,
+    this.timer,
+  );
+
+  call(action) {
+    timer.cancel();
+    timer = Timer(delay, action);
+  }
+}
+
+class Debouncer2 {
+  Debouncer2({this.delay = const Duration(seconds: 3)});
+
+  final Duration delay;
+  Timer? _timer;
+
+  void call(void Function() callback) {
+    _timer?.cancel();
+    _timer = Timer(delay, callback);
+  }
+
+  void dispose() {
+    _timer
+        ?.cancel(); // You can comment-out this line if you want. I am not sure if this call brings any value.
+    _timer = null;
+  }
 }

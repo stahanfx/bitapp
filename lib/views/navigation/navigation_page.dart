@@ -29,6 +29,7 @@ class _MyHomePageState extends State<NavigationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColor().backgroun,
       extendBody: true,
       body: _getPage(),

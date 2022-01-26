@@ -1,13 +1,17 @@
+import 'package:dio/dio.dart';
+
 import 'package:bitapp/core/base/global_parametrs.dart';
 import 'package:bitapp/core/services/api/api_path.dart';
-import 'package:dio/dio.dart';
+
 import 'location_model.dart';
 
 class ApiLocation {
   var phrase;
   final client = Dio();
 
-  ApiLocation({required this.phrase});
+  ApiLocation({
+    required this.phrase,
+  });
 
   Future<LocationResponse> getLocation() async {
     final url = Uri(
@@ -27,7 +31,7 @@ class ApiLocation {
 _queryGenerator({required String phrase}) {
   String checkPhrase = phrase;
   if (checkPhrase == '') {
-    checkPhrase = 'Москва';
+    checkPhrase = 'базовый';
   } else {
     String checksimbol = phrase.substring(phrase.length - 1);
     if (checksimbol == ' ' && checkPhrase.isNotEmpty) {

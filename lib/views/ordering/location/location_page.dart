@@ -25,6 +25,7 @@ class _BasketPageState extends State<LocationPage> {
   @override
   Widget build(BuildContext context) {
     final provider = context.read<LocationPageModel>();
+    provider.getLocationList('');
 
     // final provider = context.watch<LocationPageModel>();
     return Scaffold(

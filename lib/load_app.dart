@@ -18,9 +18,7 @@ class LoadApp extends StatelessWidget {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
             default:
-              return Scaffold(
-                  backgroundColor: AppColor().backgroun,
-                  body: NavigationPage());
+              return NavigationPage();
           }
         });
   }

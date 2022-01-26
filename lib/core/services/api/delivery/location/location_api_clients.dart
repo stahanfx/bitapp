@@ -24,11 +24,31 @@ class ApiLocation {
   }
 }
 
-_queryGenerator({required phrase}) {
-  if (phrase == '') {
-    phrase = 'Москва';
+_queryGenerator({required String phrase}) {
+  String checkPhrase = phrase;
+  if (checkPhrase == '') {
+    checkPhrase = 'Москва';
+  } else {
+    String checksimbol = phrase.substring(phrase.length - 1);
+    if (checksimbol == ' ' && checkPhrase.isNotEmpty) {
+      checkPhrase = checkPhrase.substring(0, checkPhrase.length - 1);
+    } else {
+      checkPhrase = phrase;
+    }
   }
-  var request = 'PHRASE=$phrase';
+
+  String request = 'PHRASE=$checkPhrase';
   print(request);
+  return request;
+}
+
+_spaseContril({required String text}) {
+  String request;
+  String checkPhrase = text.substring(text.length - 1);
+  if (checkPhrase == ' ' && checkPhrase.isNotEmpty) {
+    request = checkPhrase.substring(0, checkPhrase.length - 1);
+  } else {
+    request = text;
+  }
   return request;
 }

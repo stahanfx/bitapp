@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -20,9 +21,7 @@ class LocationPage extends StatefulWidget {
 
 class _BasketPageState extends State<LocationPage> {
   final textController = TextEditingController();
-  late String textData;
 
-  @override
   @override
   Widget build(BuildContext context) {
     final provider = context.read<LocationPageModel>();
@@ -43,10 +42,11 @@ class _BasketPageState extends State<LocationPage> {
         children: [
           Container(
             // color: AppColor().black,
-            height: 100,
+            height: 80,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                keyboardType: TextInputType.text,
                 controller: textController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -64,9 +64,7 @@ class _BasketPageState extends State<LocationPage> {
                 ),
                 onChanged: (text) async {
                   EasyDebounce.debounce(
-                      'my-debouncer', const Duration(seconds: 1), () {
-                    print("Начали");
-                    print("Выполнили");
+                      'getLocationList', const Duration(seconds: 1), () {
                     provider.getLocationList(textController.text);
                   });
                 },
@@ -77,16 +75,28 @@ class _BasketPageState extends State<LocationPage> {
             child:
                 Consumer<LocationPageModel>(builder: (context, model, child) {
               return ListView.builder(
+                padding: EdgeInsets.all(0),
                 itemCount: model.locationModel.length,
                 itemBuilder: (BuildContext context, int index) {
                   var location = model.locationModel[index];
-                  return Column(
-                    children: [
-                      AppFonts.b12(
-                          value: location.name, color: AppColor().black),
-                      AppFonts.b12(
-                          value: location.address, color: AppColor().black),
-                    ],
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 1),
+                    child: Container(
+                      color: AppColor().white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppFonts.b12(
+                                value: location.name, color: AppColor().black),
+                            AppFonts.t12(
+                                value: location.address,
+                                color: AppColor().black),
+                          ],
+                        ),
+                      ),
+                    ),
                   );
                 },
               );
@@ -95,38 +105,5 @@ class _BasketPageState extends State<LocationPage> {
         ],
       ),
     );
-  }
-}
-
-class Debouncer {
-  final Duration delay;
-  late final Timer timer;
-
-  Debouncer(
-    this.delay,
-    this.timer,
-  );
-
-  call(action) {
-    timer.cancel();
-    timer = Timer(delay, action);
-  }
-}
-
-class Debouncer2 {
-  Debouncer2({this.delay = const Duration(seconds: 3)});
-
-  final Duration delay;
-  Timer? _timer;
-
-  void call(void Function() callback) {
-    _timer?.cancel();
-    _timer = Timer(delay, callback);
-  }
-
-  void dispose() {
-    _timer
-        ?.cancel(); // You can comment-out this line if you want. I am not sure if this call brings any value.
-    _timer = null;
   }
 }

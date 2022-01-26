@@ -1,3 +1,4 @@
+import 'package:bitapp/core/helper/text_clean.dart';
 import 'package:bitapp/core/services/api/basket/basket_api_clients.dart';
 import 'package:bitapp/core/services/api/basket/basket_model.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
@@ -25,6 +26,7 @@ class _BasketPageState extends State<BasketPage> {
     final provider = context.watch<BasketPageModel>();
 
     return Scaffold(
+      backgroundColor: AppColor().backgroun,
       appBar: AppBar(
         actions: [
           IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.check)),
@@ -65,8 +67,7 @@ class BasketListWidget extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 600,
+          Expanded(
             child: Consumer<BasketPageModel>(builder: (context, model, child) {
               return ListView.builder(
                   padding: EdgeInsets.zero,
@@ -78,82 +79,96 @@ class BasketListWidget extends StatelessWidget {
                     double priceItem = basketElement.price as double;
                     double countItem = basketElement.quantity as double;
                     double finalCost = priceItem * countItem;
-                    return Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          width: 300,
-                                          child: AppFonts.b12(
-                                              value: basketElement.name,
-                                              color: AppColor().black),
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 1),
+                      child: Container(
+                        color: AppColor().white,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    width: 300,
+                                    child: AppFonts.b12(
+                                        value: TextCleaner(
+                                                baseText: basketElement.name
+                                                    .toString(),
+                                                repText:
+                                                    '&quot;OUIFLACON&quot;',
+                                                newText: '')
+                                            .base(),
+                                        color: AppColor().black),
+                                  ),
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      IconButton(
+                                          onPressed: () async {
+                                            await model.deleteBasketElement(
+                                                basketElement.id);
+                                          },
+                                          icon: Icon(FontAwesomeIcons.trash)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                          onPressed: () async {
+                                            var newQuantity =
+                                                basketElement.quantity! + 1.0;
+                                            await model.putBasketElement(
+                                                basketElement.id, newQuantity);
+                                          },
+                                          icon: Icon(Icons.add)),
+                                      Container(
+                                        width: 30,
+                                        height: 30,
+                                        color: Colors.amber,
+                                        child: Center(
+                                          child: AppFonts.b14(
+                                              value: basketElement.quantity
+                                                  .toString(),
+                                              color: Colors.black),
                                         ),
-                                        Row(
-                                          children: [
-                                            IconButton(
-                                                onPressed: () async {
-                                                  var newQuantity =
-                                                      basketElement.quantity! +
-                                                          1.0;
-                                                  await model.putBasketElement(
-                                                      basketElement.id,
-                                                      newQuantity);
-                                                },
-                                                icon: Icon(Icons.add)),
-                                            Container(
-                                              width: 30,
-                                              height: 30,
-                                              color: Colors.amber,
-                                              child: Center(
-                                                child: AppFonts.b14(
-                                                    value: basketElement
-                                                        .quantity
-                                                        .toString(),
-                                                    color: Colors.black),
-                                              ),
-                                            ),
-                                            IconButton(
-                                                onPressed: () async {
-                                                  var newQuantity =
-                                                      basketElement.quantity! -
-                                                          1.0;
-                                                  await model.putBasketElement(
-                                                      basketElement.id,
-                                                      newQuantity);
-                                                },
-                                                icon: Icon(Icons.remove)),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                    IconButton(
-                                        onPressed: () async {
-                                          await model.deleteBasketElement(
-                                              basketElement.id);
-                                        },
-                                        icon: Icon(FontAwesomeIcons.trash)),
-                                  ],
-                                )
-                                // AppFonts.t12(
-                                //     value: 'Cумма: ${finalCost.toString()}',
-                                //     color: AppColor().black),
-                              ],
-                            ),
+                                      ),
+                                      IconButton(
+                                          onPressed: () async {
+                                            var newQuantity =
+                                                basketElement.quantity! - 1.0;
+                                            await model.putBasketElement(
+                                                basketElement.id, newQuantity);
+                                          },
+                                          icon: Icon(Icons.remove)),
+                                    ],
+                                  ),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      AppFonts.t10(
+                                          value: 'Стоимость: ',
+                                          color: AppColor().black),
+                                      AppFonts.b12(
+                                          value: finalCost.toString(),
+                                          color: AppColor().black),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     );
                   });

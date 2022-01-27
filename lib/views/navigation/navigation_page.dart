@@ -14,8 +14,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
-import 'navigation_page_model.dart';
-
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
 
@@ -68,7 +66,7 @@ class _MyHomePageState extends State<NavigationPage> {
             ),
             CustomNavigationBarItem(
               icon: const Icon(FontAwesomeIcons.bagShopping),
-              badgeCount: _badgeCounts[0],
+              badgeCount: _badgeCounts[basketCount],
               showBadge: _badgeShows[0],
             ),
             CustomNavigationBarItem(

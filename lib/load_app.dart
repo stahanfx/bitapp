@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'theme/styles/color_style.dart';
-import 'views/basket/basket_page_model.dart';
-import 'views/home/home_model.dart';
-import 'views/navigation/navigation_page.dart';
+// ignore: implementation_imports
 import 'package:provider/src/provider.dart';
+import 'views/basket/basket_page_model.dart';
+import 'views/navigation/navigation_page.dart';
 
 class LoadApp extends StatelessWidget {
   const LoadApp({Key? key}) : super(key: key);
@@ -18,7 +16,7 @@ class LoadApp extends StatelessWidget {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
             default:
-              return NavigationPage();
+              return const NavigationPage();
           }
         });
   }

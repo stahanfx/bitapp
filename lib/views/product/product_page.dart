@@ -1,6 +1,7 @@
 import 'package:bitapp/core/helper/text_clean.dart';
 import 'package:bitapp/core/services/api/basket/basket_api_clients.dart';
 import 'package:bitapp/core/services/api/file/image_services.dart';
+import 'package:bitapp/core/services/api/user/user_api_client.dart';
 import 'package:bitapp/theme/styles/button_style.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
@@ -92,8 +93,6 @@ class ProductBuilder extends StatelessWidget {
             floating: false,
             expandedHeight: 370.0,
             flexibleSpace: FlexibleSpaceBar(
-              // title: AppFonts.t12(
-              //     value: productElement.name, color: AppColor().black),
               background: Container(
                 color: Colors.white,
                 child: Padding(
@@ -128,7 +127,7 @@ class ProductBuilder extends StatelessWidget {
                 return SizedBox(
                   height: 50.0,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -138,17 +137,10 @@ class ProductBuilder extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // AppFonts.b12(
-                              //     value: "${productElement.name}",
-                              //     color: AppColor().black),
                               AppFonts.b12(
                                   value:
                                       "${TextCleaner(baseText: sku.skuListProperties!.skuType.toString(), repText: "&quot;", newText: "").base()}",
                                   color: AppColor().black),
-                              // AppFonts.t12(
-                              //     value:
-                              //         "Артикул: ${sku.skuListProperties?.vendorCode}",
-                              //     color: AppColor().black),
                               AppFonts.t12(
                                   value:
                                       "Обьем: ${sku.skuListProperties?.skuVolumeNumber}мл",
@@ -163,8 +155,8 @@ class ProductBuilder extends StatelessWidget {
                         ElevatedButton(
                           style: AppButtonStuleElevated().textButton,
                           onPressed: () async {
-                            await ApiBasketPost(filter: {
-                              'FUSER_ID': await getFuser(),
+                            await ApiBasketPost().postProduct(filter: {
+                              'FUSER_ID': await UserApiGet().getFuser(),
                               'PRODUCT_ID': sku.skuId,
                               'PRICE': sku.skuPrice?.discountPrice,
                               //TODO: Поправить модель на получение данных(они есть)
@@ -176,16 +168,15 @@ class ProductBuilder extends StatelessWidget {
                               'QUANTITY': 1,
                               //TODO: Поправить модель на получение данных(они есть)
                               'CUSTOM_PRICE': 'Y',
-                            }).postProduct();
+                            });
                             await provider.getBasketList();
                           },
-                          child: Text("В корзину"),
+                          child: const Text("В корзину"),
                         ),
                       ],
                     ),
                   ),
                 );
-                // }
               },
               childCount: productElement.skuElement?.length,
             ),
@@ -265,7 +256,6 @@ class ProductBuilder extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.only(
-                // top: AppSize().h10,
                 bottom: AppSize().h10 * 10,
                 left: AppSize().w10,
                 right: AppSize().w10,
@@ -276,20 +266,6 @@ class ProductBuilder extends StatelessWidget {
           ),
         ],
       ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: Padding(
-      //     padding: const EdgeInsets.all(8),
-      //     child: OverflowBar(
-      //       overflowAlignment: OverflowBarAlignment.center,
-      //       children: <Widget>[
-      //         Container(
-      //           color: Colors.amber,
-      //           height: 60,
-      //         )
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 }

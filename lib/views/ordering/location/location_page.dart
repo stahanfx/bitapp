@@ -1,13 +1,8 @@
-import 'dart:async';
-
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:provider/src/provider.dart';
-
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
 import 'package:bitapp/views/ordering/location/location_page_model.dart';
@@ -33,15 +28,23 @@ class _BasketPageState extends State<LocationPage> {
       backgroundColor: AppColor().backgroun,
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.check)),
+          IconButton(
+              onPressed: () {}, icon: const Icon(FontAwesomeIcons.question)),
         ],
         leading: IconButton(
-            onPressed: () async {}, icon: Icon(FontAwesomeIcons.trashCanList)),
-        title: AppFonts.b14(value: "Корзина", color: AppColor().black),
+          icon: Icon(
+            FontAwesomeIcons.arrowLeft,
+            color: AppColor().black,
+            size: 20,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: AppFonts.b14(
+            value: "Выберите город доставки", color: AppColor().black),
       ),
       body: Column(
         children: [
-          Container(
+          SizedBox(
             // color: AppColor().black,
             height: 80,
             child: Padding(
@@ -76,7 +79,7 @@ class _BasketPageState extends State<LocationPage> {
             child:
                 Consumer<LocationPageModel>(builder: (context, model, child) {
               return ListView.builder(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 itemCount: model.locationModel.length,
                 itemBuilder: (BuildContext context, int index) {
                   var location = model.locationModel[index];

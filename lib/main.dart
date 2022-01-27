@@ -4,7 +4,6 @@ import 'package:bitapp/views/home/home_model.dart';
 import 'package:bitapp/views/navigation/navigation_page_model.dart';
 import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:bitapp/views/ordering/location/location_page_model.dart';
-import 'package:bitapp/views/product/product_arguments_models.dart';
 import 'package:bitapp/views/product/product_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

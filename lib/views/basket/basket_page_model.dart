@@ -1,6 +1,6 @@
 import 'package:bitapp/core/services/api/basket/basket_api_clients.dart';
 import 'package:bitapp/core/services/api/basket/basket_model.dart';
-import 'package:collection/collection.dart';
+import 'package:bitapp/core/services/api/user/user_api_client.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -9,9 +9,8 @@ class BasketPageModel with ChangeNotifier {
   var basketModel = <BasketProduct>[];
 
   Future<void> getBasketList() async {
-    final fuserId = await getFuser();
-    final product = await ApiBasketGet(filter: fuserId).getList();
-
+    final fuserId = await UserApiGet().getFuser();
+    final product = await ApiBasketGet().getList(filter: fuserId);
     if (product.result != null) {
       if (basketModel != product.result) {
         basketModel = product.result!;
@@ -20,37 +19,25 @@ class BasketPageModel with ChangeNotifier {
       basketModel = [];
     }
     notifyListeners();
+    print(basketModel.length);
+    print("Корзина получена");
   }
 
-  Future deleteBasketElement(
-    id,
-  ) async {
-    final result = await ApiBasketDelete(id: id).deleteProduct();
+  Future<void> deleteBasketElement(id) async {
+    final result = await ApiBasketDelete().deleteProduct(id: id);
+    if (result != null) await getBasketList();
+    notifyListeners();
+  }
 
-    if (result != null) {
-      getBasketList();
-    }
+  Future<void> deleteAllBasketElement() async {
+    final result = await ApiBasketDelete().deleteAllProduct();
+    print("Корзина очищена");
+    await getBasketList();
     notifyListeners();
   }
 
   Future putBasketElement(id, quantity) async {
-    final result = await ApiBasketPut(id: id, quantity: quantity).putProduct();
-
-    if (result != null) {
-      getBasketList();
-    }
+    final result = await ApiBasketPut().putProduct(id: id, quantity: quantity);
+    if (result != null) getBasketList();
   }
-}
-
-Future getFuser() async {
-  var box = await Hive.openBox('fuserBox');
-
-  if (box.isEmpty) {
-    final newFuser = await ApiBasketGet(filter: 0).getFuser();
-    box.put('fuser', newFuser.result);
-  }
-  final response = await box.get('fuser');
-  box.close();
-  print(response);
-  return response;
 }

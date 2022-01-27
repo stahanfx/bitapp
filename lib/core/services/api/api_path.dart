@@ -25,7 +25,7 @@ class ApiPatchBasket {
       '${AppSettings.baseApiAddress}/basket.put.product';
   static String deleteProduct() =>
       '${AppSettings.baseApiAddress}/basket.delete.product';
-  static String deleteAll() =>
+  static String deleteAllProduct() =>
       '${AppSettings.baseApiAddress}/basket.delete.all';
 }
 

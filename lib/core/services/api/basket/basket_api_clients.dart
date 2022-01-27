@@ -1,3 +1,5 @@
+import 'package:bitapp/core/services/api/user/user_api_client.dart';
+import 'package:bitapp/views/basket/basket_page_model.dart';
 import 'package:dio/dio.dart';
 
 import 'package:bitapp/core/services/api/api_path.dart';
@@ -6,14 +8,9 @@ import '../../../base/global_parametrs.dart';
 import 'basket_model.dart';
 
 class ApiBasketGet {
-  final filter;
-
   final client = Dio();
 
-  ApiBasketGet({
-    required this.filter,
-  });
-
+  //TODO: Нужно вынести метод в юзера
   Future<FuserResponse> getFuser() async {
     final url = Uri(
       scheme: AppSettings.baseSheme,
@@ -26,7 +23,12 @@ class ApiBasketGet {
     return responseData;
   }
 
-  Future<BasketResponse> getList() async {
+  Future<BasketResponse> getList({required filter}) async {
+    _queryGeneratorGetList({required filter}) {
+      var filterList = 'filter[FUSER_ID]=$filter&';
+      return filterList;
+    }
+
     final url = Uri(
       scheme: AppSettings.baseSheme,
       host: AppSettings.baseHost,
@@ -36,27 +38,25 @@ class ApiBasketGet {
     final request = await client.get(url.toString());
     final response = await request.data;
     final responseData = BasketResponse.fromJson(response);
-    print('Мы сходили за моделью корзины');
     return responseData;
-  }
-
-  //TODO: Кривой метод, надо поправить желательно весь генератор(принцип)
-  _queryGeneratorGetList({required filter}) {
-    var filterList = 'filter[FUSER_ID]=$filter&';
-    return filterList;
   }
 }
 
 class ApiBasketPost {
-  Map<String, dynamic> filter;
-
   final client = Dio();
 
-  ApiBasketPost({
-    required this.filter,
-  });
+  Future postProduct({required filter}) async {
+    _queryGeneratorPostProduct({required Map<String, dynamic> filter}) {
+      var filterList = [];
+      filter.forEach((key, value) {
+        filterList.add('filter[$key]=$value&');
+      });
+      var filterResult = filterList.join();
+      var list = [filterResult];
+      var stringList = list.join("");
+      return stringList;
+    }
 
-  Future postProduct() async {
     final url = Uri(
       scheme: AppSettings.baseSheme,
       host: AppSettings.baseHost,
@@ -68,35 +68,17 @@ class ApiBasketPost {
     // final responseData = BasketResponse.fromJson(response);
     return response;
   }
-
-  _queryGeneratorPostProduct({
-    required Map<String, dynamic> filter,
-  }) {
-    var filterList = [];
-    filter.forEach((key, value) {
-      filterList.add('filter[$key]=$value&');
-    });
-    var filterResult = filterList.join();
-
-    var list = [
-      filterResult,
-    ];
-
-    var stringList = list.join("");
-    return stringList;
-  }
 }
 
 class ApiBasketDelete {
-  String id;
-
   final client = Dio();
 
-  ApiBasketDelete({
-    required this.id,
-  });
+  Future deleteProduct({required id}) async {
+    _queryGeneratorDeleteProduct({required String id}) {
+      var filterList = 'ID=$id&';
+      return filterList;
+    }
 
-  Future deleteProduct() async {
     final url = Uri(
       scheme: AppSettings.baseSheme,
       host: AppSettings.baseHost,
@@ -105,44 +87,44 @@ class ApiBasketDelete {
     );
     final request = await client.get(url.toString());
     final response = await request.data;
-    // final responseData = BasketResponse.fromJson(response);
     return response;
   }
 
-  _queryGeneratorDeleteProduct({
-    required String id,
-  }) {
-    var filterList = 'ID=$id&';
-    return filterList;
+  Future deleteAllProduct() async {
+    _queryGeneratorDeleteAllProduct() async {
+      var fuserId = await UserApiGet().getFuser();
+      var filterList = 'FUSER=$fuserId&';
+      return filterList;
+    }
+
+    final url = Uri(
+      scheme: AppSettings.baseSheme,
+      host: AppSettings.baseHost,
+      path: ApiPatchBasket.deleteAllProduct(),
+      query: await _queryGeneratorDeleteAllProduct(),
+    );
+    final request = await client.get(url.toString());
+    final response = await request.data;
+    return response;
   }
 }
 
 class ApiBasketPut {
-  String id;
-  double quantity;
-
   final client = Dio();
 
-  ApiBasketPut({
-    required this.id,
-    required this.quantity,
-  });
-
-  Future putProduct() async {
+  Future putProduct({required id, required quantity}) async {
     final url = Uri(
       scheme: AppSettings.baseSheme,
       host: AppSettings.baseHost,
       path: ApiPatchBasket.putProduct(),
-      query: _queryGeneratorDeleteProduct(id: id),
+      query: _queryGeneratorPutProduct(id: id, quantity: quantity),
     );
     final request = await client.get(url.toString());
     final response = await request.data;
     return response;
   }
 
-  _queryGeneratorDeleteProduct({
-    required String id,
-  }) {
+  _queryGeneratorPutProduct({required String id, required quantity}) {
     var filterList = 'ID=$id&QUANTITY=$quantity&';
     return filterList;
   }

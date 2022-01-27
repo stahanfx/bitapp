@@ -5,9 +5,11 @@ import 'package:bitapp/views/basket/basket_page_model.dart';
 import 'package:bitapp/views/catalog/category_arguments_models.dart';
 import 'package:bitapp/views/catalog/catalog_page.dart';
 import 'package:bitapp/views/home/home_page.dart';
+import 'package:bitapp/views/ordering/light_registration/light_registration_page.dart';
 import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:bitapp/views/product/product_arguments_models.dart';
 import 'package:bitapp/views/product/product_page.dart';
+import 'package:bitapp/views/test/test.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -40,7 +42,6 @@ class _MyHomePageState extends State<NavigationPage> {
     final basketCount = basketProvider.basketModel.length;
 
     List<int> _badgeCounts = List<int>.generate(5, (index) => index);
-
     List<bool> _badgeShows = List<bool>.generate(5, (index) => true);
 
     return SizedBox(
@@ -100,33 +101,42 @@ class _MyHomePageState extends State<NavigationPage> {
       Navigator(
         onGenerateRoute: (settings) {
           Widget page = const HomePage();
-          if (settings.name == "catalog") {
+          if (settings.name == 'catalog') {
             page = CatalogPage(
               argument: settings.arguments as CategoryArgument,
             );
           }
-          if (settings.name == "catalog/product") {
+          if (settings.name == 'catalog/product') {
             page = ProductPage(argument: settings.arguments as ProductArgument);
           }
           return MaterialPageRoute(builder: (_) => page);
         },
       ),
-      Container(
-        alignment: Alignment.center,
-        child: const Text(
-          "Bags",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
+      Navigator(
+        onGenerateRoute: (settings) {
+          Widget page = const TestPage();
+          if (settings.name == 'test') {
+            page = const TestPage(
+                // argument: settings.arguments as CategoryArgument,
+                );
+          }
+          return MaterialPageRoute(builder: (_) => page);
+        },
       ),
       Navigator(
         onGenerateRoute: (settings) {
           Widget page = const BasketPage();
-          if (settings.name == "basket") {
+          if (settings.name == 'basket') {
             page = const BasketPage(
                 // argument: settings.arguments as CategoryArgument,
                 );
           }
-          if (settings.name == "basket/location") {
+          if (settings.name == 'basket/lightRegistration') {
+            page = LightRegistrationPage(
+                // argument: settings.arguments as CategoryArgument,
+                );
+          }
+          if (settings.name == 'basket/lightRegister/location') {
             page = const LocationPage(
                 // argument: settings.arguments as CategoryArgument,
                 );

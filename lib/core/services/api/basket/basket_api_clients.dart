@@ -10,22 +10,9 @@ import 'basket_model.dart';
 class ApiBasketGet {
   final client = Dio();
 
-  //TODO: Нужно вынести метод в юзера
-  Future<FuserResponse> getFuser() async {
-    final url = Uri(
-      scheme: AppSettings.baseSheme,
-      host: AppSettings.baseHost,
-      path: ApiPatchBasket.getFuser(),
-    );
-    final request = await client.get(url.toString());
-    final response = await request.data;
-    final responseData = FuserResponse.fromJson(response);
-    return responseData;
-  }
-
-  Future<BasketResponse> getList({required filter}) async {
-    _queryGeneratorGetList({required filter}) {
-      var filterList = 'filter[FUSER_ID]=$filter&';
+  Future<BasketResponse> getList({required fuserId}) async {
+    _queryGeneratorGetList({required fuserId}) {
+      var filterList = 'FUSER_ID=$fuserId&';
       return filterList;
     }
 
@@ -33,7 +20,7 @@ class ApiBasketGet {
       scheme: AppSettings.baseSheme,
       host: AppSettings.baseHost,
       path: ApiPatchBasket.getList(),
-      query: _queryGeneratorGetList(filter: filter),
+      query: _queryGeneratorGetList(fuserId: fuserId),
     );
     final request = await client.get(url.toString());
     final response = await request.data;
@@ -49,7 +36,7 @@ class ApiBasketPost {
     _queryGeneratorPostProduct({required Map<String, dynamic> filter}) {
       var filterList = [];
       filter.forEach((key, value) {
-        filterList.add('filter[$key]=$value&');
+        filterList.add('$key=$value&');
       });
       var filterResult = filterList.join();
       var list = [filterResult];
@@ -92,7 +79,7 @@ class ApiBasketDelete {
 
   Future deleteAllProduct() async {
     _queryGeneratorDeleteAllProduct() async {
-      var fuserId = await UserApiGet().getFuser();
+      var fuserId = await UserApiGet().getLocalFuser();
       var filterList = 'FUSER=$fuserId&';
       return filterList;
     }

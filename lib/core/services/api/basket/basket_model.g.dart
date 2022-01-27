@@ -9,7 +9,7 @@ part of 'basket_model.dart';
 FuserResponse _$FuserResponseFromJson(Map<String, dynamic> json) =>
     FuserResponse(
       status: json['status'] as int?,
-      result: (json['result'] as num?)?.toDouble(),
+      result: json['result'] as int?,
     );
 
 Map<String, dynamic> _$FuserResponseToJson(FuserResponse instance) =>

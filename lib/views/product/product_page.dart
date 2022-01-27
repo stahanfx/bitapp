@@ -108,7 +108,7 @@ class ProductBuilder extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   vertical: AppSize().w10, horizontal: AppSize().w10),
               child: Center(
-                child: AppFonts.b14(
+                child: AppText.b14(
                     value: productElement.name, color: AppColor().black),
               ),
             ),
@@ -116,7 +116,7 @@ class ProductBuilder extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: AppFonts.b14(
+              child: AppText.b14(
                   value: "Торговые предложения", color: AppColor().black),
             ),
           ),
@@ -137,15 +137,15 @@ class ProductBuilder extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              AppFonts.b12(
+                              AppText.b12(
                                   value:
                                       "${TextCleaner(baseText: sku.skuListProperties!.skuType.toString(), repText: "&quot;", newText: "").base()}",
                                   color: AppColor().black),
-                              AppFonts.t12(
+                              AppText.t12(
                                   value:
                                       "Обьем: ${sku.skuListProperties?.skuVolumeNumber}мл",
                                   color: AppColor().black),
-                              AppFonts.b12(
+                              AppText.b12(
                                   value:
                                       "Цена: ${sku.skuPrice?.discountPrice.toString()}",
                                   color: AppColor().activeButton),
@@ -156,7 +156,7 @@ class ProductBuilder extends StatelessWidget {
                           style: AppButtonStuleElevated().textButton,
                           onPressed: () async {
                             await ApiBasketPost().postProduct(filter: {
-                              'FUSER_ID': await UserApiGet().getFuser(),
+                              'FUSER_ID': await UserApiGet().getLocalFuser(),
                               'PRODUCT_ID': sku.skuId,
                               'PRICE': sku.skuPrice?.discountPrice,
                               //TODO: Поправить модель на получение данных(они есть)
@@ -184,8 +184,8 @@ class ProductBuilder extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-              child: AppFonts.b16(
-                  value: "Характеристики", color: AppColor().black),
+              child:
+                  AppText.b16(value: "Характеристики", color: AppColor().black),
             ),
           ),
           SliverToBoxAdapter(
@@ -198,8 +198,8 @@ class ProductBuilder extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AppFonts.t12(value: "Бренд:", color: AppColor().black),
-                        AppFonts.t12(
+                        AppText.t12(value: "Бренд:", color: AppColor().black),
+                        AppText.t12(
                             value: productElement.brand,
                             color: AppColor().black),
                       ],
@@ -210,8 +210,8 @@ class ProductBuilder extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AppFonts.t12(value: "Пол:", color: AppColor().black),
-                        AppFonts.t12(
+                        AppText.t12(value: "Пол:", color: AppColor().black),
+                        AppText.t12(
                             value: productElement.gender,
                             color: AppColor().black),
                       ],
@@ -222,9 +222,9 @@ class ProductBuilder extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AppFonts.t12(
+                        AppText.t12(
                             value: "Семейство:", color: AppColor().black),
-                        AppFonts.t12(
+                        AppText.t12(
                             value: productElement.family,
                             color: AppColor().black),
                       ],
@@ -235,9 +235,9 @@ class ProductBuilder extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AppFonts.t12(
+                        AppText.t12(
                             value: "Производство:", color: AppColor().black),
-                        AppFonts.t12(
+                        AppText.t12(
                             value: productElement.country,
                             color: AppColor().black),
                       ],
@@ -250,7 +250,7 @@ class ProductBuilder extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-              child: AppFonts.b16(value: "Описание", color: AppColor().black),
+              child: AppText.b16(value: "Описание", color: AppColor().black),
             ),
           ),
           SliverToBoxAdapter(
@@ -260,7 +260,7 @@ class ProductBuilder extends StatelessWidget {
                 left: AppSize().w10,
                 right: AppSize().w10,
               ),
-              child: AppFonts.t14(
+              child: AppText.t14(
                   value: productElement.detailText, color: AppColor().black),
             ),
           ),

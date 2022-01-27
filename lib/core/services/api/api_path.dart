@@ -17,7 +17,6 @@ class ApiPatchProduct {
 }
 
 class ApiPatchBasket {
-  static String getFuser() => '${AppSettings.baseApiAddress}/basket.get.fuser';
   static String getList() => '${AppSettings.baseApiAddress}/basket.get.list';
   static String postProduct() =>
       '${AppSettings.baseApiAddress}/basket.post.product';
@@ -32,4 +31,13 @@ class ApiPatchBasket {
 class ApiPatchDelivery {
   static String getLocation() =>
       '${AppSettings.baseApiAddress}/delivery.get.location';
+}
+
+class ApiPatchUserGet {
+  static String getFuser() => '${AppSettings.baseApiAddress}/user.get.fuser';
+}
+
+class ApiPatchUserAuth {
+  static String postRegistration() =>
+      '${AppSettings.baseApiAddress}/user.auth.registration';
 }

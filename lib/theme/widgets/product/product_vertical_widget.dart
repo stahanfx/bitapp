@@ -85,7 +85,7 @@ class ProductElementWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(
                   AppSize().w10, AppSize().h10, AppSize().w10, AppSize().h10),
-              child: AppFonts.b12(
+              child: AppText.b12(
                 value: product.price,
                 color: AppColor().activeButton,
               ),
@@ -95,7 +95,7 @@ class ProductElementWidget extends StatelessWidget {
                   AppSize().w10, AppSize().h10, AppSize().w10, AppSize().h10),
               child: SizedBox(
                 height: AppSize().h10 * 3,
-                child: AppFonts.b12(
+                child: AppText.b12(
                   textAlign: TextAlign.start,
                   value: TextCleaner(
                     baseText: product.name.toString(),

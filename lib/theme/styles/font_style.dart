@@ -3,14 +3,14 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppFonts extends StatelessWidget {
+class AppText extends StatelessWidget {
   final String? value;
   final double fontSize;
   final FontWeight fontWeight;
   final Color color;
   final TextAlign textAlign;
 
-  const AppFonts.b40({
+  const AppText.b40({
     Key? key,
     required this.value,
     this.fontSize = 40,
@@ -19,7 +19,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.b32({
+  const AppText.b32({
     Key? key,
     required this.value,
     this.fontSize = 32,
@@ -28,7 +28,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.b24({
+  const AppText.b24({
     Key? key,
     required this.value,
     this.fontSize = 24,
@@ -37,7 +37,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.b20({
+  const AppText.b20({
     Key? key,
     required this.value,
     this.fontSize = 20,
@@ -46,7 +46,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.b18({
+  const AppText.b18({
     Key? key,
     required this.value,
     this.fontSize = 18,
@@ -55,7 +55,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.b16({
+  const AppText.b16({
     Key? key,
     required this.value,
     this.fontSize = 16,
@@ -64,7 +64,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.t16({
+  const AppText.t16({
     Key? key,
     required this.value,
     this.fontSize = 16,
@@ -73,7 +73,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.b14({
+  const AppText.b14({
     Key? key,
     required this.value,
     this.fontSize = 14,
@@ -82,7 +82,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.t14({
+  const AppText.t14({
     Key? key,
     required this.value,
     this.fontSize = 14,
@@ -91,7 +91,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.t12({
+  const AppText.t12({
     Key? key,
     required this.value,
     this.fontSize = 12,
@@ -100,7 +100,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.b12({
+  const AppText.b12({
     Key? key,
     required this.value,
     this.fontSize = 12,
@@ -109,7 +109,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.t10({
+  const AppText.t10({
     Key? key,
     required this.value,
     this.fontSize = 10,
@@ -118,7 +118,7 @@ class AppFonts extends StatelessWidget {
     this.textAlign = TextAlign.start,
   }) : super(key: key);
 
-  const AppFonts.t8({
+  const AppText.t8({
     Key? key,
     required this.value,
     this.fontSize = 8,

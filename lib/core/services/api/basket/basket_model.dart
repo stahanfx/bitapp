@@ -9,7 +9,7 @@ class FuserResponse {
   @JsonKey(name: 'status')
   int? status;
   @JsonKey(name: 'result')
-  double? result;
+  int? result;
 
   FuserResponse({
     required this.status,

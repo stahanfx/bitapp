@@ -9,8 +9,9 @@ class BasketPageModel with ChangeNotifier {
   var basketModel = <BasketProduct>[];
 
   Future<void> getBasketList() async {
-    final fuserId = await UserApiGet().getFuser();
-    final product = await ApiBasketGet().getList(filter: fuserId);
+    final fuserId = await UserApiGet().getLocalFuser();
+    print(fuserId);
+    final product = await ApiBasketGet().getList(fuserId: fuserId);
     if (product.result != null) {
       if (basketModel != product.result) {
         basketModel = product.result!;
@@ -19,8 +20,6 @@ class BasketPageModel with ChangeNotifier {
       basketModel = [];
     }
     notifyListeners();
-    print(basketModel.length);
-    print("Корзина получена");
   }
 
   Future<void> deleteBasketElement(id) async {
@@ -39,5 +38,10 @@ class BasketPageModel with ChangeNotifier {
   Future putBasketElement(id, quantity) async {
     final result = await ApiBasketPut().putProduct(id: id, quantity: quantity);
     if (result != null) getBasketList();
+  }
+
+  Future getUserID() async {
+    final result = await UserApiGet().getLocalUserId();
+    return result;
   }
 }

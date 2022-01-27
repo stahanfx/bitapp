@@ -12,6 +12,21 @@ class ApiCatalog {
   ApiCatalog({required this.filter, required this.select, s});
 
   Future<CategoryResponse> getCategory() async {
+    _queryGenerator({
+      required Map<String, dynamic> filter,
+      required String select,
+    }) {
+      var filterList = [];
+      filter.forEach((key, value) {
+        filterList.add('filter[$key]=$value&');
+      });
+      var filterResult = filterList.join();
+      var selectResult = 'select=$select';
+      var list = [filterResult, selectResult];
+      var stringList = list.join("");
+      return stringList;
+    }
+
     final url = Uri(
       scheme: AppSettings.baseSheme,
       host: AppSettings.baseHost,
@@ -23,24 +38,4 @@ class ApiCatalog {
     final responseData = CategoryResponse.fromJson(response);
     return responseData;
   }
-}
-
-_queryGenerator({
-  required Map<String, dynamic> filter,
-  required String select,
-}) {
-  var filterList = [];
-  filter.forEach((key, value) {
-    filterList.add('filter[$key]=$value&');
-  });
-  var filterResult = filterList.join();
-  var selectResult = 'select=$select';
-
-  var list = [
-    filterResult,
-    selectResult,
-  ];
-
-  var stringList = list.join("");
-  return stringList;
 }

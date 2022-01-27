@@ -69,7 +69,7 @@ class CatalogNavigationAppbar extends StatelessWidget {
         // floating: true,
         pinned: true,
         expandedHeight: value,
-        title: AppFonts.b20(
+        title: AppText.b20(
           value: '${argument.title}',
           color: AppColor().black,
         ),
@@ -114,7 +114,7 @@ class CatalogNavigationAppbar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: ElevatedButton(
               onPressed: () {},
-              child: AppFonts.b14(value: 'Фильтр', color: AppColor().black),
+              child: AppText.b14(value: 'Фильтр', color: AppColor().black),
               style: ButtonStyleAppBar().textButton,
             ),
           ),
@@ -151,7 +151,7 @@ class CatalogLightAppbar extends StatelessWidget {
       sliver: SliverAppBar(
         centerTitle: false,
         pinned: true,
-        title: AppFonts.b20(
+        title: AppText.b20(
           value: '${argument.title}',
           color: AppColor().black,
         ),
@@ -196,7 +196,7 @@ class CatalogLightAppbar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: ElevatedButton(
               onPressed: () {},
-              child: AppFonts.b14(value: 'Фильтр', color: AppColor().black),
+              child: AppText.b14(value: 'Фильтр', color: AppColor().black),
               style: ButtonStyleAppBar().textButton,
             ),
           ),

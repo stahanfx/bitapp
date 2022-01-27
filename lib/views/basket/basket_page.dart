@@ -28,8 +28,15 @@ class _BasketPageState extends State<BasketPage> {
               ? null
               : <Widget>[
                   IconButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'basket/location');
+                      onPressed: () async {
+                        var userId = await BasketPageModel().getUserID();
+                        if (userId == null) {
+                          Navigator.pushNamed(
+                              context, 'basket/lightRegistration');
+                        } else {
+                          Navigator.pushNamed(
+                              context, 'basket/lightRegister/location');
+                        }
                       },
                       icon: const Icon(FontAwesomeIcons.check))
                 ],
@@ -38,7 +45,7 @@ class _BasketPageState extends State<BasketPage> {
                 model.deleteAllBasketElement();
               },
               icon: const Icon(FontAwesomeIcons.trashCanList)),
-          title: AppFonts.b14(value: "Корзина", color: AppColor().black),
+          title: AppText.b14(value: "Корзина", color: AppColor().black),
         ),
         body: BasketListWidget(model: model),
       );
@@ -65,7 +72,7 @@ class BasketListWidget extends StatelessWidget {
           child: Column(
             children: [
               Center(
-                child: AppFonts.t16(
+                child: AppText.t16(
                     value: _calcBasketPrice(model.basketModel).toString(),
                     color: AppColor().black),
               ),
@@ -97,7 +104,7 @@ class BasketListWidget extends StatelessWidget {
                               children: [
                                 SizedBox(
                                   width: 300,
-                                  child: AppFonts.b12(
+                                  child: AppText.b12(
                                       value: TextCleaner(
                                               baseText:
                                                   basketElement.name.toString(),
@@ -140,7 +147,7 @@ class BasketListWidget extends StatelessWidget {
                                       height: 30,
                                       color: Colors.amber,
                                       child: Center(
-                                        child: AppFonts.b14(
+                                        child: AppText.b14(
                                             value: basketElement.quantity
                                                 .toString(),
                                             color: Colors.black),
@@ -159,10 +166,10 @@ class BasketListWidget extends StatelessWidget {
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    AppFonts.t12(
+                                    AppText.t12(
                                         value: 'Стоимость: ',
                                         color: AppColor().black),
-                                    AppFonts.b14(
+                                    AppText.b14(
                                         value: finalCost.toString(),
                                         color: AppColor().black),
                                   ],

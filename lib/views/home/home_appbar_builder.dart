@@ -24,7 +24,7 @@ class HomePageAppBarBuilder extends StatelessWidget with PreferredSizeWidget {
 
 _homeAppBarLight(context) {
   return AppBar(
-    title: AppFonts.b16(
+    title: AppText.b16(
       value: 'OUIPERFUME',
       color: AppColor().black,
     ),

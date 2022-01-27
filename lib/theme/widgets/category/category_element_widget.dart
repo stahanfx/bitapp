@@ -26,7 +26,7 @@ class CategoryElementBuilder {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppFonts.b14(value: catalog.name, color: AppColor().black),
+                AppText.b14(value: catalog.name, color: AppColor().black),
                 SizedBox(
                     width: AppSize().w10 * 5,
                     height: AppSize().h10 * 5,
@@ -60,7 +60,7 @@ class CategoryElementBuilder {
                 SizedBox(
                   height: AppSize().h10 * 0.5,
                 ),
-                AppFonts.t12(
+                AppText.t12(
                     textAlign: TextAlign.center,
                     value: TextCleaner(
                             baseText: catalog.name.toString(),

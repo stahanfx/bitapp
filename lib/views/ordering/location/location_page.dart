@@ -39,7 +39,7 @@ class _BasketPageState extends State<LocationPage> {
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: AppFonts.b14(
+        title: AppText.b14(
             value: "Выберите город доставки", color: AppColor().black),
       ),
       body: Column(
@@ -92,9 +92,9 @@ class _BasketPageState extends State<LocationPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AppFonts.b12(
+                            AppText.b12(
                                 value: location.name, color: AppColor().black),
-                            AppFonts.t12(
+                            AppText.t12(
                                 value: location.address,
                                 color: AppColor().black),
                           ],

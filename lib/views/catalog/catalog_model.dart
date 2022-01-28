@@ -1,16 +1,16 @@
-import 'package:bitapp/core/services/api/catalog/catalog_api_clients.dart';
-import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
-import 'package:bitapp/core/services/api/product/product_list/product_list_api_clients.dart';
+import 'package:bitapp/core/services/api/category/api_category_get.dart';
+import 'package:bitapp/core/services/api/category/category_model.dart';
+import 'package:bitapp/core/services/api/product/product_list/api_product_list_get.dart';
 import 'package:bitapp/core/services/api/product/product_list/product_list_model.dart';
 import 'package:flutter/material.dart';
 
 class CatalogPageModel with ChangeNotifier {
-  var categoryList = <Category>[];
+  var categoryList = <CategoryItem>[];
   var productList = <ProductList>[];
 
-  Future getCatalog(filter, select) async {
+  Future getCatalogList({required filter, required select}) async {
     final category =
-        await ApiCatalog(filter: filter, select: select).getCategory();
+        await ApiCategoryGet.category(filter: filter, select: select);
     if (category.result != null) {
       categoryList += category.result!;
       return category.result;
@@ -20,12 +20,8 @@ class CatalogPageModel with ChangeNotifier {
     // notifyListeners();
   }
 
-  Future getProduct(filter, select) async {
-    final product = await ApiProductList(
-      filter: filter,
-      // select: select,
-    ).getProduct();
-    // ignore: unnecessary_null_comparison
+  Future getProductList({required filter, required select}) async {
+    final product = await ApiProductListGet.list(filter: filter);
     if (product.result != null) {
       productList += product.result;
       return product.result;

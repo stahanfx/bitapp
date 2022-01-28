@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'catalog_model.dart';
+part of 'category_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -10,7 +10,7 @@ CategoryResponse _$CategoryResponseFromJson(Map<String, dynamic> json) =>
     CategoryResponse(
       status: json['status'] as int?,
       result: (json['result'] as List<dynamic>?)
-          ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => CategoryItem.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -20,7 +20,7 @@ Map<String, dynamic> _$CategoryResponseToJson(CategoryResponse instance) =>
       'result': instance.result,
     };
 
-Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
+CategoryItem _$CategoryItemFromJson(Map<String, dynamic> json) => CategoryItem(
       id: json['ID'] as String?,
       iblockId: json['IBLOCK_ID'] as String?,
       iblockSectionId: json['IBLOCK_SECTION_ID'] as String?,
@@ -34,7 +34,8 @@ Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
       code: json['CODE'] as String?,
     );
 
-Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
+Map<String, dynamic> _$CategoryItemToJson(CategoryItem instance) =>
+    <String, dynamic>{
       'ID': instance.id,
       'IBLOCK_ID': instance.iblockId,
       'IBLOCK_SECTION_ID': instance.iblockSectionId,

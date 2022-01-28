@@ -9,9 +9,9 @@ class LoadApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<BasketPageModel>();
+    final basketModelProvider = context.read<BasketPageModel>();
     return FutureBuilder(
-        future: provider.getBasketList(),
+        future: basketModelProvider.getList(),
         builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:

@@ -1,6 +1,5 @@
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -8,13 +7,12 @@ import 'package:provider/provider.dart';
 import 'light_registration_model.dart';
 
 class LightRegistrationPage extends StatelessWidget {
-  LightRegistrationPage({Key? key}) : super(key: key);
+  const LightRegistrationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final nameController = TextEditingController();
     final phoneController = TextEditingController();
-    final provider = context.read<LightRegistrationPageModel>();
     return Scaffold(
       appBar: AppBar(),
       body: Center(

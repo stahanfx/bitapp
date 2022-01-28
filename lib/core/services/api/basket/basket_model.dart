@@ -3,28 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'basket_model.g.dart';
 
-//TODO:Перенести в USER!
-@JsonSerializable()
-class FuserResponse {
-  @JsonKey(name: 'status')
-  int? status;
-  @JsonKey(name: 'result')
-  int? result;
-
-  FuserResponse({
-    required this.status,
-    required this.result,
-  });
-
-  factory FuserResponse.fromJson(Map<String, dynamic> json) =>
-      _$FuserResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$FuserResponseToJson(this);
-}
-
 @JsonSerializable()
 class BasketResponse {
   int? status;
-  List<BasketProduct>? result;
+  List<BasketItem>? result;
 
   BasketResponse({
     required this.status,
@@ -37,7 +19,8 @@ class BasketResponse {
 }
 
 @JsonSerializable()
-class BasketProduct extends Equatable {
+// ignore: must_be_immutable
+class BasketItem extends Equatable {
   @JsonKey(name: 'ID')
   String? id;
   @JsonKey(name: 'FUSER_ID')
@@ -59,7 +42,7 @@ class BasketProduct extends Equatable {
   @JsonKey(name: 'QUANTITY')
   double? quantity;
 
-  BasketProduct({
+  BasketItem({
     required this.id,
     required this.fuserId,
     required this.productId,
@@ -72,9 +55,9 @@ class BasketProduct extends Equatable {
     required this.quantity,
   });
 
-  factory BasketProduct.fromJson(Map<String, dynamic> json) =>
-      _$BasketProductFromJson(json);
-  Map<String, dynamic> toJson() => _$BasketProductToJson(this);
+  factory BasketItem.fromJson(Map<String, dynamic> json) =>
+      _$BasketItemFromJson(json);
+  Map<String, dynamic> toJson() => _$BasketItemToJson(this);
 
   @override
   // TODO: implement props

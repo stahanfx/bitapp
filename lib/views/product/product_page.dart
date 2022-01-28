@@ -1,7 +1,8 @@
-import 'package:bitapp/core/helper/text_clean.dart';
-import 'package:bitapp/core/services/api/basket/basket_api_clients.dart';
+import 'package:bitapp/core/helper/text_cleaner.dart';
+import 'package:bitapp/core/services/api/basket/api_basket_post.dart';
 import 'package:bitapp/core/services/api/file/image_services.dart';
-import 'package:bitapp/core/services/api/user/user_api_client.dart';
+import 'package:bitapp/core/services/api/product/product_item/product_item_model.dart';
+import 'package:bitapp/core/services/api/user/api_user_get.dart';
 import 'package:bitapp/theme/styles/button_style.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:bitapp/core/services/api/product/product_element/product_element_model.dart';
 import 'package:bitapp/theme/styles/sized_style.dart';
 
 import 'product_arguments_models.dart';
@@ -28,12 +28,12 @@ class ProductPage extends StatefulWidget {
 }
 
 class _HomePageState extends State<ProductPage> {
-  List<ProductElement> productElement = [];
+  List<ProductItem> productElement = [];
 
   Future<void> _getModel(argument) async {
     final model = context.watch<ProductPageModel>();
     productElement.clear();
-    final categoryListData = await model.getProductElement(argument);
+    final categoryListData = await model.getProductItem(argument);
     productElement += categoryListData;
   }
 
@@ -64,7 +64,7 @@ class _HomePageState extends State<ProductPage> {
 
 // ignore: must_be_immutable
 class ProductBuilder extends StatelessWidget {
-  ProductElement productElement;
+  ProductItem productElement;
   ProductBuilder({
     Key? key,
     required this.productElement,
@@ -72,7 +72,7 @@ class ProductBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<BasketPageModel>();
+    final BasketPageProvider = context.watch<BasketPageModel>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -123,7 +123,7 @@ class ProductBuilder extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                final sku = productElement.skuElement![index];
+                final sku = productElement.skuItem![index];
                 return SizedBox(
                   height: 50.0,
                   child: Padding(
@@ -155,21 +155,17 @@ class ProductBuilder extends StatelessWidget {
                         ElevatedButton(
                           style: AppButtonStuleElevated().textButton,
                           onPressed: () async {
-                            await ApiBasketPost().postProduct(filter: {
-                              'FUSER_ID': await UserApiGet().getLocalFuser(),
+                            await ApiBasketPost.product(productInfo: {
+                              'FUSER_ID': await ApiUserGet.fuserID(),
                               'PRODUCT_ID': sku.skuId,
                               'PRICE': sku.skuPrice?.discountPrice,
-                              //TODO: Поправить модель на получение данных(они есть)
                               'CURRENCY': 'RUB',
-                              //TODO: Добавить в глобальные переменные
                               'LID': 's1',
                               'NAME': sku.skuName,
-                              //TODO: Доделать чтоб было круто!
                               'QUANTITY': 1,
-                              //TODO: Поправить модель на получение данных(они есть)
                               'CUSTOM_PRICE': 'Y',
                             });
-                            await provider.getBasketList();
+                            await BasketPageProvider.getList();
                           },
                           child: const Text("В корзину"),
                         ),
@@ -178,7 +174,7 @@ class ProductBuilder extends StatelessWidget {
                   ),
                 );
               },
-              childCount: productElement.skuElement?.length,
+              childCount: productElement.skuItem?.length,
             ),
           ),
           SliverToBoxAdapter(

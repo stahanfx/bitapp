@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//TODO: ПЕРЕПИСАТЬ ВСЕ!
 // ignore: must_be_immutable
 class GetImageApi extends StatelessWidget {
   dynamic image;

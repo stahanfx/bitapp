@@ -85,7 +85,8 @@ class MyApp extends StatelessWidget {
             'basket': (context) => const BasketPage(),
             'basket/location': (context) => const LocationPage(),
             'basket/lightRegister/location': (context) => const LocationPage(),
-            'basket/lightRegistration': (context) => LightRegistrationPage(),
+            'basket/lightRegistration': (context) =>
+                const LightRegistrationPage(),
           },
         ),
       ),

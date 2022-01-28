@@ -6,23 +6,11 @@ part of 'basket_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FuserResponse _$FuserResponseFromJson(Map<String, dynamic> json) =>
-    FuserResponse(
-      status: json['status'] as int?,
-      result: json['result'] as int?,
-    );
-
-Map<String, dynamic> _$FuserResponseToJson(FuserResponse instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-      'result': instance.result,
-    };
-
 BasketResponse _$BasketResponseFromJson(Map<String, dynamic> json) =>
     BasketResponse(
       status: json['status'] as int?,
       result: (json['result'] as List<dynamic>?)
-          ?.map((e) => BasketProduct.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => BasketItem.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -32,8 +20,7 @@ Map<String, dynamic> _$BasketResponseToJson(BasketResponse instance) =>
       'result': instance.result,
     };
 
-BasketProduct _$BasketProductFromJson(Map<String, dynamic> json) =>
-    BasketProduct(
+BasketItem _$BasketItemFromJson(Map<String, dynamic> json) => BasketItem(
       id: json['ID'] as String?,
       fuserId: json['FUSER_ID'] as String?,
       productId: json['PRODUCT_ID'] as String?,
@@ -46,7 +33,7 @@ BasketProduct _$BasketProductFromJson(Map<String, dynamic> json) =>
       quantity: (json['QUANTITY'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$BasketProductToJson(BasketProduct instance) =>
+Map<String, dynamic> _$BasketItemToJson(BasketItem instance) =>
     <String, dynamic>{
       'ID': instance.id,
       'FUSER_ID': instance.fuserId,

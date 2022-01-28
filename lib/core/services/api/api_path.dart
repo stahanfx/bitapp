@@ -1,19 +1,16 @@
 import 'package:bitapp/core/base/global_parametrs.dart';
 
-class ApiPatchCatalog {
-  static String categoryList() =>
-      '${AppSettings.baseApiAddress}/catalog.trade.list';
+class ApiPatchCategoryGet {
+  static String list() => '${AppSettings.baseApiAddress}/catalog.trade.list';
 }
 
-class ApiPatchFile {
-  static String imageGet() => '${AppSettings.baseApiAddress}/file.images.get';
+class ApiPatchFileGet {
+  static String file() => '${AppSettings.baseApiAddress}/file.images.get';
 }
 
-class ApiPatchProduct {
-  static String productGet() =>
-      '${AppSettings.baseApiAddress}/product.trade.list';
-  static String getProductElement() =>
-      '${AppSettings.baseApiAddress}/product.trade.element';
+class ApiPatchProductGet {
+  static String list() => '${AppSettings.baseApiAddress}/product.trade.list';
+  static String item() => '${AppSettings.baseApiAddress}/product.trade.element';
 }
 
 class ApiPatchBasket {
@@ -24,20 +21,20 @@ class ApiPatchBasket {
       '${AppSettings.baseApiAddress}/basket.put.product';
   static String deleteProduct() =>
       '${AppSettings.baseApiAddress}/basket.delete.product';
-  static String deleteAllProduct() =>
+  static String deleteBasket() =>
       '${AppSettings.baseApiAddress}/basket.delete.all';
 }
 
-class ApiPatchDelivery {
-  static String getLocation() =>
+class ApiPatchDeliveryGet {
+  static String location() =>
       '${AppSettings.baseApiAddress}/delivery.get.location';
 }
 
 class ApiPatchUserGet {
-  static String getFuser() => '${AppSettings.baseApiAddress}/user.get.fuser';
+  static String fuser() => '${AppSettings.baseApiAddress}/user.get.fuser';
 }
 
-class ApiPatchUserAuth {
-  static String postRegistration() =>
+class ApiPatchUserPost {
+  static String registrations() =>
       '${AppSettings.baseApiAddress}/user.auth.registration';
 }

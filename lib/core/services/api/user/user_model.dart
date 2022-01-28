@@ -5,6 +5,24 @@ part 'user_model.g.dart';
 
 //TODO:Перенести в USER!
 @JsonSerializable()
+class FuserResponse {
+  @JsonKey(name: 'status')
+  int? status;
+  @JsonKey(name: 'result')
+  int? result;
+
+  FuserResponse({
+    required this.status,
+    required this.result,
+  });
+
+  factory FuserResponse.fromJson(Map<String, dynamic> json) =>
+      _$FuserResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$FuserResponseToJson(this);
+}
+
+//TODO:Перенести в USER!
+@JsonSerializable()
 class RegistrationResponse {
   @JsonKey(name: 'status')
   int? status;
@@ -22,6 +40,7 @@ class RegistrationResponse {
 }
 
 @JsonSerializable()
+// ignore: must_be_immutable
 class RegistrationResult extends Equatable {
   @JsonKey(name: 'MESSAGE')
   String? message;

@@ -1,24 +1,24 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'product_element_model.g.dart';
+part 'product_item_model.g.dart';
 
 @JsonSerializable()
-class ProductElementResponse {
+class ProductItemResponse {
   int status;
-  List<ProductElement> result;
+  List<ProductItem> result;
 
-  ProductElementResponse({
+  ProductItemResponse({
     required this.status,
     required this.result,
   });
 
-  factory ProductElementResponse.fromJson(Map<String, dynamic> json) =>
-      _$ProductElementResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$ProductElementResponseToJson(this);
+  factory ProductItemResponse.fromJson(Map<String, dynamic> json) =>
+      _$ProductItemResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductItemResponseToJson(this);
 }
 
 @JsonSerializable()
-class ProductElement {
+class ProductItem {
   @JsonKey(name: 'ID')
   String? id;
   @JsonKey(name: 'ACTIVE')
@@ -41,9 +41,9 @@ class ProductElement {
   String? country;
 
   @JsonKey(name: 'SKU')
-  List<SkuElement>? skuElement;
+  List<SkuItem>? skuItem;
 
-  ProductElement({
+  ProductItem({
     required this.id,
     required this.active,
     required this.name,
@@ -54,16 +54,16 @@ class ProductElement {
     required this.gender,
     required this.family,
     required this.country,
-    required this.skuElement,
+    required this.skuItem,
   });
 
-  factory ProductElement.fromJson(Map<String, dynamic> json) =>
-      _$ProductElementFromJson(json);
-  Map<String, dynamic> toJson() => _$ProductElementToJson(this);
+  factory ProductItem.fromJson(Map<String, dynamic> json) =>
+      _$ProductItemFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductItemToJson(this);
 }
 
 @JsonSerializable()
-class SkuElement {
+class SkuItem {
   @JsonKey(name: 'ID')
   int? skuId;
   @JsonKey(name: 'ACTIVE')
@@ -85,7 +85,7 @@ class SkuElement {
   @JsonKey(name: 'PRICE')
   Price? skuPrice;
 
-  SkuElement({
+  SkuItem({
     required this.skuId,
     required this.skuActive,
     required this.skuName,
@@ -97,9 +97,9 @@ class SkuElement {
     required this.skuPrice,
   });
 
-  factory SkuElement.fromJson(Map<String, dynamic> json) =>
-      _$SkuElementFromJson(json);
-  Map<String, dynamic> toJson() => _$SkuElementToJson(this);
+  factory SkuItem.fromJson(Map<String, dynamic> json) =>
+      _$SkuItemFromJson(json);
+  Map<String, dynamic> toJson() => _$SkuItemToJson(this);
 }
 
 @JsonSerializable()

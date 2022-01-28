@@ -1,29 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product_element_model.dart';
+part of 'product_item_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProductElementResponse _$ProductElementResponseFromJson(
-        Map<String, dynamic> json) =>
-    ProductElementResponse(
+ProductItemResponse _$ProductItemResponseFromJson(Map<String, dynamic> json) =>
+    ProductItemResponse(
       status: json['status'] as int,
       result: (json['result'] as List<dynamic>)
-          .map((e) => ProductElement.fromJson(e as Map<String, dynamic>))
+          .map((e) => ProductItem.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$ProductElementResponseToJson(
-        ProductElementResponse instance) =>
+Map<String, dynamic> _$ProductItemResponseToJson(
+        ProductItemResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'result': instance.result,
     };
 
-ProductElement _$ProductElementFromJson(Map<String, dynamic> json) =>
-    ProductElement(
+ProductItem _$ProductItemFromJson(Map<String, dynamic> json) => ProductItem(
       id: json['ID'] as String?,
       active: json['ACTIVE'] as String?,
       name: json['NAME'] as String?,
@@ -34,12 +32,12 @@ ProductElement _$ProductElementFromJson(Map<String, dynamic> json) =>
       gender: json['GENDER'] as String?,
       family: json['FAMILY'] as String?,
       country: json['COUNTRY'] as String?,
-      skuElement: (json['SKU'] as List<dynamic>?)
-          ?.map((e) => SkuElement.fromJson(e as Map<String, dynamic>))
+      skuItem: (json['SKU'] as List<dynamic>?)
+          ?.map((e) => SkuItem.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$ProductElementToJson(ProductElement instance) =>
+Map<String, dynamic> _$ProductItemToJson(ProductItem instance) =>
     <String, dynamic>{
       'ID': instance.id,
       'ACTIVE': instance.active,
@@ -51,10 +49,10 @@ Map<String, dynamic> _$ProductElementToJson(ProductElement instance) =>
       'GENDER': instance.gender,
       'FAMILY': instance.family,
       'COUNTRY': instance.country,
-      'SKU': instance.skuElement,
+      'SKU': instance.skuItem,
     };
 
-SkuElement _$SkuElementFromJson(Map<String, dynamic> json) => SkuElement(
+SkuItem _$SkuItemFromJson(Map<String, dynamic> json) => SkuItem(
       skuId: json['ID'] as int?,
       skuActive: json['ACTIVE'] as String?,
       skuName: json['NAME'] as String?,
@@ -70,8 +68,7 @@ SkuElement _$SkuElementFromJson(Map<String, dynamic> json) => SkuElement(
           : Price.fromJson(json['PRICE'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$SkuElementToJson(SkuElement instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SkuItemToJson(SkuItem instance) => <String, dynamic>{
       'ID': instance.skuId,
       'ACTIVE': instance.skuActive,
       'NAME': instance.skuName,

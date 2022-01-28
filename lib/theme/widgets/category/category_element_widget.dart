@@ -1,17 +1,17 @@
-import 'package:bitapp/core/helper/text_clean.dart';
+import 'package:bitapp/core/helper/text_cleaner.dart';
+import 'package:bitapp/core/services/api/category/category_model.dart';
 import 'package:bitapp/core/services/api/file/image_services.dart';
 import 'package:bitapp/theme/styles/sized_style.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
 
 class CategoryElementBuilder {
-  final Category catalog;
+  final CategoryItem categoryItem;
   const CategoryElementBuilder({
     Key? key,
-    required this.catalog,
+    required this.categoryItem,
   });
 
   catalogOneRow() {
@@ -26,11 +26,11 @@ class CategoryElementBuilder {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppText.b14(value: catalog.name, color: AppColor().black),
+                AppText.b14(value: categoryItem.name, color: AppColor().black),
                 SizedBox(
                     width: AppSize().w10 * 5,
                     height: AppSize().h10 * 5,
-                    child: GetImageApi(image: catalog.picture)),
+                    child: GetImageApi(image: categoryItem.picture)),
               ],
             ),
           )),
@@ -55,7 +55,7 @@ class CategoryElementBuilder {
                 SizedBox(
                   width: AppSize().w10 * 5,
                   height: AppSize().h10 * 5,
-                  child: GetImageApi(image: catalog.picture),
+                  child: GetImageApi(image: categoryItem.picture),
                 ),
                 SizedBox(
                   height: AppSize().h10 * 0.5,
@@ -63,7 +63,7 @@ class CategoryElementBuilder {
                 AppText.t12(
                     textAlign: TextAlign.center,
                     value: TextCleaner(
-                            baseText: catalog.name.toString(),
+                            baseText: categoryItem.name.toString(),
                             repText: '(OUIFLACON)',
                             newText: '')
                         .base(),

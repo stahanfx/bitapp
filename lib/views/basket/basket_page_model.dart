@@ -1,17 +1,18 @@
-import 'package:bitapp/core/services/api/basket/basket_api_clients.dart';
+import 'package:bitapp/core/services/api/basket/api_basket_delete.dart';
+import 'package:bitapp/core/services/api/basket/api_basket_get.dart';
+import 'package:bitapp/core/services/api/basket/api_basket_put.dart';
+
 import 'package:bitapp/core/services/api/basket/basket_model.dart';
-import 'package:bitapp/core/services/api/user/user_api_client.dart';
+import 'package:bitapp/core/services/api/user/api_user_get.dart';
 
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class BasketPageModel with ChangeNotifier {
-  var basketModel = <BasketProduct>[];
+  var basketModel = <BasketItem>[];
 
-  Future<void> getBasketList() async {
-    final fuserId = await UserApiGet().getLocalFuser();
-    print(fuserId);
-    final product = await ApiBasketGet().getList(fuserId: fuserId);
+  Future<void> getList() async {
+    final fuserId = await ApiUserGet.fuserID();
+    final product = await ApiBasketGet.list(fuserId: fuserId);
     if (product.result != null) {
       if (basketModel != product.result) {
         basketModel = product.result!;
@@ -22,26 +23,25 @@ class BasketPageModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteBasketElement(id) async {
-    final result = await ApiBasketDelete().deleteProduct(id: id);
-    if (result != null) await getBasketList();
+  Future<void> deleteItem({required productId}) async {
+    final result = await ApiBasketDelete.product(productId: productId);
+    if (result != null) await getList();
     notifyListeners();
   }
 
-  Future<void> deleteAllBasketElement() async {
-    final result = await ApiBasketDelete().deleteAllProduct();
-    print("Корзина очищена");
-    await getBasketList();
+  Future<void> deleteBasket() async {
+    await ApiBasketDelete.basket();
+    await getList();
     notifyListeners();
   }
 
-  Future putBasketElement(id, quantity) async {
-    final result = await ApiBasketPut().putProduct(id: id, quantity: quantity);
-    if (result != null) getBasketList();
+  Future<void> putItem({required id, required quantity}) async {
+    final result = await ApiBasketPut.product(id: id, quantity: quantity);
+    if (result != null) getList();
   }
 
+//TODO: Надо держать модель пользователя
   Future getUserID() async {
-    final result = await UserApiGet().getLocalUserId();
-    return result;
+    return await ApiUserGet.localUserID();
   }
 }

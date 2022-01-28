@@ -1,4 +1,4 @@
-import 'package:bitapp/core/helper/text_clean.dart';
+import 'package:bitapp/core/helper/text_cleaner.dart';
 import 'package:bitapp/core/services/api/basket/basket_model.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
@@ -16,7 +16,7 @@ class BasketPage extends StatefulWidget {
 }
 
 class _BasketPageState extends State<BasketPage> {
-  var model = [];
+  // var model = [];
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _BasketPageState extends State<BasketPage> {
                 ],
           leading: IconButton(
               onPressed: () {
-                model.deleteAllBasketElement();
+                model.deleteBasket();
               },
               icon: const Icon(FontAwesomeIcons.trashCanList)),
           title: AppText.b14(value: "Корзина", color: AppColor().black),
@@ -120,8 +120,8 @@ class BasketListWidget extends StatelessWidget {
                                   children: [
                                     IconButton(
                                         onPressed: () async {
-                                          await model.deleteBasketElement(
-                                              basketElement.id);
+                                          await model.deleteItem(
+                                              productId: basketElement.id);
                                         },
                                         icon:
                                             const Icon(FontAwesomeIcons.trash)),
@@ -136,10 +136,12 @@ class BasketListWidget extends StatelessWidget {
                                   children: [
                                     IconButton(
                                         onPressed: () async {
-                                          var newQuantity =
+                                          var plassQuantity =
                                               basketElement.quantity! + 1.0;
-                                          await model.putBasketElement(
-                                              basketElement.id, newQuantity);
+                                          await model.putItem(
+                                            id: basketElement.id,
+                                            quantity: plassQuantity,
+                                          );
                                         },
                                         icon: const Icon(Icons.add)),
                                     Container(
@@ -155,10 +157,12 @@ class BasketListWidget extends StatelessWidget {
                                     ),
                                     IconButton(
                                         onPressed: () async {
-                                          var newQuantity =
+                                          var minusQuantity =
                                               basketElement.quantity! - 1.0;
-                                          await model.putBasketElement(
-                                              basketElement.id, newQuantity);
+                                          await model.putItem(
+                                            id: basketElement.id,
+                                            quantity: minusQuantity,
+                                          );
                                         },
                                         icon: const Icon(Icons.remove)),
                                   ],
@@ -189,7 +193,7 @@ class BasketListWidget extends StatelessWidget {
   }
 }
 
-_calcBasketPrice(List<BasketProduct> data) {
+_calcBasketPrice(List<BasketItem> data) {
   double finalCost = 0;
   data.asMap().forEach((k, v) {
     var price = v.price;

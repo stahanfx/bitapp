@@ -1,5 +1,5 @@
 import 'package:bitapp/core/base/global_parametrs.dart';
-import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
+import 'package:bitapp/core/services/api/category/category_model.dart';
 import 'package:bitapp/theme/styles/button_style.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
@@ -13,10 +13,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // ignore: must_be_immutable
 class CatalogPageAppBarBuilder extends StatelessWidget
     with PreferredSizeWidget {
-  List<Category> catalogListModel;
+  List<CategoryItem> categoryListModel;
   CategoryArgument argument;
   CatalogPageAppBarBuilder(
-      {Key? key, required this.argument, required this.catalogListModel})
+      {Key? key, required this.argument, required this.categoryListModel})
       : super(key: key);
 
   @override
@@ -28,7 +28,7 @@ class CatalogPageAppBarBuilder extends StatelessWidget
       case 'horisontal':
         return CatalogNavigationAppbar(
           argument: argument,
-          categoryListModel: catalogListModel,
+          categoryListModel: categoryListModel,
         );
       case 'light':
         return CatalogLightAppbar(
@@ -37,7 +37,7 @@ class CatalogPageAppBarBuilder extends StatelessWidget
       default:
         return CatalogNavigationAppbar(
           argument: argument,
-          categoryListModel: catalogListModel,
+          categoryListModel: categoryListModel,
         );
     }
   }
@@ -51,7 +51,7 @@ class CatalogNavigationAppbar extends StatelessWidget {
   }) : super(key: key);
 
   final CategoryArgument argument;
-  final List<Category> categoryListModel;
+  final List<CategoryItem> categoryListModel;
 
   @override
   Widget build(BuildContext context) {

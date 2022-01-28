@@ -38,7 +38,7 @@ class ProductList {
   @JsonKey(name: 'PREVIEW_TEXT')
   String? previewText;
   @JsonKey(name: 'DETAIL_PICTURE')
-  String? detailText;
+  String? detailPicture;
   @JsonKey(name: 'IN_SECTIONS')
   String? unSections;
   @JsonKey(name: 'CODE')
@@ -66,7 +66,7 @@ class ProductList {
     required this.name,
     required this.previewPicture,
     required this.previewText,
-    required this.detailText,
+    required this.detailPicture,
     required this.unSections,
     required this.code,
     required this.externalId,

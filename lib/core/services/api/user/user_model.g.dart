@@ -6,6 +6,18 @@ part of 'user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+FuserResponse _$FuserResponseFromJson(Map<String, dynamic> json) =>
+    FuserResponse(
+      status: json['status'] as int?,
+      result: json['result'] as int?,
+    );
+
+Map<String, dynamic> _$FuserResponseToJson(FuserResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'result': instance.result,
+    };
+
 RegistrationResponse _$RegistrationResponseFromJson(
         Map<String, dynamic> json) =>
     RegistrationResponse(

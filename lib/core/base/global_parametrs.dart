@@ -4,6 +4,7 @@ class AppSettings {
   static const String baseApiAddress = 'bitapi';
   static const String siteUrl = '$baseSheme://$baseHost';
   static const String baseTradeCatalog = '38';
+  static const String siteId = 's1';
 
 //TODO: Перевести на ENUM
 

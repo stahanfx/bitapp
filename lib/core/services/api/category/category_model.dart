@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'catalog_model.g.dart';
+part 'category_model.g.dart';
 
 @JsonSerializable()
 class CategoryResponse {
   int? status;
-  List<Category>? result;
+  List<CategoryItem>? result;
 
   CategoryResponse({
     required this.status,
@@ -18,7 +18,7 @@ class CategoryResponse {
 }
 
 @JsonSerializable()
-class Category {
+class CategoryItem {
   @JsonKey(name: 'ID')
   String? id;
   @JsonKey(name: 'IBLOCK_ID')
@@ -42,7 +42,7 @@ class Category {
   @JsonKey(name: 'CODE')
   String? code;
 
-  Category({
+  CategoryItem({
     required this.id,
     required this.iblockId,
     required this.iblockSectionId,
@@ -56,7 +56,7 @@ class Category {
     required this.code,
   });
 
-  factory Category.fromJson(Map<String, dynamic> json) =>
-      _$CategoryFromJson(json);
-  Map<String, dynamic> toJson() => _$CategoryToJson(this);
+  factory CategoryItem.fromJson(Map<String, dynamic> json) =>
+      _$CategoryItemFromJson(json);
+  Map<String, dynamic> toJson() => _$CategoryItemToJson(this);
 }

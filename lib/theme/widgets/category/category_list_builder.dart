@@ -1,14 +1,14 @@
+import 'package:bitapp/core/services/api/category/category_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitapp/core/base/global_parametrs.dart';
-import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 import 'package:bitapp/theme/styles/sized_style.dart';
 
 import '../../../views/catalog/category_arguments_models.dart';
 import 'category_element_widget.dart';
 
 class CategoryListBuilder {
-  List<Category> categoryListModel;
+  List<CategoryItem> categoryListModel;
   CategoryListBuilder({
     Key? key,
     required this.categoryListModel,
@@ -18,7 +18,7 @@ class CategoryListBuilder {
     if (categoryListModel.isNotEmpty) {
       switch (AppSettings.homeCategoryViewType) {
         case 'verticaltext':
-          return CategoryListVerticalText(catalogListModel: categoryListModel);
+          return CategoryListVerticalText(categoryListModel: categoryListModel);
       }
     } else {
       return Container();
@@ -30,7 +30,7 @@ class CategoryListBuilder {
       switch (AppSettings.catalogCategiryViewType) {
         case 'verticalTwoText':
           return CategoryListTwoVerticalText(
-              catalogListModel: categoryListModel);
+              categoryListModel: categoryListModel);
       }
     } else {
       return Container();
@@ -40,10 +40,10 @@ class CategoryListBuilder {
 
 // ignore: must_be_immutable
 class CategoryListVerticalText extends StatelessWidget {
-  List<Category> catalogListModel;
+  List<CategoryItem> categoryListModel;
   CategoryListVerticalText({
     Key? key,
-    required this.catalogListModel,
+    required this.categoryListModel,
   }) : super(key: key);
 
   @override
@@ -53,15 +53,17 @@ class CategoryListVerticalText extends StatelessWidget {
       child: ListView.builder(
         // cacheExtent: 800,
         scrollDirection: Axis.vertical,
-        itemCount: catalogListModel.length,
+        itemCount: categoryListModel.length,
         itemBuilder: (BuildContext context, int index) {
-          final catalog = catalogListModel[index];
+          final categoryItem = categoryListModel[index];
           return GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, 'catalog',
-                    arguments: CategoryArgument(catalog.name, catalog.id));
+                    arguments:
+                        CategoryArgument(categoryItem.name, categoryItem.id));
               },
-              child: CategoryElementBuilder(catalog: catalog).catalogOneRow());
+              child: CategoryElementBuilder(categoryItem: categoryItem)
+                  .catalogOneRow());
         },
       ),
     );
@@ -70,10 +72,10 @@ class CategoryListVerticalText extends StatelessWidget {
 
 // ignore: must_be_immutable
 class CategoryListTwoVerticalText extends StatelessWidget {
-  List<Category> catalogListModel;
+  List<CategoryItem> categoryListModel;
   CategoryListTwoVerticalText({
     Key? key,
-    required this.catalogListModel,
+    required this.categoryListModel,
   }) : super(key: key);
 
   @override
@@ -94,15 +96,16 @@ class CategoryListTwoVerticalText extends StatelessWidget {
           ),
           // cacheExtent: 800,
           scrollDirection: Axis.vertical,
-          itemCount: catalogListModel.length,
+          itemCount: categoryListModel.length,
           itemBuilder: (BuildContext context, int index) {
-            final catalog = catalogListModel[index];
+            final categoryItem = categoryListModel[index];
             return GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, 'catalog',
-                      arguments: CategoryArgument(catalog.name, catalog.id));
+                      arguments:
+                          CategoryArgument(categoryItem.name, categoryItem.id));
                 },
-                child: CategoryElementBuilder(catalog: catalog)
+                child: CategoryElementBuilder(categoryItem: categoryItem)
                     .catalogTwoColumn());
           },
         ),

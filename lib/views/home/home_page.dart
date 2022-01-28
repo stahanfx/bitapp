@@ -1,9 +1,9 @@
 import 'package:bitapp/core/base/global_parametrs.dart';
+import 'package:bitapp/core/services/api/category/category_model.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/widgets/category/category_list_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:bitapp/core/services/api/catalog/catalog_model.dart';
 
 import 'home_appbar_builder.dart';
 import 'home_model.dart';
@@ -16,11 +16,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Category> categoryListModel = [];
+  List<CategoryItem> categoryListModel = [];
 
   Future<void> _getModel() async {
     final model = context.watch<HomePageModel>();
-    // catalogListModel.clear();
+    // categoryListModel.clear();
     final categoryListData = await model.getCategory(
         {'SECTION_ID': 'false', 'IBLOCK_ID': AppSettings.baseTradeCatalog},
         'light');

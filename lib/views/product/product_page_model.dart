@@ -1,14 +1,12 @@
-import 'package:bitapp/core/services/api/product/product_element/product_element_api_clients.dart';
-import 'package:bitapp/core/services/api/product/product_element/product_element_model.dart';
+import 'package:bitapp/core/services/api/product/product_item/api_product_item_get.dart';
+import 'package:bitapp/core/services/api/product/product_item/product_item_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductPageModel with ChangeNotifier {
-  var productElement = <ProductElement>[];
+  var productElement = <ProductItem>[];
 
-  Future getProductElement(id) async {
-    final product = await ApiProductElement(
-      id: id,
-    ).getProductElement();
+  Future getProductItem(id) async {
+    final product = await ApiProductItemGet.poductItem(id: id);
     // ignore: unnecessary_null_comparison
     if (product.result != null) {
       productElement += product.result;

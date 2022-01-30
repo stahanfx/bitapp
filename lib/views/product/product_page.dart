@@ -109,7 +109,7 @@ class ProductBuilder extends StatelessWidget {
                   vertical: AppSize().w10, horizontal: AppSize().w10),
               child: Center(
                 child: AppText.b14(
-                    value: productElement.name, color: AppColor().black),
+                    value: productElement.name, color: AppColor.black),
               ),
             ),
           ),
@@ -117,7 +117,7 @@ class ProductBuilder extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: AppText.b14(
-                  value: "Торговые предложения", color: AppColor().black),
+                  value: "Торговые предложения", color: AppColor.black),
             ),
           ),
           SliverList(
@@ -140,15 +140,15 @@ class ProductBuilder extends StatelessWidget {
                               AppText.b12(
                                   value:
                                       "${TextCleaner(baseText: sku.skuListProperties!.skuType.toString(), repText: "&quot;", newText: "").base()}",
-                                  color: AppColor().black),
+                                  color: AppColor.black),
                               AppText.t12(
                                   value:
                                       "Обьем: ${sku.skuListProperties?.skuVolumeNumber}мл",
-                                  color: AppColor().black),
+                                  color: AppColor.black),
                               AppText.b12(
                                   value:
                                       "Цена: ${sku.skuPrice?.discountPrice.toString()}",
-                                  color: AppColor().activeButton),
+                                  color: AppColor.activeButton),
                             ],
                           ),
                         ),
@@ -164,6 +164,7 @@ class ProductBuilder extends StatelessWidget {
                               'NAME': sku.skuName,
                               'QUANTITY': 1,
                               'CUSTOM_PRICE': 'Y',
+                              'XML_ID': sku.xmlId,
                             });
                             await BasketPageProvider.getList();
                           },
@@ -181,7 +182,7 @@ class ProductBuilder extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
               child:
-                  AppText.b16(value: "Характеристики", color: AppColor().black),
+                  AppText.b16(value: "Характеристики", color: AppColor.black),
             ),
           ),
           SliverToBoxAdapter(
@@ -194,10 +195,9 @@ class ProductBuilder extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AppText.t12(value: "Бренд:", color: AppColor().black),
+                        AppText.t12(value: "Бренд:", color: AppColor.black),
                         AppText.t12(
-                            value: productElement.brand,
-                            color: AppColor().black),
+                            value: productElement.brand, color: AppColor.black),
                       ],
                     ),
                   ),
@@ -206,10 +206,21 @@ class ProductBuilder extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AppText.t12(value: "Пол:", color: AppColor().black),
+                        AppText.t12(value: "XML:", color: AppColor.black),
+                        AppText.t12(
+                            value: productElement.xmlId, color: AppColor.black),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppText.t12(value: "Пол:", color: AppColor.black),
                         AppText.t12(
                             value: productElement.gender,
-                            color: AppColor().black),
+                            color: AppColor.black),
                       ],
                     ),
                   ),
@@ -218,11 +229,10 @@ class ProductBuilder extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AppText.t12(
-                            value: "Семейство:", color: AppColor().black),
+                        AppText.t12(value: "Семейство:", color: AppColor.black),
                         AppText.t12(
                             value: productElement.family,
-                            color: AppColor().black),
+                            color: AppColor.black),
                       ],
                     ),
                   ),
@@ -232,10 +242,10 @@ class ProductBuilder extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AppText.t12(
-                            value: "Производство:", color: AppColor().black),
+                            value: "Производство:", color: AppColor.black),
                         AppText.t12(
                             value: productElement.country,
-                            color: AppColor().black),
+                            color: AppColor.black),
                       ],
                     ),
                   ),
@@ -246,7 +256,7 @@ class ProductBuilder extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
-              child: AppText.b16(value: "Описание", color: AppColor().black),
+              child: AppText.b16(value: "Описание", color: AppColor.black),
             ),
           ),
           SliverToBoxAdapter(
@@ -257,7 +267,7 @@ class ProductBuilder extends StatelessWidget {
                 right: AppSize().w10,
               ),
               child: AppText.t14(
-                  value: productElement.detailText, color: AppColor().black),
+                  value: productElement.detailText, color: AppColor.black),
             ),
           ),
         ],

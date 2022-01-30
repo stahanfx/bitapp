@@ -6,21 +6,23 @@ part of 'location_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-LocationResponse _$LocationResponseFromJson(Map<String, dynamic> json) =>
-    LocationResponse(
+OrderLocationResponse _$OrderLocationResponseFromJson(
+        Map<String, dynamic> json) =>
+    OrderLocationResponse(
       status: json['status'] as int?,
       result: (json['result'] as List<dynamic>?)
-          ?.map((e) => Location.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => LocationItem.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$LocationResponseToJson(LocationResponse instance) =>
+Map<String, dynamic> _$OrderLocationResponseToJson(
+        OrderLocationResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'result': instance.result,
     };
 
-Location _$LocationFromJson(Map<String, dynamic> json) => Location(
+LocationItem _$LocationItemFromJson(Map<String, dynamic> json) => LocationItem(
       id: json['ID'] as String?,
       code: json['CODE'] as String?,
       sort: json['SORT'] as String?,
@@ -29,7 +31,8 @@ Location _$LocationFromJson(Map<String, dynamic> json) => Location(
       address: json['ADDRESS'] as String?,
     );
 
-Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
+Map<String, dynamic> _$LocationItemToJson(LocationItem instance) =>
+    <String, dynamic>{
       'ID': instance.id,
       'CODE': instance.code,
       'SORT': instance.sort,

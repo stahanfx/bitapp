@@ -21,9 +21,10 @@ class _HomePageState extends State<HomePage> {
   Future<void> _getModel() async {
     final model = context.watch<HomePageModel>();
     // categoryListModel.clear();
-    final categoryListData = await model.getCategory(
-        {'SECTION_ID': 'false', 'IBLOCK_ID': AppSettings.baseTradeCatalog},
-        'light');
+    final categoryListData = await model.getCategory({
+      'SECTION_ID': 'false',
+      'IBLOCK_ID': AppGlobalSettings.baseTradeCatalog
+    }, 'light');
     categoryListModel += categoryListData;
   }
 
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
             } else {
               //
               return Scaffold(
-                backgroundColor: AppColor().backgroun,
+                backgroundColor: AppColor.backgroun,
                 appBar: const HomePageAppBarBuilder(),
                 body: ListView(
                   children: [

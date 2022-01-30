@@ -24,7 +24,7 @@ class CatalogPageAppBarBuilder extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    switch (AppSettings.catalogAppbarViewType) {
+    switch (AppGlobalSettings.catalogAppbarViewType) {
       case 'horisontal':
         return CatalogNavigationAppbar(
           argument: argument,
@@ -71,7 +71,7 @@ class CatalogNavigationAppbar extends StatelessWidget {
         expandedHeight: value,
         title: AppText.b20(
           value: '${argument.title}',
-          color: AppColor().black,
+          color: AppColor.black,
         ),
         leading: Padding(
           padding: const EdgeInsets.only(
@@ -80,11 +80,11 @@ class CatalogNavigationAppbar extends StatelessWidget {
             bottom: 10,
           ),
           child: CircleAvatar(
-            backgroundColor: AppColor().white,
+            backgroundColor: AppColor.white,
             child: IconButton(
               icon: Icon(
                 FontAwesomeIcons.arrowLeft,
-                color: AppColor().black,
+                color: AppColor.black,
                 size: 20,
               ),
               onPressed: () => Navigator.of(context).pop(),
@@ -99,11 +99,11 @@ class CatalogNavigationAppbar extends StatelessWidget {
               bottom: 10,
             ),
             child: CircleAvatar(
-              backgroundColor: AppColor().white,
+              backgroundColor: AppColor.white,
               child: IconButton(
                 icon: Icon(
                   Icons.search,
-                  color: AppColor().black,
+                  color: AppColor.black,
                   size: 20,
                 ),
                 onPressed: () {},
@@ -114,7 +114,7 @@ class CatalogNavigationAppbar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: ElevatedButton(
               onPressed: () {},
-              child: AppText.b14(value: 'Фильтр', color: AppColor().black),
+              child: AppText.b14(value: 'Фильтр', color: AppColor.black),
               style: ButtonStyleAppBar().textButton,
             ),
           ),
@@ -153,7 +153,7 @@ class CatalogLightAppbar extends StatelessWidget {
         pinned: true,
         title: AppText.b20(
           value: '${argument.title}',
-          color: AppColor().black,
+          color: AppColor.black,
         ),
         leading: Padding(
           padding: const EdgeInsets.only(
@@ -162,11 +162,11 @@ class CatalogLightAppbar extends StatelessWidget {
             bottom: 10,
           ),
           child: CircleAvatar(
-            backgroundColor: AppColor().white,
+            backgroundColor: AppColor.white,
             child: IconButton(
               icon: Icon(
                 FontAwesomeIcons.arrowLeft,
-                color: AppColor().black,
+                color: AppColor.black,
                 size: 20,
               ),
               onPressed: () => Navigator.of(context).pop(),
@@ -181,11 +181,11 @@ class CatalogLightAppbar extends StatelessWidget {
               bottom: 10,
             ),
             child: CircleAvatar(
-              backgroundColor: AppColor().white,
+              backgroundColor: AppColor.white,
               child: IconButton(
                 icon: Icon(
                   Icons.search,
-                  color: AppColor().black,
+                  color: AppColor.black,
                   size: 20,
                 ),
                 onPressed: () {},
@@ -196,7 +196,7 @@ class CatalogLightAppbar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: ElevatedButton(
               onPressed: () {},
-              child: AppText.b14(value: 'Фильтр', color: AppColor().black),
+              child: AppText.b14(value: 'Фильтр', color: AppColor.black),
               style: ButtonStyleAppBar().textButton,
             ),
           ),

@@ -1,8 +1,9 @@
-import 'package:bitapp/theme/styles/color_style.dart';
-import 'package:bitapp/theme/styles/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+import 'package:bitapp/theme/styles/color_style.dart';
+import 'package:bitapp/theme/styles/font_style.dart';
 
 import 'light_registration_model.dart';
 
@@ -14,7 +15,9 @@ class LightRegistrationPage extends StatelessWidget {
     final nameController = TextEditingController();
     final phoneController = TextEditingController();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: AppText.b12(value: "value", color: AppColor.black),
+      ),
       body: Center(
         child: Column(
           children: [
@@ -55,26 +58,51 @@ class LightRegistrationPage extends StatelessWidget {
               ),
             ),
             Consumer<LightRegistrationPageModel>(
-              builder: (context, model, child) {
-                return Column(
-                  children: [
-                    ElevatedButton(
-                        onPressed: () async {
-                          await model.postLightRegistration(
-                              name: nameController.text,
-                              phone: phoneController.text);
-                        },
-                        child: AppText.b12(
-                            value: 'value', color: AppColor().black)),
-                    AppText.b12(value: model.type, color: AppColor().black),
-                    AppText.b12(value: model.massage, color: AppColor().black),
-                  ],
-                );
-              },
-            ),
+                builder: (context, model, child) {
+              return _LightRegistrationWidget(
+                nameController: nameController,
+                phoneController: phoneController,
+                model: model,
+              );
+            }),
           ],
         ),
       ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class _LightRegistrationWidget extends StatelessWidget {
+  LightRegistrationPageModel model;
+
+  _LightRegistrationWidget({
+    Key? key,
+    required this.model,
+    required this.nameController,
+    required this.phoneController,
+  }) : super(key: key);
+
+  final TextEditingController nameController;
+  final TextEditingController phoneController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ElevatedButton(
+            onPressed: () async {
+              print('object');
+              await model.postLightRegistration(
+                  name: nameController.text, phone: phoneController.text);
+              if (model.type == 'OK') {
+                Navigator.pushNamed(context, 'basket/lightRegister/location');
+              }
+            },
+            child: AppText.b12(value: 'value123', color: AppColor.black)),
+        AppText.b12(value: model.type, color: AppColor.black),
+        AppText.b12(value: model.massage, color: AppColor.black),
+      ],
     );
   }
 }

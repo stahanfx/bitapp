@@ -19,14 +19,14 @@ class CategoryElementBuilder {
       padding: EdgeInsets.symmetric(
           vertical: AppSize().w10, horizontal: AppSize().h10 * 1.5),
       child: Container(
-          color: AppColor().white,
+          color: AppColor.white,
           child: Padding(
             padding: EdgeInsets.symmetric(
                 vertical: AppSize().w10, horizontal: AppSize().h10 * 2),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppText.b14(value: categoryItem.name, color: AppColor().black),
+                AppText.b14(value: categoryItem.name, color: AppColor.black),
                 SizedBox(
                     width: AppSize().w10 * 5,
                     height: AppSize().h10 * 5,
@@ -43,7 +43,7 @@ class CategoryElementBuilder {
         vertical: AppSize().w10 * 0.5,
       ),
       child: Container(
-          color: AppColor().white,
+          color: AppColor.white,
           child: Padding(
             padding: EdgeInsets.symmetric(
               vertical: AppSize().w10,
@@ -67,7 +67,7 @@ class CategoryElementBuilder {
                             repText: '(OUIFLACON)',
                             newText: '')
                         .base(),
-                    color: AppColor().black),
+                    color: AppColor.black),
               ],
             ),
           )),

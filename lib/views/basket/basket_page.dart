@@ -22,7 +22,7 @@ class _BasketPageState extends State<BasketPage> {
   Widget build(BuildContext context) {
     return Consumer<BasketPageModel>(builder: (context, model, child) {
       return Scaffold(
-        backgroundColor: AppColor().backgroun,
+        backgroundColor: AppColor.backgroun,
         appBar: AppBar(
           actions: (model.basketModel.isEmpty)
               ? null
@@ -45,7 +45,7 @@ class _BasketPageState extends State<BasketPage> {
                 model.deleteBasket();
               },
               icon: const Icon(FontAwesomeIcons.trashCanList)),
-          title: AppText.b14(value: "Корзина", color: AppColor().black),
+          title: AppText.b14(value: "Корзина", color: AppColor.black),
         ),
         body: BasketListWidget(model: model),
       );
@@ -68,13 +68,13 @@ class BasketListWidget extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 100,
-          color: AppColor().activeButton,
+          color: AppColor.activeButton,
           child: Column(
             children: [
               Center(
                 child: AppText.t16(
                     value: _calcBasketPrice(model.basketModel).toString(),
-                    color: AppColor().black),
+                    color: AppColor.black),
               ),
             ],
           ),
@@ -94,7 +94,7 @@ class BasketListWidget extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 1),
                     child: Container(
-                      color: AppColor().white,
+                      color: AppColor.white,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Column(
@@ -111,7 +111,7 @@ class BasketListWidget extends StatelessWidget {
                                               repText: '&quot;OUIFLACON&quot;',
                                               newText: '')
                                           .base(),
-                                      color: AppColor().black),
+                                      color: AppColor.black),
                                 ),
                                 Column(
                                   mainAxisAlignment:
@@ -172,10 +172,10 @@ class BasketListWidget extends StatelessWidget {
                                   children: [
                                     AppText.t12(
                                         value: 'Стоимость: ',
-                                        color: AppColor().black),
+                                        color: AppColor.black),
                                     AppText.b14(
                                         value: finalCost.toString(),
-                                        color: AppColor().black),
+                                        color: AppColor.black),
                                   ],
                                 ),
                               ],

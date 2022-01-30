@@ -1,4 +1,4 @@
-class AppSettings {
+class AppGlobalSettings {
   static const String baseSheme = 'https';
   static const String baseHost = 'oui.ru';
   static const String baseApiAddress = 'bitapi';

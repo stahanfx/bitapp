@@ -1,10 +1,10 @@
-import 'package:bitapp/core/services/api/delivery/location/api_location_get.dart';
-import 'package:bitapp/core/services/api/delivery/location/location_model.dart';
+import 'package:bitapp/core/services/api/order/location/api_location_get.dart';
+import 'package:bitapp/core/services/api/order/location/location_model.dart';
 
 import 'package:flutter/material.dart';
 
 class LocationPageModel with ChangeNotifier {
-  var locationModel = <Location>[];
+  var locationModel = <LocationItem>[];
 
   Future<void> getLocationList(phrase) async {
     String checkPhrase = phrase;
@@ -19,7 +19,8 @@ class LocationPageModel with ChangeNotifier {
       }
     }
 
-    final locationData = await ApiDeliveryGet.location(phrase: checkPhrase);
+    final locationData =
+        await ApiOrderLocationGet.location(phrase: checkPhrase);
 
     if (locationData.result != null) {
       if (locationModel != locationData.result) {

@@ -33,7 +33,7 @@ class _CatalogPageState extends State<CatalogPage> {
     //Текущий уровень каталога
     final catalogListData = await provider.getCatalogList(filter: {
       'SECTION_ID': '$argument',
-      'IBLOCK_ID': AppSettings.baseTradeCatalog,
+      'IBLOCK_ID': AppGlobalSettings.baseTradeCatalog,
       'ACTIVE': 'Y',
     }, select: 'light');
 
@@ -41,11 +41,11 @@ class _CatalogPageState extends State<CatalogPage> {
       categoryListModel += catalogListData;
     }
 
-    switch (AppSettings.categoryAllChildrenProduct) {
+    switch (AppGlobalSettings.categoryAllChildrenProduct) {
       case 'Y':
         final productListData = await provider.getProductList(filter: {
           'SECTION_ID': '$argument',
-          'IBLOCK_ID': AppSettings.baseTradeCatalog,
+          'IBLOCK_ID': AppGlobalSettings.baseTradeCatalog,
           'CATALOG_AVAILABLE': 'Y',
         }, select: 'light');
         if (productListData != null) {
@@ -54,7 +54,7 @@ class _CatalogPageState extends State<CatalogPage> {
         for (var element in categoryListModel) {
           final productListData = await provider.getProductList(filter: {
             'SECTION_ID': '${element.id}',
-            'IBLOCK_ID': AppSettings.baseTradeCatalog
+            'IBLOCK_ID': AppGlobalSettings.baseTradeCatalog
           }, select: 'light');
           if (productListData != null) {
             productListModel += productListData;
@@ -65,7 +65,7 @@ class _CatalogPageState extends State<CatalogPage> {
       case 'N':
         final productListData = await provider.getProductList(filter: {
           'SECTION_ID': '$argument',
-          'IBLOCK_ID': AppSettings.baseTradeCatalog,
+          'IBLOCK_ID': AppGlobalSettings.baseTradeCatalog,
           'CATALOG_AVAILABLE': 'Y',
         }, select: 'light');
         if (productListData != null) {
@@ -97,7 +97,7 @@ class _CatalogPageState extends State<CatalogPage> {
               return Text('Error: ${snapshot.error}');
             } else {
               return Scaffold(
-                backgroundColor: AppColor().backgroun,
+                backgroundColor: AppColor.backgroun,
                 body: CustomScrollView(
                   slivers: [
                     CatalogPageAppBarBuilder(

@@ -21,10 +21,10 @@ class TestPage extends StatelessWidget {
                   onPressed: () {
                     model.getModel();
                   },
-                  child: AppText.t14(value: "GetData", color: AppColor().black),
+                  child: AppText.t14(value: "GetData", color: AppColor.black),
                 ),
                 AppText.b12(
-                    value: provider.model.toString(), color: AppColor().black),
+                    value: provider.model.toString(), color: AppColor.black),
               ],
             ),
           );

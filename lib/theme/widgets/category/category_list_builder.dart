@@ -16,7 +16,7 @@ class CategoryListBuilder {
 
   home() {
     if (categoryListModel.isNotEmpty) {
-      switch (AppSettings.homeCategoryViewType) {
+      switch (AppGlobalSettings.homeCategoryViewType) {
         case 'verticaltext':
           return CategoryListVerticalText(categoryListModel: categoryListModel);
       }
@@ -27,7 +27,7 @@ class CategoryListBuilder {
 
   catalog() {
     if (categoryListModel.isNotEmpty) {
-      switch (AppSettings.catalogCategiryViewType) {
+      switch (AppGlobalSettings.catalogCategiryViewType) {
         case 'verticalTwoText':
           return CategoryListTwoVerticalText(
               categoryListModel: categoryListModel);

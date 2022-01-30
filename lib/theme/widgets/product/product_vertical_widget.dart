@@ -59,7 +59,7 @@ class ProductElementWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize().r10 * 1.6),
-          color: AppColor().white,
+          color: AppColor.white,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.1),
@@ -88,7 +88,7 @@ class ProductElementWidget extends StatelessWidget {
                   AppSize().w10, AppSize().h10, AppSize().w10, AppSize().h10),
               child: AppText.b12(
                 value: product.price,
-                color: AppColor().activeButton,
+                color: AppColor.activeButton,
               ),
             ),
             Padding(
@@ -103,7 +103,7 @@ class ProductElementWidget extends StatelessWidget {
                     repText: '(OUIFLACON)',
                     newText: '',
                   ).base(),
-                  color: AppColor().black,
+                  color: AppColor.black,
                 ),
               ),
             ),

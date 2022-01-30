@@ -39,6 +39,8 @@ class ProductItem {
   String? family;
   @JsonKey(name: 'COUNTRY')
   String? country;
+  @JsonKey(name: 'XML_ID')
+  String? xmlId;
 
   @JsonKey(name: 'SKU')
   List<SkuItem>? skuItem;
@@ -55,6 +57,7 @@ class ProductItem {
     required this.family,
     required this.country,
     required this.skuItem,
+    required this.xmlId,
   });
 
   factory ProductItem.fromJson(Map<String, dynamic> json) =>
@@ -76,12 +79,15 @@ class SkuItem {
   String? skuDetailPicture;
   @JsonKey(name: 'QUANTITY')
   String? skuQuantity;
+
+  @JsonKey(name: 'XML_ID')
+  String? xmlId;
+
   @JsonKey(name: 'PARENT_ID')
   int? skuParentId;
 
   @JsonKey(name: 'PROPERTIES')
   SkuProperties? skuListProperties;
-
   @JsonKey(name: 'PRICE')
   Price? skuPrice;
 

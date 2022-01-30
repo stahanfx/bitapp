@@ -13,7 +13,7 @@ class HomePageAppBarBuilder extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    switch (AppSettings.homeAppbarViewType) {
+    switch (AppGlobalSettings.homeAppbarViewType) {
       case 'light':
         return _homeAppBarLight(context);
       default:
@@ -26,7 +26,7 @@ _homeAppBarLight(context) {
   return AppBar(
     title: AppText.b16(
       value: 'OUIPERFUME',
-      color: AppColor().black,
+      color: AppColor.black,
     ),
     leading: IconButton(
       icon: const Icon(

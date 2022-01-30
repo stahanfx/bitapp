@@ -5,6 +5,8 @@ import 'package:bitapp/views/basket/basket_page_model.dart';
 import 'package:bitapp/views/catalog/category_arguments_models.dart';
 import 'package:bitapp/views/catalog/catalog_page.dart';
 import 'package:bitapp/views/home/home_page.dart';
+import 'package:bitapp/views/ordering/delivery/delivery_arguments_models.dart';
+import 'package:bitapp/views/ordering/delivery/delivery_page.dart';
 import 'package:bitapp/views/ordering/light_registration/light_registration_page.dart';
 import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:bitapp/views/product/product_arguments_models.dart';
@@ -30,7 +32,7 @@ class _MyHomePageState extends State<NavigationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColor().backgroun,
+      backgroundColor: AppColor.backgroun,
       extendBody: true,
       body: _getPage(),
       bottomNavigationBar: _getDesign(),
@@ -57,7 +59,7 @@ class _MyHomePageState extends State<NavigationPage> {
           selectedColor: Colors.white,
           strokeColor: Colors.white,
           unSelectedColor: const Color(0x90ffffff),
-          backgroundColor: AppColor().activeButton,
+          backgroundColor: AppColor.activeButton,
           items: [
             CustomNavigationBarItem(
               icon: const Icon(FontAwesomeIcons.home),
@@ -132,7 +134,7 @@ class _MyHomePageState extends State<NavigationPage> {
                 );
           }
           if (settings.name == 'basket/lightRegistration') {
-            page = LightRegistrationPage(
+            page = const LightRegistrationPage(
                 // argument: settings.arguments as CategoryArgument,
                 );
           }
@@ -140,6 +142,11 @@ class _MyHomePageState extends State<NavigationPage> {
             page = const LocationPage(
                 // argument: settings.arguments as CategoryArgument,
                 );
+          }
+          if (settings.name == 'order/delivery') {
+            page = OrderDeliveryPage(
+              argument: settings.arguments as OrderDeliveryArgument,
+            );
           }
           return MaterialPageRoute(builder: (_) => page);
         },

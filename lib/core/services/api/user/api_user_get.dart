@@ -31,6 +31,7 @@ class ApiUserGet {
     var box = await Hive.openBox('fuserBox');
     int? response = await box.get('userId');
     await box.close();
+    print(response);
     return response;
   }
 }

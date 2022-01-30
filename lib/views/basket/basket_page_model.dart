@@ -12,6 +12,7 @@ class BasketPageModel with ChangeNotifier {
 
   Future<void> getList() async {
     final fuserId = await ApiUserGet.fuserID();
+    print(fuserId);
     final product = await ApiBasketGet.list(fuserId: fuserId);
     if (product.result != null) {
       if (basketModel != product.result) {
@@ -42,6 +43,7 @@ class BasketPageModel with ChangeNotifier {
 
 //TODO: Надо держать модель пользователя
   Future getUserID() async {
+    print(ApiUserGet.localUserID());
     return await ApiUserGet.localUserID();
   }
 }

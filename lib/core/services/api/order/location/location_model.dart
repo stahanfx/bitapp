@@ -3,22 +3,22 @@ import 'package:json_annotation/json_annotation.dart';
 part 'location_model.g.dart';
 
 @JsonSerializable()
-class LocationResponse {
+class OrderLocationResponse {
   int? status;
-  List<Location>? result;
+  List<LocationItem>? result;
 
-  LocationResponse({
+  OrderLocationResponse({
     required this.status,
     required this.result,
   });
 
-  factory LocationResponse.fromJson(Map<String, dynamic> json) =>
-      _$LocationResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$LocationResponseToJson(this);
+  factory OrderLocationResponse.fromJson(Map<String, dynamic> json) =>
+      _$OrderLocationResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$OrderLocationResponseToJson(this);
 }
 
 @JsonSerializable()
-class Location {
+class LocationItem {
   @JsonKey(name: 'ID')
   String? id;
   @JsonKey(name: 'CODE')
@@ -32,7 +32,7 @@ class Location {
   @JsonKey(name: 'ADDRESS')
   String? address;
 
-  Location({
+  LocationItem({
     required this.id,
     required this.code,
     required this.sort,
@@ -41,7 +41,7 @@ class Location {
     required this.address,
   });
 
-  factory Location.fromJson(Map<String, dynamic> json) =>
-      _$LocationFromJson(json);
-  Map<String, dynamic> toJson() => _$LocationToJson(this);
+  factory LocationItem.fromJson(Map<String, dynamic> json) =>
+      _$LocationItemFromJson(json);
+  Map<String, dynamic> toJson() => _$LocationItemToJson(this);
 }

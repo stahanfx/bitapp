@@ -1,6 +1,9 @@
 import 'package:bitapp/views/basket/basket_page.dart';
 import 'package:bitapp/views/catalog/catalog_model.dart';
 import 'package:bitapp/views/home/home_model.dart';
+import 'package:bitapp/views/ordering/delivery/delivery_page.dart';
+import 'package:bitapp/views/ordering/delivery/delivery_page_model.dart';
+import 'package:bitapp/views/ordering/light_registration/light_registration_model.dart';
 import 'package:bitapp/views/ordering/light_registration/light_registration_page.dart';
 import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:bitapp/views/ordering/location/location_page_model.dart';
@@ -18,7 +21,6 @@ import 'theme/styles/color_style.dart';
 import 'views/basket/basket_page_model.dart';
 import 'views/catalog/catalog_page.dart';
 import 'views/home/home_page.dart';
-import 'views/ordering/light_registration/light_registration_model.dart';
 import 'views/product/product_page_model.dart';
 import 'views/test/test_model.dart';
 
@@ -58,6 +60,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => BasketPageModel()),
           ChangeNotifierProvider(create: (_) => LocationPageModel()),
           ChangeNotifierProvider(create: (_) => LightRegistrationPageModel()),
+          ChangeNotifierProvider(create: (_) => OrderDeliveryPageModel()),
         ],
         child: MaterialApp(
           localizationsDelegates: context.localizationDelegates,
@@ -66,13 +69,13 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             textTheme:
                 GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
-            backgroundColor: AppColor().backgroun,
+            backgroundColor: AppColor.backgroun,
             appBarTheme: AppBarTheme(
-                toolbarTextStyle: TextStyle(color: AppColor().black),
-                iconTheme: IconThemeData(color: AppColor().black),
-                backgroundColor: AppColor().backgroun,
+                toolbarTextStyle: TextStyle(color: AppColor.black),
+                iconTheme: IconThemeData(color: AppColor.black),
+                backgroundColor: AppColor.backgroun,
                 elevation: 0,
-                titleTextStyle: TextStyle(color: AppColor().black)),
+                titleTextStyle: TextStyle(color: AppColor.black)),
             primarySwatch: Colors.blue,
           ),
           initialRoute: 'loader',
@@ -87,6 +90,9 @@ class MyApp extends StatelessWidget {
             'basket/lightRegister/location': (context) => const LocationPage(),
             'basket/lightRegistration': (context) =>
                 const LightRegistrationPage(),
+            'order/delivery': (context) => const OrderDeliveryPage(
+                  argument: null,
+                ),
           },
         ),
       ),

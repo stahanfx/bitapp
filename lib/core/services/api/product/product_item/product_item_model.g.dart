@@ -35,6 +35,7 @@ ProductItem _$ProductItemFromJson(Map<String, dynamic> json) => ProductItem(
       skuItem: (json['SKU'] as List<dynamic>?)
           ?.map((e) => SkuItem.fromJson(e as Map<String, dynamic>))
           .toList(),
+      xmlId: json['XML_ID'] as String?,
     );
 
 Map<String, dynamic> _$ProductItemToJson(ProductItem instance) =>
@@ -49,6 +50,7 @@ Map<String, dynamic> _$ProductItemToJson(ProductItem instance) =>
       'GENDER': instance.gender,
       'FAMILY': instance.family,
       'COUNTRY': instance.country,
+      'XML_ID': instance.xmlId,
       'SKU': instance.skuItem,
     };
 
@@ -66,7 +68,7 @@ SkuItem _$SkuItemFromJson(Map<String, dynamic> json) => SkuItem(
       skuPrice: json['PRICE'] == null
           ? null
           : Price.fromJson(json['PRICE'] as Map<String, dynamic>),
-    );
+    )..xmlId = json['XML_ID'] as String?;
 
 Map<String, dynamic> _$SkuItemToJson(SkuItem instance) => <String, dynamic>{
       'ID': instance.skuId,
@@ -75,6 +77,7 @@ Map<String, dynamic> _$SkuItemToJson(SkuItem instance) => <String, dynamic>{
       'PREVIEW_PICTURE': instance.skuPrevievPicture,
       'DETAIL_PICTURE': instance.skuDetailPicture,
       'QUANTITY': instance.skuQuantity,
+      'XML_ID': instance.xmlId,
       'PARENT_ID': instance.skuParentId,
       'PROPERTIES': instance.skuListProperties,
       'PRICE': instance.skuPrice,

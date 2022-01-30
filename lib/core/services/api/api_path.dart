@@ -1,40 +1,48 @@
 import 'package:bitapp/core/base/global_parametrs.dart';
 
 class ApiPatchCategoryGet {
-  static String list() => '${AppSettings.baseApiAddress}/catalog.trade.list';
+  static String list() =>
+      '${AppGlobalSettings.baseApiAddress}/catalog.trade.list';
 }
 
 class ApiPatchFileGet {
-  static String file() => '${AppSettings.baseApiAddress}/file.images.get';
+  static String file() => '${AppGlobalSettings.baseApiAddress}/file.images.get';
 }
 
 class ApiPatchProductGet {
-  static String list() => '${AppSettings.baseApiAddress}/product.trade.list';
-  static String item() => '${AppSettings.baseApiAddress}/product.trade.element';
+  static String list() =>
+      '${AppGlobalSettings.baseApiAddress}/product.trade.list';
+  static String item() =>
+      '${AppGlobalSettings.baseApiAddress}/product.trade.element';
 }
 
 class ApiPatchBasket {
-  static String getList() => '${AppSettings.baseApiAddress}/basket.get.list';
+  static String getList() =>
+      '${AppGlobalSettings.baseApiAddress}/basket.get.list';
   static String postProduct() =>
-      '${AppSettings.baseApiAddress}/basket.post.product';
+      '${AppGlobalSettings.baseApiAddress}/basket.post.product';
   static String putProduct() =>
-      '${AppSettings.baseApiAddress}/basket.put.product';
+      '${AppGlobalSettings.baseApiAddress}/basket.put.product';
   static String deleteProduct() =>
-      '${AppSettings.baseApiAddress}/basket.delete.product';
+      '${AppGlobalSettings.baseApiAddress}/basket.delete.product';
   static String deleteBasket() =>
-      '${AppSettings.baseApiAddress}/basket.delete.all';
+      '${AppGlobalSettings.baseApiAddress}/basket.delete.all';
 }
 
-class ApiPatchDeliveryGet {
+class ApiPatchOrderGet {
   static String location() =>
-      '${AppSettings.baseApiAddress}/delivery.get.location';
+      '${AppGlobalSettings.baseApiAddress}/delivery.get.location';
+  static String delivery() =>
+      '${AppGlobalSettings.baseApiAddress}/basket.post.basket';
+  static String payment() =>
+      '${AppGlobalSettings.baseApiAddress}/basket.post.basket';
 }
 
 class ApiPatchUserGet {
-  static String fuser() => '${AppSettings.baseApiAddress}/user.get.fuser';
+  static String fuser() => '${AppGlobalSettings.baseApiAddress}/user.get.fuser';
 }
 
 class ApiPatchUserPost {
   static String registrations() =>
-      '${AppSettings.baseApiAddress}/user.auth.registration';
+      '${AppGlobalSettings.baseApiAddress}/user.auth.registration';
 }

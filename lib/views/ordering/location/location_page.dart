@@ -1,3 +1,4 @@
+import 'package:bitapp/views/ordering/delivery/delivery_arguments_models.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +26,7 @@ class _BasketPageState extends State<LocationPage> {
     // final provider = context.watch<LocationPageModel>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColor().backgroun,
+      backgroundColor: AppColor.backgroun,
       appBar: AppBar(
         actions: [
           IconButton(
@@ -34,18 +35,18 @@ class _BasketPageState extends State<LocationPage> {
         leading: IconButton(
           icon: Icon(
             FontAwesomeIcons.arrowLeft,
-            color: AppColor().black,
+            color: AppColor.black,
             size: 20,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: AppText.b14(
-            value: "Выберите город доставки", color: AppColor().black),
+            value: "Выберите город доставки", color: AppColor.black),
       ),
       body: Column(
         children: [
           SizedBox(
-            // color: AppColor().black,
+            // color: AppColor.black,
             height: 80,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -83,21 +84,32 @@ class _BasketPageState extends State<LocationPage> {
                 itemCount: model.locationModel.length,
                 itemBuilder: (BuildContext context, int index) {
                   var location = model.locationModel[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 1),
-                    child: Container(
-                      color: AppColor().white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AppText.b12(
-                                value: location.name, color: AppColor().black),
-                            AppText.t12(
-                                value: location.address,
-                                color: AppColor().black),
-                          ],
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'order/delivery',
+                          arguments: OrderDeliveryArgument(
+                            address: location.address,
+                            code: location.code,
+                            name: location.name,
+                            sort: location.sort,
+                          ));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 1),
+                      child: Container(
+                        color: AppColor.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppText.b12(
+                                  value: location.name, color: AppColor.black),
+                              AppText.t12(
+                                  value: location.address,
+                                  color: AppColor.black),
+                            ],
+                          ),
                         ),
                       ),
                     ),

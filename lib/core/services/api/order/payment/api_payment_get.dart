@@ -1,6 +1,5 @@
 import 'package:bitapp/core/base/global_parametrs.dart';
 import 'package:bitapp/core/services/api/order/payment/payment_model.dart';
-import 'package:bitapp/core/services/api/user/api_user_get.dart';
 import 'package:dio/dio.dart';
 import 'package:bitapp/core/services/api/api_path.dart';
 
@@ -12,8 +11,8 @@ class ApiOrderPaymentGet {
   }) async {
     Future<String> _queryGeneratorPaymentGet() async {
       var siteID = AppGlobalSettings.siteId;
-      var userID = await ApiUserGet.localUserID();
-      return 'SITE_ID=$siteID&=USER_ID=$userID&DELIVERY_ID=$deliveryId';
+      // var userID = await ApiUserGet.localUserID();
+      return 'SITE_ID=$siteID&DELIVERY_ID=$deliveryId';
     }
 
     final client = Dio();

@@ -35,11 +35,11 @@ class _BasketPageState extends State<LocationPage> {
         ],
         leading: IconButton(
           icon: Icon(
-            FontAwesomeIcons.arrowLeft,
+            Icons.clear,
             color: AppColor.black,
             size: 20,
           ),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pushNamed(context, 'loader'),
         ),
         title: AppText.b14(
             value: "Выберите город доставки", color: AppColor.black),

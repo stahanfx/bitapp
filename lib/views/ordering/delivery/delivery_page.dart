@@ -1,3 +1,4 @@
+import 'package:bitapp/core/services/api/basket/basket_model.dart';
 import 'package:bitapp/core/services/api/file/image_services.dart';
 import 'package:bitapp/core/services/api/order/delivery/delivery_model.dart';
 import 'package:bitapp/views/ordering/delivery/delivery_arguments_models.dart';
@@ -41,11 +42,11 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
         ],
         leading: IconButton(
           icon: Icon(
-            FontAwesomeIcons.arrowLeft,
+            Icons.clear,
             color: AppColor.black,
             size: 20,
           ),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pushNamed(context, 'navigation'),
         ),
         title: AppText.b14(
             value: "Выберите вариант доставки", color: AppColor.black),
@@ -108,9 +109,16 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
                                         AppText.t12(
                                             value: model.description,
                                             color: AppColor.black),
-                                        AppText.b12(
-                                            value: model.price.toString(),
-                                            color: AppColor.activeButton),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            AppText.b12(
+                                                value: "Срок: ${model.period}",
+                                                color: AppColor.black),
+                                            _getPrice(model: model),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -126,5 +134,14 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
         },
       ),
     );
+  }
+}
+
+Widget _getPrice({required DeliveryItem model}) {
+  if (model.price == 0.0) {
+    return AppText.b12(value: "Бесплатно", color: AppColor.activeButton);
+  } else {
+    return AppText.b12(
+        value: "${model.price} руб", color: AppColor.activeButton);
   }
 }

@@ -2,6 +2,7 @@ import 'package:bitapp/core/helper/text_cleaner.dart';
 import 'package:bitapp/core/services/api/basket/basket_model.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
+import 'package:bitapp/views/profile/profile_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -28,20 +29,7 @@ class _BasketPageState extends State<BasketPage> {
               ? null
               : <Widget>[
                   IconButton(
-                      onPressed: () async {
-                        var userId = await BasketPageModel().getUserID();
-                        if (userId == null) {
-                          Navigator.pushNamed(
-                            context,
-                            'order/lightRegistration',
-                          );
-                        } else {
-                          Navigator.pushNamed(
-                            context,
-                            'order/location',
-                          );
-                        }
-                      },
+                      onPressed: () async {},
                       icon: const Icon(FontAwesomeIcons.check))
                 ],
           leading: IconButton(
@@ -67,22 +55,57 @@ class BasketListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var providerUser = context.read<ProfilePageModel>();
     return Column(
       children: [
         Container(
-          width: double.infinity,
-          height: 100,
-          color: AppColor.activeButton,
-          child: Column(
-            children: [
-              Center(
-                child: AppText.t16(
-                    value: _calcBasketPrice(model.basketModel).toString(),
-                    color: AppColor.black),
-              ),
-            ],
-          ),
-        ),
+            width: double.infinity,
+            height: 60,
+            // color: AppColor.activeButton,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText.t12(
+                          value:
+                              "Тoваров: ${_calcBasketQuant(model.basketModel).toString()}",
+                          color: AppColor.black),
+                      AppText.b14(
+                          value:
+                              "Cумма заказа: ${_calcBasketPrice(model.basketModel).toString()}",
+                          color: AppColor.black),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: (model.basketModel.isEmpty)
+                      ? null
+                      : ElevatedButton(
+                          onPressed: () async {
+                            var userId = providerUser.userModel?.userId;
+                            if (userId == null) {
+                              Navigator.pushNamed(
+                                context,
+                                'order/lightRegistration',
+                              );
+                            } else {
+                              Navigator.pushNamed(
+                                context,
+                                'order/location',
+                              );
+                            }
+                          },
+                          child: AppText.b12(
+                              value: "Формить заказ", color: AppColor.white)),
+                ),
+              ],
+            )),
         Expanded(
           child: Consumer<BasketPageModel>(builder: (context, model, child) {
             return ListView.builder(
@@ -206,4 +229,13 @@ _calcBasketPrice(List<BasketItem> data) {
     finalCost += costGroup;
   });
   return finalCost;
+}
+
+_calcBasketQuant(List<BasketItem> data) {
+  double finalQuant = 0;
+  data.asMap().forEach((k, v) {
+    var quant = v.quantity;
+    finalQuant += quant!;
+  });
+  return finalQuant;
 }

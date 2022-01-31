@@ -65,3 +65,23 @@ class RegistrationResult extends Equatable {
   @override
   List<Object?> get props => throw UnimplementedError();
 }
+
+@JsonSerializable()
+class UserModel {
+  @JsonKey(name: 'user_id')
+  int? userId;
+  @JsonKey(name: 'fuser_id')
+  int? fuserId;
+  @JsonKey(name: 'result')
+  String? phoneNumber;
+
+  UserModel({
+    required this.userId,
+    required this.fuserId,
+    required this.phoneNumber,
+  });
+
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+}

@@ -9,6 +9,8 @@ import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:bitapp/views/ordering/location/location_page_model.dart';
 import 'package:bitapp/views/ordering/payment/payment_page_model.dart';
 import 'package:bitapp/views/product/product_page.dart';
+import 'package:bitapp/views/profile/profile_paga.dart';
+import 'package:bitapp/views/profile/profile_page_model.dart';
 import 'package:bitapp/views/test/test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'core/navigation/navigation_page.dart';
 import 'core/navigation/navigation_page_model.dart';
 import 'load_app.dart';
 import 'theme/styles/color_style.dart';
@@ -63,6 +66,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => LightRegistrationPageModel()),
           ChangeNotifierProvider(create: (_) => OrderDeliveryPageModel()),
           ChangeNotifierProvider(create: (_) => OrderPaymentPageModel()),
+          ChangeNotifierProvider(
+              create: (_) => ProfilePageModel(), lazy: false),
         ],
         child: MaterialApp(
           localizationsDelegates: context.localizationDelegates,
@@ -83,6 +88,8 @@ class MyApp extends StatelessWidget {
           initialRoute: 'loader',
           routes: {
             'test': (context) => const TestPage(),
+            'navigation': (context) => const NavigationPage(),
+            'profile': (context) => const ProfilePage(),
             'loader': (context) => const LoadApp(),
             'home': (context) => const HomePage(),
             'catalog': (context) => const CatalogPage(argument: null),

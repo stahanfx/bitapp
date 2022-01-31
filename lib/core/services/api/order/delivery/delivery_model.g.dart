@@ -23,8 +23,9 @@ Map<String, dynamic> _$DeliveryOrderResponseToJson(
     };
 
 DeliveryItem _$DeliveryItemFromJson(Map<String, dynamic> json) => DeliveryItem(
-      id: json['ID'] as String?,
+      id: json['DELIVERY_ID'] as String?,
       name: json['NAME'] as String?,
+      period: json['PERIOD_TEXT'] as String?,
       description: json['DESCRIPTION'] as String?,
       logo: json['LOGOTIP'] as String?,
       xmlId: json['XML_ID'] as String?,
@@ -33,8 +34,9 @@ DeliveryItem _$DeliveryItemFromJson(Map<String, dynamic> json) => DeliveryItem(
 
 Map<String, dynamic> _$DeliveryItemToJson(DeliveryItem instance) =>
     <String, dynamic>{
-      'ID': instance.id,
       'NAME': instance.name,
+      'PERIOD_TEXT': instance.period,
+      'DELIVERY_ID': instance.id,
       'DESCRIPTION': instance.description,
       'LOGOTIP': instance.logo,
       'XML_ID': instance.xmlId,

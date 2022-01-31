@@ -23,14 +23,28 @@ class ApiUserGet {
       await box.put('fuserId', newFuser.result);
     }
     var response = await box.get('fuserId');
-    await box.close();
     return response;
   }
 
   static Future localUserID() async {
     var box = await Hive.openBox('userBox');
     int? response = await box.get('userId');
-    await box.close();
     return response;
+  }
+
+  static Future getUserPhone() async {
+    print("БОКС Phone ОТКРЫТ");
+    var box = await Hive.openBox('userBox');
+    String? response = await box.get('userPhone');
+    return response;
+  }
+
+  static Future<UserModel> userModel() async {
+    var userId = await localUserID();
+    var fuserId = await fuserID();
+    var userPhone = await getUserPhone();
+    var result =
+        UserModel(userId: userId, fuserId: fuserId, phoneNumber: userPhone);
+    return result;
   }
 }

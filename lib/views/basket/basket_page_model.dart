@@ -39,9 +39,4 @@ class BasketPageModel with ChangeNotifier {
     final result = await ApiBasketPut.item(itemId: itemId, quantity: quantity);
     if (result != null) getList();
   }
-
-//TODO: Надо держать модель пользователя
-  Future getUserID() async {
-    return await ApiUserGet.localUserID();
-  }
 }

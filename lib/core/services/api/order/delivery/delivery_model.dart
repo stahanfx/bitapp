@@ -19,10 +19,12 @@ class DeliveryOrderResponse {
 
 @JsonSerializable()
 class DeliveryItem {
-  @JsonKey(name: 'ID')
-  String? id;
   @JsonKey(name: 'NAME')
   String? name;
+  @JsonKey(name: 'PERIOD_TEXT')
+  String? period;
+  @JsonKey(name: 'DELIVERY_ID')
+  String? id;
   @JsonKey(name: 'DESCRIPTION')
   String? description;
   @JsonKey(name: 'LOGOTIP')
@@ -35,6 +37,7 @@ class DeliveryItem {
   DeliveryItem({
     required this.id,
     required this.name,
+    required this.period,
     required this.description,
     required this.logo,
     required this.xmlId,

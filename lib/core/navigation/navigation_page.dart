@@ -7,6 +7,7 @@ import 'package:bitapp/views/catalog/catalog_page.dart';
 import 'package:bitapp/views/home/home_page.dart';
 import 'package:bitapp/views/product/product_arguments_models.dart';
 import 'package:bitapp/views/product/product_page.dart';
+import 'package:bitapp/views/profile/profile_paga.dart';
 import 'package:bitapp/views/test/test.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -155,12 +156,16 @@ class _MyHomePageState extends State<NavigationPage> {
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ),
-      Container(
-        alignment: Alignment.center,
-        child: const Text(
-          "Profile",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
+      Navigator(
+        onGenerateRoute: (settings) {
+          Widget page = const ProfilePage();
+          if (settings.name == 'profile') {
+            page = const ProfilePage(
+                // argument: settings.arguments as CategoryArgument,
+                );
+          }
+          return MaterialPageRoute(builder: (_) => page);
+        },
       ),
     ];
     return IndexedStack(

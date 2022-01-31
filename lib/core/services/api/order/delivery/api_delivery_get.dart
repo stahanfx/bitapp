@@ -13,7 +13,7 @@ class ApiOrderDeliveryGet {
         {required String locationCode}) async {
       var siteID = AppGlobalSettings.siteId;
       var userID = await ApiUserGet.localUserID();
-      return 'SITE_ID=$siteID&=USER_ID=$userID&LOCATION_CODE=$locationCode';
+      return 'USER_ID=$userID&SITE_ID=$siteID&LOCATION_CODE=$locationCode';
     }
 
     final client = Dio();

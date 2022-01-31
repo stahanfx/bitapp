@@ -1,6 +1,5 @@
 import 'package:bitapp/core/services/api/file/image_services.dart';
 import 'package:bitapp/core/services/api/order/payment/payment_model.dart';
-import 'package:bitapp/views/ordering/delivery/delivery_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';

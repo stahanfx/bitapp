@@ -50,3 +50,15 @@ Map<String, dynamic> _$RegistrationResultToJson(RegistrationResult instance) =>
       'NEW_FUSER_ID': instance.newFuserId,
       'USER_PHONE': instance.userPhone,
     };
+
+UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
+      userId: json['user_id'] as int?,
+      fuserId: json['fuser_id'] as int?,
+      phoneNumber: json['result'] as String?,
+    );
+
+Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
+      'user_id': instance.userId,
+      'fuser_id': instance.fuserId,
+      'result': instance.phoneNumber,
+    };

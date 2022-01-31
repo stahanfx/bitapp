@@ -23,10 +23,8 @@ class DeliveryItem {
   String? id;
   @JsonKey(name: 'NAME')
   String? name;
-  @JsonKey(name: 's')
+  @JsonKey(name: 'DESCRIPTION')
   String? description;
-  @JsonKey(name: 'PERIOD_TEXT')
-  String? period;
   @JsonKey(name: 'LOGOTIP')
   String? logo;
   @JsonKey(name: 'XML_ID')
@@ -41,7 +39,6 @@ class DeliveryItem {
     required this.logo,
     required this.xmlId,
     required this.price,
-    required this.period,
   });
 
   factory DeliveryItem.fromJson(Map<String, dynamic> json) =>

@@ -39,6 +39,7 @@ RegistrationResult _$RegistrationResultFromJson(Map<String, dynamic> json) =>
       message: json['MESSAGE'] as String?,
       type: json['TYPE'] as String?,
       userId: json['ID'] as int?,
+      userPhone: json['USER_PHONE'] as String?,
     )..newFuserId = json['NEW_FUSER_ID'] as int?;
 
 Map<String, dynamic> _$RegistrationResultToJson(RegistrationResult instance) =>
@@ -47,4 +48,5 @@ Map<String, dynamic> _$RegistrationResultToJson(RegistrationResult instance) =>
       'TYPE': instance.type,
       'ID': instance.userId,
       'NEW_FUSER_ID': instance.newFuserId,
+      'USER_PHONE': instance.userPhone,
     };

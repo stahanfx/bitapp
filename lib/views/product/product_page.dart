@@ -155,7 +155,7 @@ class ProductBuilder extends StatelessWidget {
                         ElevatedButton(
                           style: AppButtonStuleElevated().textButton,
                           onPressed: () async {
-                            await ApiBasketPost.product(productInfo: {
+                            await ApiBasketPost.item(itemInfo: {
                               'FUSER_ID': await ApiUserGet.fuserID(),
                               'PRODUCT_ID': sku.skuId,
                               'PRICE': sku.skuPrice?.discountPrice,

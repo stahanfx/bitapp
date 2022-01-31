@@ -8,14 +8,20 @@ import 'api_user_get.dart';
 
 class ApiUserPost {
   static Future localUserId({userId}) async {
-    var box = await Hive.openBox('fuserBox');
+    var box = await Hive.openBox('userBox');
     await box.put('userId', userId);
     await box.close();
   }
 
   static Future localFuserID({required newFuserId}) async {
-    var box = await Hive.openBox('fuserBox');
-    await box.put('fuser', newFuserId);
+    var box = await Hive.openBox('userBox');
+    await box.put('fuserId', newFuserId);
+    await box.close();
+  }
+
+  static Future localUserPhone({required userPhone}) async {
+    var box = await Hive.openBox('userBox');
+    await box.put('userPhone', userPhone);
     await box.close();
   }
 
@@ -44,6 +50,8 @@ class ApiUserPost {
       await ApiUserPost.localFuserID(
           newFuserId: responseData.result?.newFuserId);
       await ApiUserPost.localUserId(userId: responseData.result!.userId);
+      await ApiUserPost.localUserPhone(
+          userPhone: responseData.result?.userPhone);
     }
 
     return responseData;

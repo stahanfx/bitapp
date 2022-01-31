@@ -12,7 +12,6 @@ class BasketPageModel with ChangeNotifier {
 
   Future<void> getList() async {
     final fuserId = await ApiUserGet.fuserID();
-    print(fuserId);
     final product = await ApiBasketGet.list(fuserId: fuserId);
     if (product.result != null) {
       if (basketModel != product.result) {
@@ -24,26 +23,25 @@ class BasketPageModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteItem({required productId}) async {
-    final result = await ApiBasketDelete.product(productId: productId);
+  Future<void> deleteItem({required itemId}) async {
+    final result = await ApiBasketDelete.item(itemId: itemId);
     if (result != null) await getList();
-    notifyListeners();
+    // notifyListeners();
   }
 
   Future<void> deleteBasket() async {
     await ApiBasketDelete.basket();
     await getList();
-    notifyListeners();
+    // notifyListeners();
   }
 
-  Future<void> putItem({required id, required quantity}) async {
-    final result = await ApiBasketPut.product(id: id, quantity: quantity);
+  Future<void> putItem({required itemId, required quantity}) async {
+    final result = await ApiBasketPut.item(itemId: itemId, quantity: quantity);
     if (result != null) getList();
   }
 
 //TODO: Надо держать модель пользователя
   Future getUserID() async {
-    print(ApiUserGet.localUserID());
     return await ApiUserGet.localUserID();
   }
 }

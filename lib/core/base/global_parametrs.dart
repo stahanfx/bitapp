@@ -6,8 +6,6 @@ class AppGlobalSettings {
   static const String baseTradeCatalog = '38';
   static const String siteId = 's1';
 
-//TODO: Перевести на ENUM
-
   //‘horisontal' or 'vertical’
   static const String categoryViewTupe = 'horisontal';
   static const String categoryAllChildrenProduct = 'N';

@@ -1,14 +1,14 @@
 import 'package:bitapp/core/services/api/file/image_services.dart';
 import 'package:bitapp/core/services/api/order/delivery/delivery_model.dart';
-import 'package:bitapp/views/catalog/category_arguments_models.dart';
 import 'package:bitapp/views/ordering/delivery/delivery_arguments_models.dart';
 import 'package:bitapp/views/ordering/delivery/delivery_page_model.dart';
+import 'package:bitapp/views/ordering/payment/payment_arguments_models.dart';
+import 'package:bitapp/views/ordering/payment/payment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
-import 'package:bitapp/views/ordering/location/location_page_model.dart';
 
 class OrderDeliveryPage extends StatefulWidget {
   final OrderDeliveryArgument? argument;
@@ -48,7 +48,7 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: AppText.b14(
-            value: "Выберите город доставки", color: AppColor.black),
+            value: "Выберите вариант доставки", color: AppColor.black),
       ),
       body: FutureBuilder(
         future: _getDeliveryModel(),
@@ -64,49 +64,61 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
                   child: Center(child: Text('Error: ${snapshot.error}')),
                 );
               } else {
-                //
                 return ListView.builder(
                   itemCount: deliveryListModel.length,
                   itemBuilder: (BuildContext context, int index) {
                     var model = deliveryListModel[index];
-                    return Padding(
-                        padding: const EdgeInsets.only(bottom: 2),
-                        child: Container(
-                          color: AppColor.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: SizedBox(
-                                    width: 80,
-                                    height: 50,
-                                    child: GetImageApi(image: model.logo),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 250,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      AppText.b12(
-                                          value: model.name,
-                                          color: AppColor.black),
-                                      AppText.t12(
-                                          value: model.description,
-                                          color: AppColor.black),
-                                      AppText.b12(
-                                          value: model.price.toString(),
-                                          color: AppColor.activeButton),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OrderPaymentPage(
+                              argument:
+                                  OrderPaymentArgument(deliveryCode: model.id),
                             ),
                           ),
-                        ));
+                        );
+                      },
+                      child: Padding(
+                          padding: const EdgeInsets.only(bottom: 2),
+                          child: Container(
+                            color: AppColor.white,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                      width: 80,
+                                      height: 50,
+                                      child: GetImageApi(image: model.logo),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 250,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        AppText.b12(
+                                            value: model.name,
+                                            color: AppColor.black),
+                                        AppText.t12(
+                                            value: model.description,
+                                            color: AppColor.black),
+                                        AppText.b12(
+                                            value: model.price.toString(),
+                                            color: AppColor.activeButton),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )),
+                    );
                   },
                 );
               }

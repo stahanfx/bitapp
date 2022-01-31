@@ -17,21 +17,20 @@ class ApiUserGet {
   }
 
   static Future fuserID() async {
-    var box = await Hive.openBox('fuserBox');
+    var box = await Hive.openBox('userBox');
     if (box.isEmpty) {
       final newFuser = await ApiUserGet._serverFuser();
-      await box.put('fuser', newFuser.result);
+      await box.put('fuserId', newFuser.result);
     }
-    var response = await box.get('fuser');
+    var response = await box.get('fuserId');
     await box.close();
     return response;
   }
 
   static Future localUserID() async {
-    var box = await Hive.openBox('fuserBox');
+    var box = await Hive.openBox('userBox');
     int? response = await box.get('userId');
     await box.close();
-    print(response);
     return response;
   }
 }

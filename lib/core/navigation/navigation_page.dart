@@ -5,10 +5,6 @@ import 'package:bitapp/views/basket/basket_page_model.dart';
 import 'package:bitapp/views/catalog/category_arguments_models.dart';
 import 'package:bitapp/views/catalog/catalog_page.dart';
 import 'package:bitapp/views/home/home_page.dart';
-import 'package:bitapp/views/ordering/delivery/delivery_arguments_models.dart';
-import 'package:bitapp/views/ordering/delivery/delivery_page.dart';
-import 'package:bitapp/views/ordering/light_registration/light_registration_page.dart';
-import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:bitapp/views/product/product_arguments_models.dart';
 import 'package:bitapp/views/product/product_page.dart';
 import 'package:bitapp/views/test/test.dart';
@@ -125,32 +121,33 @@ class _MyHomePageState extends State<NavigationPage> {
           return MaterialPageRoute(builder: (_) => page);
         },
       ),
-      Navigator(
-        onGenerateRoute: (settings) {
-          Widget page = const BasketPage();
-          if (settings.name == 'basket') {
-            page = const BasketPage(
-                // argument: settings.arguments as CategoryArgument,
-                );
-          }
-          if (settings.name == 'basket/lightRegistration') {
-            page = const LightRegistrationPage(
-                // argument: settings.arguments as CategoryArgument,
-                );
-          }
-          if (settings.name == 'basket/lightRegister/location') {
-            page = const LocationPage(
-                // argument: settings.arguments as CategoryArgument,
-                );
-          }
-          if (settings.name == 'order/delivery') {
-            page = OrderDeliveryPage(
-              argument: settings.arguments as OrderDeliveryArgument,
-            );
-          }
-          return MaterialPageRoute(builder: (_) => page);
-        },
-      ),
+      const BasketPage(),
+      // Navigator(
+      //   onGenerateRoute: (settings) {
+      //     Widget page = const BasketPage();
+      //     if (settings.name == 'basket') {
+      //       page = const BasketPage(
+      //           // argument: settings.arguments as CategoryArgument,
+      //           );
+      //     }
+      //     if (settings.name == 'basket/lightRegistration') {
+      //       page = const LightRegistrationPage(
+      //           // argument: settings.arguments as CategoryArgument,
+      //           );
+      //     }
+      //     if (settings.name == 'basket/lightRegister/location') {
+      //       page = const LocationPage(
+      //           // argument: settings.arguments as CategoryArgument,
+      //           );
+      //     }
+      //     if (settings.name == 'order/delivery') {
+      //       page = OrderDeliveryPage(
+      //         argument: settings.arguments as OrderDeliveryArgument,
+      //       );
+      //     }
+      //     return MaterialPageRoute(builder: (_) => page);
+      //   },
+      // ),
       Container(
         alignment: Alignment.center,
         child: const Text(

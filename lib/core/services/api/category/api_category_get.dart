@@ -7,7 +7,7 @@ import 'category_model.dart';
 class ApiCategoryGet {
   static Future<CategoryResponse> category(
       {required Map<String, dynamic> filter, required String select}) async {
-    _queryGeneratorGetCatgegory({required filter, required select}) {
+    _queryGeneratorGetCategory({required filter, required select}) {
       var filterList = [];
       filter.forEach((key, value) {
         filterList.add('filter[$key]=$value&');
@@ -19,7 +19,7 @@ class ApiCategoryGet {
     }
 
     final client = Dio();
-    String query = _queryGeneratorGetCatgegory(filter: filter, select: select);
+    String query = _queryGeneratorGetCategory(filter: filter, select: select);
     String patch = ApiPatchCategoryGet.list();
     Uri url = ApiHelper().uriGenerator(query: query, patch: patch);
     final request = await client.get(url.toString());

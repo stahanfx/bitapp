@@ -3,10 +3,10 @@ import 'package:bitapp/core/services/api/api_path.dart';
 import '../api_helper.dart';
 
 class ApiBasketPost {
-  static Future product({required productInfo}) async {
-    _queryGeneratorPostProduct({required Map<String, dynamic> productInfo}) {
+  static Future item({required itemInfo}) async {
+    _queryGeneratorPostItem({required Map<String, dynamic> itemInfo}) {
       var filterList = [];
-      productInfo.forEach((key, value) {
+      itemInfo.forEach((key, value) {
         filterList.add('$key=$value&');
       });
       var filterResult = filterList.join();
@@ -16,8 +16,8 @@ class ApiBasketPost {
     }
 
     final client = Dio();
-    String query = _queryGeneratorPostProduct(productInfo: productInfo);
-    String patch = ApiPatchBasket.postProduct();
+    String query = _queryGeneratorPostItem(itemInfo: itemInfo);
+    String patch = ApiPatchBasketPost.item();
     Uri url = ApiHelper().uriGenerator(query: query, patch: patch);
     final request = await client.get(url.toString());
     return request.data;

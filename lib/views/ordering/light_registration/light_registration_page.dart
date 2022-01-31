@@ -1,3 +1,4 @@
+import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -92,11 +93,13 @@ class _LightRegistrationWidget extends StatelessWidget {
       children: [
         ElevatedButton(
             onPressed: () async {
-              print('object');
               await model.postLightRegistration(
                   name: nameController.text, phone: phoneController.text);
               if (model.type == 'OK') {
-                Navigator.pushNamed(context, 'basket/lightRegister/location');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LocationPage()),
+                );
               }
             },
             child: AppText.b12(value: 'value123', color: AppColor.black)),

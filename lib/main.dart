@@ -7,6 +7,7 @@ import 'package:bitapp/views/ordering/light_registration/light_registration_mode
 import 'package:bitapp/views/ordering/light_registration/light_registration_page.dart';
 import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:bitapp/views/ordering/location/location_page_model.dart';
+import 'package:bitapp/views/ordering/payment/payment_page_model.dart';
 import 'package:bitapp/views/product/product_page.dart';
 import 'package:bitapp/views/test/test.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => LocationPageModel()),
           ChangeNotifierProvider(create: (_) => LightRegistrationPageModel()),
           ChangeNotifierProvider(create: (_) => OrderDeliveryPageModel()),
+          ChangeNotifierProvider(create: (_) => OrderPaymentPageModel()),
         ],
         child: MaterialApp(
           localizationsDelegates: context.localizationDelegates,
@@ -86,10 +88,9 @@ class MyApp extends StatelessWidget {
             'catalog': (context) => const CatalogPage(argument: null),
             'catalog/product': (context) => const ProductPage(argument: null),
             'basket': (context) => const BasketPage(),
-            'basket/location': (context) => const LocationPage(),
-            'basket/lightRegister/location': (context) => const LocationPage(),
-            'basket/lightRegistration': (context) =>
+            'order/lightRegistration': (context) =>
                 const LightRegistrationPage(),
+            'order/location': (context) => const LocationPage(),
             'order/delivery': (context) => const OrderDeliveryPage(
                   argument: null,
                 ),

@@ -60,6 +60,5 @@ class BasketItem extends Equatable {
   Map<String, dynamic> toJson() => _$BasketItemToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [id, quantity];
 }

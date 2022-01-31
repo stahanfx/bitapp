@@ -1,4 +1,5 @@
 import 'package:bitapp/views/ordering/delivery/delivery_arguments_models.dart';
+import 'package:bitapp/views/ordering/delivery/delivery_page.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -86,13 +87,25 @@ class _BasketPageState extends State<LocationPage> {
                   var location = model.locationModel[index];
                   return GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, 'order/delivery',
-                          arguments: OrderDeliveryArgument(
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OrderDeliveryPage(
+                              argument: OrderDeliveryArgument(
                             address: location.address,
                             code: location.code,
                             name: location.name,
                             sort: location.sort,
-                          ));
+                          )),
+                        ),
+                      );
+                      // Navigator.pushNamed(context, 'order/delivery',
+                      //     arguments: OrderDeliveryArgument(
+                      //       address: location.address,
+                      //       code: location.code,
+                      //       name: location.name,
+                      //       sort: location.sort,
+                      //     ));
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 1),

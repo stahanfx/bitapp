@@ -3,7 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'user_model.g.dart';
 
-//TODO:Перенести в USER!
 @JsonSerializable()
 class FuserResponse {
   @JsonKey(name: 'status')
@@ -21,7 +20,6 @@ class FuserResponse {
   Map<String, dynamic> toJson() => _$FuserResponseToJson(this);
 }
 
-//TODO:Перенести в USER!
 @JsonSerializable()
 class RegistrationResponse {
   @JsonKey(name: 'status')
@@ -50,11 +48,14 @@ class RegistrationResult extends Equatable {
   int? userId;
   @JsonKey(name: 'NEW_FUSER_ID')
   int? newFuserId;
+  @JsonKey(name: 'USER_PHONE')
+  String? userPhone;
 
   RegistrationResult({
     required this.message,
     required this.type,
     required this.userId,
+    required this.userPhone,
   });
 
   factory RegistrationResult.fromJson(Map<String, dynamic> json) =>
@@ -62,6 +63,5 @@ class RegistrationResult extends Equatable {
   Map<String, dynamic> toJson() => _$RegistrationResultToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
 }

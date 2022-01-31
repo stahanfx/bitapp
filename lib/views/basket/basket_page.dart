@@ -32,10 +32,14 @@ class _BasketPageState extends State<BasketPage> {
                         var userId = await BasketPageModel().getUserID();
                         if (userId == null) {
                           Navigator.pushNamed(
-                              context, 'basket/lightRegistration');
+                            context,
+                            'order/lightRegistration',
+                          );
                         } else {
                           Navigator.pushNamed(
-                              context, 'basket/lightRegister/location');
+                            context,
+                            'order/location',
+                          );
                         }
                       },
                       icon: const Icon(FontAwesomeIcons.check))
@@ -121,7 +125,7 @@ class BasketListWidget extends StatelessWidget {
                                     IconButton(
                                         onPressed: () async {
                                           await model.deleteItem(
-                                              productId: basketElement.id);
+                                              itemId: basketElement.id);
                                         },
                                         icon:
                                             const Icon(FontAwesomeIcons.trash)),
@@ -139,7 +143,7 @@ class BasketListWidget extends StatelessWidget {
                                           var plassQuantity =
                                               basketElement.quantity! + 1.0;
                                           await model.putItem(
-                                            id: basketElement.id,
+                                            itemId: basketElement.id,
                                             quantity: plassQuantity,
                                           );
                                         },
@@ -160,7 +164,7 @@ class BasketListWidget extends StatelessWidget {
                                           var minusQuantity =
                                               basketElement.quantity! - 1.0;
                                           await model.putItem(
-                                            id: basketElement.id,
+                                            itemId: basketElement.id,
                                             quantity: minusQuantity,
                                           );
                                         },

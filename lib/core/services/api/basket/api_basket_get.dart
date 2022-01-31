@@ -12,7 +12,7 @@ class ApiBasketGet {
 
     final client = Dio();
     String query = _queryGeneratorGetList(fuserId: fuserId);
-    String patch = ApiPatchBasket.getList();
+    String patch = ApiPatchBasketGet.list();
     Uri url = ApiHelper().uriGenerator(query: query, patch: patch);
     final request = await client.get(url.toString());
     final response = request.data;

@@ -5,28 +5,28 @@ import '../api_helper.dart';
 import '../api_path.dart';
 
 class ApiBasketDelete {
-  static Future product({required productId}) async {
-    _queryGeneratorDeleteProduct({required String productId}) {
-      return 'ID=$productId&';
+  static Future item({required itemId}) async {
+    _queryGeneratorDeleteItem({required String itemId}) {
+      return 'ITEM_ID=$itemId&';
     }
 
     final client = Dio();
-    String query = _queryGeneratorDeleteProduct(productId: productId);
-    String patch = ApiPatchBasket.deleteProduct();
+    String query = _queryGeneratorDeleteItem(itemId: itemId);
+    String patch = ApiPatchBasketDelete.item();
     Uri url = ApiHelper().uriGenerator(query: query, patch: patch);
     final request = await client.get(url.toString());
     return request.data;
   }
 
   static Future basket() async {
-    _queryGeneratorDeleteAllProduct() async {
+    _queryGeneratorDeleteAllBasket() async {
       var fuserId = await ApiUserGet.fuserID();
-      return 'FUSER=$fuserId&';
+      return 'FUSER_ID=$fuserId&';
     }
 
     final client = Dio();
-    String query = await _queryGeneratorDeleteAllProduct();
-    String patch = ApiPatchBasket.deleteBasket();
+    String query = await _queryGeneratorDeleteAllBasket();
+    String patch = ApiPatchBasketDelete.basket();
     Uri url = ApiHelper().uriGenerator(query: query, patch: patch);
     final request = await client.get(url.toString());
     return request.data;

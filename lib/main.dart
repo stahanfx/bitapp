@@ -11,7 +11,7 @@ import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:bitapp/views/ordering/location/location_page_model.dart';
 import 'package:bitapp/views/ordering/payment/payment_page_model.dart';
 import 'package:bitapp/views/product/product_page.dart';
-import 'package:bitapp/views/profile/profile_paga.dart';
+import 'package:bitapp/views/profile/profile_page.dart';
 import 'package:bitapp/views/profile/profile_page_model.dart';
 import 'package:bitapp/views/test/test.dart';
 import 'package:easy_localization/easy_localization.dart';

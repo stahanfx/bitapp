@@ -7,7 +7,7 @@ import 'package:bitapp/views/catalog/catalog_page.dart';
 import 'package:bitapp/views/home/home_page.dart';
 import 'package:bitapp/views/product/product_arguments_models.dart';
 import 'package:bitapp/views/product/product_page.dart';
-import 'package:bitapp/views/profile/profile_paga.dart';
+import 'package:bitapp/views/profile/profile_page.dart';
 import 'package:bitapp/views/test/test.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';

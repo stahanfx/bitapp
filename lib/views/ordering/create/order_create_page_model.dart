@@ -1,3 +1,5 @@
+import 'package:bitapp/core/services/api/order/create/api_create_post.dart';
+import 'package:bitapp/core/services/api/order/delivery/delivery_model.dart';
 import 'package:bitapp/core/services/api/user/api_user_get.dart';
 import 'package:bitapp/core/services/api/user/user_model.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,14 @@ class OrderCreatePageModel with ChangeNotifier {
   UserToCreate? userToCreateModel;
   DeliveryToCreate? deliveryToCreateModel;
   PaymentToCreate? paymentToCreateModel;
+
+  Future<void> clanModel() async {
+    basketToCreateModel = null;
+    userToCreateModel = null;
+    deliveryToCreateModel = null;
+    paymentToCreateModel = null;
+    notifyListeners();
+  }
 
   Future<void> addBasketInfo({required BasketToCreate data}) async {
     if (data.totalPrice!.isNotEmpty) {
@@ -40,5 +50,21 @@ class OrderCreatePageModel with ChangeNotifier {
       paymentToCreateModel = paymentData;
       notifyListeners();
     }
+  }
+
+  Future postOrder({
+    required deliveryId,
+    required paymentId,
+    required shipmentAddress,
+    required userComment,
+  }) async {
+    var responce = await ApiOrderPost.order(
+      deliveryId: deliveryId,
+      paymentId: paymentId,
+      shipmentAddress: shipmentAddress,
+      userComment: userComment,
+    );
+    notifyListeners();
+    return responce;
   }
 }

@@ -50,11 +50,15 @@ class RegistrationResult extends Equatable {
   int? newFuserId;
   @JsonKey(name: 'USER_PHONE')
   String? userPhone;
+  @JsonKey(name: 'USER_NAME')
+  String? userName;
 
   RegistrationResult({
     required this.message,
     required this.type,
     required this.userId,
+    required this.newFuserId,
+    required this.userName,
     required this.userPhone,
   });
 

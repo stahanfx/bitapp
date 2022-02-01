@@ -98,6 +98,7 @@ class BasketListWidget extends StatelessWidget {
                             } else {
                               var providerCreateOrder =
                                   context.read<OrderCreatePageModel>();
+                              providerCreateOrder.clanModel();
                               await providerCreateOrder.addBasketInfo(
                                   data: BasketToCreate(
                                       quantity:

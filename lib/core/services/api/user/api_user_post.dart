@@ -25,6 +25,12 @@ class ApiUserPost {
     await box.close();
   }
 
+  static Future localUserName({required userName}) async {
+    var box = await Hive.openBox('userBox');
+    await box.put('userName', userName);
+    await box.close();
+  }
+
   static Future lightRegistration({name, phone}) async {
     _queryGeneratorPostLightRegistration(
         {required name, required phone}) async {
@@ -52,6 +58,7 @@ class ApiUserPost {
       await ApiUserPost.localUserId(userId: responseData.result!.userId);
       await ApiUserPost.localUserPhone(
           userPhone: responseData.result?.userPhone);
+      await ApiUserPost.localUserName(userName: responseData.result?.userName);
     }
 
     return responseData;

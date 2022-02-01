@@ -78,14 +78,17 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
                             context.read<OrderCreatePageModel>();
                         createProvider.addDeliveryInfo(
                             deliveryData: DeliveryToCreate(
-                                deliveryId: model.id,
-                                deliveryName: model.name,
-                                deliveryCity: model.period,
-                                deliveryPrice: model.price));
+                          deliveryId: model.id,
+                          deliveryName: model.name,
+                          deliveryDescription: model.description,
+                          deliveryLogo: model.logo,
+                          deliveryCity: model.period,
+                          deliveryPrice: model.price,
+                        ));
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => OrderCreatePage(),
+                            builder: (context) => const OrderCreatePage(),
                           ),
                         );
                       },
@@ -98,7 +101,7 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: SizedBox(
                                       width: 80,
                                       height: 50,

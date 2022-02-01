@@ -56,7 +56,7 @@ class _OrderPaymentPageState extends State<OrderPaymentPage> {
         builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Center(child: Text('Загрузка способов оплаты....'));
+              return const Center(child: Text('Загрузка способов оплаты...'));
             default:
               if (snapshot.hasError) {
                 return Padding(

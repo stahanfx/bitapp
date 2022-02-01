@@ -37,6 +37,7 @@ class UserToCreate {
 class DeliveryToCreate {
   String? deliveryId;
   String? deliveryName;
+  String? deliveryDescription;
   String? deliveryCity;
   String? deliveryLogo;
   double? deliveryPrice;
@@ -44,7 +45,9 @@ class DeliveryToCreate {
   DeliveryToCreate({
     required this.deliveryId,
     required this.deliveryName,
+    required this.deliveryDescription,
     required this.deliveryCity,
+    required this.deliveryLogo,
     required this.deliveryPrice,
   });
 }

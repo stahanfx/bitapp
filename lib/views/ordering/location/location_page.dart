@@ -1,3 +1,4 @@
+import 'package:bitapp/theme/widgets/elements/text_field_widget.dart';
 import 'package:bitapp/views/ordering/delivery/delivery_arguments_models.dart';
 import 'package:bitapp/views/ordering/delivery/delivery_page.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -50,32 +51,17 @@ class _BasketPageState extends State<LocationPage> {
             // color: AppColor.black,
             height: 80,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                keyboardType: TextInputType.text,
-                controller: textController,
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.r),
-                      borderSide: const BorderSide(color: Colors.white),
-                      gapPadding: 10.h),
-                  prefixIconConstraints:
-                      BoxConstraints(minHeight: 0, minWidth: 60.h),
-                  suffixIconConstraints:
-                      BoxConstraints(minHeight: 0, minWidth: 60.h),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.r),
-                      borderSide: const BorderSide(color: Colors.white),
-                      gapPadding: 10.h),
-                ),
-                onChanged: (text) async {
-                  EasyDebounce.debounce(
-                      'getLocationList', const Duration(seconds: 1), () {
-                    provider.getLocationList(textController.text);
-                  });
-                },
-              ),
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: AppTextField(
+                  controllerValue: textController,
+                  hintString: 'Введите город для поиска',
+                  onChanged: (text) async {
+                    EasyDebounce.debounce(
+                        'getLocationList', const Duration(seconds: 1), () {
+                      provider.getLocationList(textController.text);
+                    });
+                  },
+                )),
           ),
           Expanded(
             child:

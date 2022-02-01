@@ -1,5 +1,7 @@
 import 'package:bitapp/core/services/api/file/image_services.dart';
 import 'package:bitapp/core/services/api/order/payment/payment_model.dart';
+import 'package:bitapp/views/ordering/create/order_arguments_models.dart';
+import 'package:bitapp/views/ordering/create/order_create_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +69,20 @@ class _OrderPaymentPageState extends State<OrderPaymentPage> {
                   itemCount: paymentListModel.length,
                   itemBuilder: (BuildContext context, int index) {
                     var model = paymentListModel[index];
-                    return Padding(
+                    return GestureDetector(
+                      onTap: () {
+                        var providerOrderCreate =
+                            context.read<OrderCreatePageModel>();
+                        providerOrderCreate.addPaymentInfo(
+                            paymentData: PaymentToCreate(
+                          paymentId: model.id,
+                          paymentName: model.name,
+                          paymentDescription: model.description,
+                          paymentLogo: model.logo,
+                        ));
+                        Navigator.pushNamed(context, 'order');
+                      },
+                      child: Padding(
                         padding: const EdgeInsets.only(bottom: 2),
                         child: Container(
                           color: AppColor.white,
@@ -101,7 +116,9 @@ class _OrderPaymentPageState extends State<OrderPaymentPage> {
                               ],
                             ),
                           ),
-                        ));
+                        ),
+                      ),
+                    );
                   },
                 );
               }

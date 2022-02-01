@@ -73,11 +73,14 @@ class UserModel {
   @JsonKey(name: 'fuser_id')
   int? fuserId;
   @JsonKey(name: 'result')
+  String? name;
+  @JsonKey(name: 'resultName')
   String? phoneNumber;
 
   UserModel({
     required this.userId,
     required this.fuserId,
+    required this.name,
     required this.phoneNumber,
   });
 

@@ -1,6 +1,9 @@
 import 'package:bitapp/core/services/api/basket/basket_model.dart';
 import 'package:bitapp/core/services/api/file/image_services.dart';
 import 'package:bitapp/core/services/api/order/delivery/delivery_model.dart';
+import 'package:bitapp/views/ordering/create/order_arguments_models.dart';
+import 'package:bitapp/views/ordering/create/order_create_page.dart';
+import 'package:bitapp/views/ordering/create/order_create_page_model.dart';
 import 'package:bitapp/views/ordering/delivery/delivery_arguments_models.dart';
 import 'package:bitapp/views/ordering/delivery/delivery_page_model.dart';
 import 'package:bitapp/views/ordering/payment/payment_arguments_models.dart';
@@ -71,13 +74,18 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
                     var model = deliveryListModel[index];
                     return GestureDetector(
                       onTap: () {
+                        var createProvider =
+                            context.read<OrderCreatePageModel>();
+                        createProvider.addDeliveryInfo(
+                            deliveryData: DeliveryToCreate(
+                                deliveryId: model.id,
+                                deliveryName: model.name,
+                                deliveryCity: model.period,
+                                deliveryPrice: model.price));
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => OrderPaymentPage(
-                              argument:
-                                  OrderPaymentArgument(deliveryCode: model.id),
-                            ),
+                            builder: (context) => OrderCreatePage(),
                           ),
                         );
                       },

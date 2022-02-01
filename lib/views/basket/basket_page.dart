@@ -2,6 +2,9 @@ import 'package:bitapp/core/helper/text_cleaner.dart';
 import 'package:bitapp/core/services/api/basket/basket_model.dart';
 import 'package:bitapp/theme/styles/color_style.dart';
 import 'package:bitapp/theme/styles/font_style.dart';
+import 'package:bitapp/views/ordering/create/order_arguments_models.dart';
+import 'package:bitapp/views/ordering/create/order_create_page.dart';
+import 'package:bitapp/views/ordering/create/order_create_page_model.dart';
 import 'package:bitapp/views/profile/profile_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +20,6 @@ class BasketPage extends StatefulWidget {
 }
 
 class _BasketPageState extends State<BasketPage> {
-  // var model = [];
-
   @override
   Widget build(BuildContext context) {
     return Consumer<BasketPageModel>(builder: (context, model, child) {
@@ -95,9 +96,21 @@ class BasketListWidget extends StatelessWidget {
                                 'order/lightRegistration',
                               );
                             } else {
-                              Navigator.pushNamed(
+                              var providerCreateOrder =
+                                  context.read<OrderCreatePageModel>();
+                              await providerCreateOrder.addBasketInfo(
+                                  data: BasketToCreate(
+                                      quantity:
+                                          _calcBasketQuant(model.basketModel)
+                                              .toString(),
+                                      totalPrice:
+                                          _calcBasketPrice(model.basketModel)
+                                              .toString()));
+                              Navigator.push(
                                 context,
-                                'order/location',
+                                MaterialPageRoute(
+                                  builder: (context) => OrderCreatePage(),
+                                ),
                               );
                             }
                           },

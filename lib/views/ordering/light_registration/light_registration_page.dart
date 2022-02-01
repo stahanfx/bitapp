@@ -1,3 +1,4 @@
+import 'package:bitapp/theme/widgets/elements/text_field_widget.dart';
 import 'package:bitapp/views/ordering/location/location_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,46 +17,26 @@ class LightRegistrationPage extends StatelessWidget {
     final nameController = TextEditingController();
     final phoneController = TextEditingController();
     return Scaffold(
+      backgroundColor: AppColor.backgroun,
       appBar: AppBar(
-        title: AppText.b12(value: "value", color: AppColor.black),
+        title:
+            AppText.b12(value: "Контактная информация", color: AppColor.black),
       ),
       body: Center(
         child: Column(
           children: [
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: nameController,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.r),
-                    borderSide: const BorderSide(color: Colors.white),
-                    gapPadding: 10.h),
-                prefixIconConstraints:
-                    BoxConstraints(minHeight: 0, minWidth: 60.h),
-                suffixIconConstraints:
-                    BoxConstraints(minHeight: 0, minWidth: 60.h),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.r),
-                    borderSide: const BorderSide(color: Colors.white),
-                    gapPadding: 10.h),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AppTextField(
+                controllerValue: nameController,
+                hintString: 'Ваше имя',
               ),
             ),
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: phoneController,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.r),
-                    borderSide: const BorderSide(color: Colors.white),
-                    gapPadding: 10.h),
-                prefixIconConstraints:
-                    BoxConstraints(minHeight: 0, minWidth: 60.h),
-                suffixIconConstraints:
-                    BoxConstraints(minHeight: 0, minWidth: 60.h),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.r),
-                    borderSide: const BorderSide(color: Colors.white),
-                    gapPadding: 10.h),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AppTextField(
+                controllerValue: phoneController,
+                hintString: 'Номер телефона',
               ),
             ),
             Consumer<LightRegistrationPageModel>(
@@ -91,18 +72,26 @@ class _LightRegistrationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ElevatedButton(
-            onPressed: () async {
-              await model.postLightRegistration(
-                  name: nameController.text, phone: phoneController.text);
-              if (model.type == 'OK') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LocationPage()),
-                );
-              }
-            },
-            child: AppText.b12(value: 'value123', color: AppColor.black)),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            height: 60,
+            width: double.infinity,
+            child: ElevatedButton(
+                onPressed: () async {
+                  await model.postLightRegistration(
+                      name: nameController.text, phone: phoneController.text);
+                  if (model.type == 'OK') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LocationPage()),
+                    );
+                  }
+                },
+                child: AppText.b12(value: 'ПРОДОЛЖИТЬ', color: AppColor.black)),
+          ),
+        ),
         AppText.b12(value: model.type, color: AppColor.black),
         AppText.b12(value: model.massage, color: AppColor.black),
       ],

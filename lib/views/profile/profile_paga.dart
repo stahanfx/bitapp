@@ -9,7 +9,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var providerProfile = context.watch<ProfilePageModel>();
+    var providerProfile = context.read<ProfilePageModel>();
     providerProfile.getUserModel();
     return Consumer<ProfilePageModel>(
       builder: (context, model, child) {

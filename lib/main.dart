@@ -1,6 +1,8 @@
 import 'package:bitapp/views/basket/basket_page.dart';
 import 'package:bitapp/views/catalog/catalog_model.dart';
 import 'package:bitapp/views/home/home_model.dart';
+import 'package:bitapp/views/ordering/create/order_create_page.dart';
+import 'package:bitapp/views/ordering/create/order_create_page_model.dart';
 import 'package:bitapp/views/ordering/delivery/delivery_page.dart';
 import 'package:bitapp/views/ordering/delivery/delivery_page_model.dart';
 import 'package:bitapp/views/ordering/light_registration/light_registration_model.dart';
@@ -66,6 +68,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => LightRegistrationPageModel()),
           ChangeNotifierProvider(create: (_) => OrderDeliveryPageModel()),
           ChangeNotifierProvider(create: (_) => OrderPaymentPageModel()),
+          ChangeNotifierProvider(create: (_) => OrderCreatePageModel()),
           ChangeNotifierProvider(
               create: (_) => ProfilePageModel(), lazy: false),
         ],
@@ -95,6 +98,7 @@ class MyApp extends StatelessWidget {
             'catalog': (context) => const CatalogPage(argument: null),
             'catalog/product': (context) => const ProductPage(argument: null),
             'basket': (context) => const BasketPage(),
+            'order': (context) => OrderCreatePage(),
             'order/lightRegistration': (context) =>
                 const LightRegistrationPage(),
             'order/location': (context) => const LocationPage(),

@@ -19,7 +19,17 @@ class CategoryElementBuilder {
       padding: EdgeInsets.symmetric(
           vertical: AppSize().w10, horizontal: AppSize().h10 * 1.5),
       child: Container(
-          color: AppColor.white,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.05),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: Offset(0, 1), // changes position of shadow
+                ),
+              ]),
           child: Padding(
             padding: EdgeInsets.symmetric(
                 vertical: AppSize().w10, horizontal: AppSize().h10 * 2),

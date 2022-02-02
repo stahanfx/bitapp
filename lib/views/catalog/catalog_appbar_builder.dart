@@ -115,7 +115,7 @@ class CatalogNavigationAppbar extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {},
               child: AppText.b14(value: 'Фильтр', color: AppColor.black),
-              style: ButtonStyleAppBar().textButton,
+              style: ButtonStyleAppBar.textButton,
             ),
           ),
         ],
@@ -197,7 +197,7 @@ class CatalogLightAppbar extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {},
               child: AppText.b14(value: 'Фильтр', color: AppColor.black),
-              style: ButtonStyleAppBar().textButton,
+              style: ButtonStyleAppBar.textButton,
             ),
           ),
         ],

@@ -28,21 +28,21 @@ _homeAppBarLight(context) {
       value: 'OUIPERFUME',
       color: AppColor.black,
     ),
-    leading: IconButton(
-      icon: const Icon(
-        FontAwesomeIcons.gift,
-      ),
-      onPressed: () {},
-    ),
-    actions: [
-      IconButton(
-        icon: const Icon(
-          FontAwesomeIcons.heart,
-        ),
-        onPressed: () {
-          Navigator.pushNamed(context, 'product');
-        },
-      ),
-    ],
+    // leading: IconButton(
+    //   icon: const Icon(
+    //     FontAwesomeIcons.gift,
+    //   ),
+    //   onPressed: () {},
+    // ),
+    // actions: [
+    //   IconButton(
+    //     icon: const Icon(
+    //       FontAwesomeIcons.heart,
+    //     ),
+    //     onPressed: () {
+    //       Navigator.pushNamed(context, 'product');
+    //     },
+    //   ),
+    // ],
   );
 }

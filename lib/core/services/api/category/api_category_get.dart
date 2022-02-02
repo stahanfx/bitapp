@@ -19,11 +19,14 @@ class ApiCategoryGet {
     }
 
     final client = Dio();
+    client.options.headers["Access-Control-Allow-Origin"] = "*";
     String query = _queryGeneratorGetCategory(filter: filter, select: select);
     String patch = ApiPatchCategoryGet.list();
     Uri url = ApiHelper().uriGenerator(query: query, patch: patch);
     final request = await client.get(url.toString());
+    print(request.data);
     final response = await request.data;
+
     final responseData = CategoryResponse.fromJson(response);
     return responseData;
   }

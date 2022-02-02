@@ -40,7 +40,7 @@ class _MyHomePageState extends State<NavigationPage> {
     final basketProvider = context.watch<BasketPageModel>();
     final basketCount = basketProvider.basketModel.length;
 
-    List<int> _badgeCounts = List<int>.generate(5, (index) => index);
+    List<int> _badgeCounts = List<int>.generate(99, (index) => index);
     List<bool> _badgeShows = List<bool>.generate(5, (index) => true);
 
     return SizedBox(

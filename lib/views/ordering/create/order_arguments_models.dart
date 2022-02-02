@@ -1,6 +1,6 @@
 class BasketToCreate {
   String? quantity;
-  String? totalPrice;
+  double? totalPrice;
 
   BasketToCreate({
     required this.quantity,

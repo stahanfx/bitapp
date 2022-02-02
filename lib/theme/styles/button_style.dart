@@ -4,7 +4,7 @@ import 'color_style.dart';
 import 'sized_style.dart';
 
 class ButtonStyleAppBar {
-  final ButtonStyle textButton = ButtonStyle(
+  static final ButtonStyle textButton = ButtonStyle(
     backgroundColor: MaterialStateProperty.all(AppColor.white),
     elevation: MaterialStateProperty.all(0),
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -17,15 +17,15 @@ class ButtonStyleAppBar {
     ),
   );
 
-  final ButtonStyle iconButton = ElevatedButton.styleFrom();
-  final ButtonStyle iconTextButton = ElevatedButton.styleFrom();
+  static final ButtonStyle iconButton = ElevatedButton.styleFrom();
+  static final ButtonStyle iconTextButton = ElevatedButton.styleFrom();
 }
 
 class AppButtonStuleElevated {
-  final ButtonStyle textButton = ElevatedButton.styleFrom(
+  static final ButtonStyle textButton = ElevatedButton.styleFrom(
     primary: AppColor.activeButton,
     elevation: 0,
   );
-  final ButtonStyle iconButton = ElevatedButton.styleFrom();
-  final ButtonStyle iconTextButton = ElevatedButton.styleFrom();
+  static final ButtonStyle iconButton = ElevatedButton.styleFrom();
+  static final ButtonStyle iconTextButton = ElevatedButton.styleFrom();
 }

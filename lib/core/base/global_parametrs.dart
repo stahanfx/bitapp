@@ -1,6 +1,6 @@
 class AppGlobalSettings {
   static const String baseSheme = 'https';
-  static const String baseHost = 'oui.ru';
+  static const String baseHost = 'www.oui.ru';
   static const String baseApiAddress = 'bitapi';
   static const String siteUrl = '$baseSheme://$baseHost';
   static const String baseTradeCatalog = '38';

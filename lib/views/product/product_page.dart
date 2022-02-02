@@ -153,7 +153,7 @@ class ProductBuilder extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          style: AppButtonStuleElevated().textButton,
+                          style: AppButtonStuleElevated.textButton,
                           onPressed: () async {
                             await ApiBasketPost.item(itemInfo: {
                               'FUSER_ID': await ApiUserGet.fuserID(),

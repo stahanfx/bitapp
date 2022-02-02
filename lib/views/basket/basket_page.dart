@@ -100,13 +100,13 @@ class BasketListWidget extends StatelessWidget {
                                   context.read<OrderCreatePageModel>();
                               providerCreateOrder.clanModel();
                               await providerCreateOrder.addBasketInfo(
-                                  data: BasketToCreate(
-                                      quantity:
-                                          _calcBasketQuant(model.basketModel)
-                                              .toString(),
-                                      totalPrice:
-                                          _calcBasketPrice(model.basketModel)
-                                              .toString()));
+                                data: BasketToCreate(
+                                  quantity: _calcBasketQuant(model.basketModel)
+                                      .toString(),
+                                  totalPrice:
+                                      _calcBasketPrice(model.basketModel),
+                                ),
+                              );
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -133,9 +133,20 @@ class BasketListWidget extends StatelessWidget {
                   double countItem = basketElement.quantity as double;
                   double finalCost = priceItem * countItem;
                   return Padding(
-                    padding: const EdgeInsets.only(bottom: 1),
+                    padding: const EdgeInsets.all(10),
                     child: Container(
-                      color: AppColor.white,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.05),
+                              spreadRadius: 1,
+                              blurRadius: 7,
+                              offset: const Offset(
+                                  0, 1), // changes position of shadow
+                            ),
+                          ]),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Column(
@@ -144,7 +155,7 @@ class BasketListWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
-                                  width: 300,
+                                  width: 280,
                                   child: AppText.b12(
                                       value: TextCleaner(
                                               baseText:
@@ -164,8 +175,7 @@ class BasketListWidget extends StatelessWidget {
                                           await model.deleteItem(
                                               itemId: basketElement.id);
                                         },
-                                        icon:
-                                            const Icon(FontAwesomeIcons.trash)),
+                                        icon: const Icon(Icons.remove)),
                                   ],
                                 ),
                               ],
@@ -188,7 +198,7 @@ class BasketListWidget extends StatelessWidget {
                                     Container(
                                       width: 30,
                                       height: 30,
-                                      color: Colors.amber,
+                                      color: AppColor.backgroun,
                                       child: Center(
                                         child: AppText.b14(
                                             value: basketElement.quantity

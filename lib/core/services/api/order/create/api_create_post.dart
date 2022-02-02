@@ -1,13 +1,14 @@
 import 'package:bitapp/core/base/global_parametrs.dart';
-import 'package:bitapp/core/services/api/order/delivery/delivery_model.dart';
 import 'package:bitapp/core/services/api/user/api_user_get.dart';
+import 'package:bitapp/views/ordering/create/order_create_page.dart';
 import 'package:dio/dio.dart';
 
 import '../../api_helper.dart';
 import '../../api_path.dart';
+import 'order_create_model.dart';
 
 class ApiOrderPost {
-  static Future<DeliveryOrderResponse> order({
+  static Future<OrderResponse> order({
     required deliveryId,
     required paymentId,
     required shipmentAddress,
@@ -29,6 +30,6 @@ class ApiOrderPost {
     Uri url = ApiHelper().uriGenerator(query: query, patch: patch);
     final request = await client.get(url.toString());
     final response = await request.data;
-    return response;
+    return OrderResponse.fromJson(response);
   }
 }

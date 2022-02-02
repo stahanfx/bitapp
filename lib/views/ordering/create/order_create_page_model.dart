@@ -21,7 +21,7 @@ class OrderCreatePageModel with ChangeNotifier {
   }
 
   Future<void> addBasketInfo({required BasketToCreate data}) async {
-    if (data.totalPrice!.isNotEmpty) {
+    if (data.totalPrice!.isFinite) {
       basketToCreateModel = data;
       notifyListeners();
     }

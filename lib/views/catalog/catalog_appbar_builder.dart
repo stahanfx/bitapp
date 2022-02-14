@@ -20,7 +20,7 @@ class CatalogPageAppBarBuilder extends StatelessWidget
       : super(key: key);
 
   @override
-  Size get preferredSize => Size.fromHeight(AppSize().h10 * 2);
+  Size get preferredSize => Size.fromHeight(AppSize.h10 * 2);
 
   @override
   Widget build(BuildContext context) {
@@ -91,34 +91,6 @@ class CatalogNavigationAppbar extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 5,
-              top: 10,
-              bottom: 10,
-            ),
-            child: CircleAvatar(
-              backgroundColor: AppColor.white,
-              child: IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: AppColor.black,
-                  size: 20,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: AppText.b14(value: 'Фильтр', color: AppColor.black),
-              style: ButtonStyleAppBar.textButton,
-            ),
-          ),
-        ],
         flexibleSpace: FlexibleSpaceBar(
           background: Padding(
             padding: const EdgeInsets.only(top: 100),
@@ -137,10 +109,8 @@ class CatalogNavigationAppbar extends StatelessWidget {
 }
 
 class CatalogLightAppbar extends StatelessWidget {
-  const CatalogLightAppbar({
-    Key? key,
-    required this.argument,
-  }) : super(key: key);
+  const CatalogLightAppbar({Key? key, required this.argument})
+      : super(key: key);
 
   final CategoryArgument argument;
 
@@ -149,58 +119,19 @@ class CatalogLightAppbar extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       sliver: SliverAppBar(
-        centerTitle: false,
         pinned: true,
         title: AppText.b20(
           value: '${argument.title}',
           color: AppColor.black,
         ),
-        leading: Padding(
-          padding: const EdgeInsets.only(
-            right: 5,
-            top: 10,
-            bottom: 10,
+        leading: IconButton(
+          icon: Icon(
+            FontAwesomeIcons.arrowLeft,
+            color: AppColor.black,
+            size: 20,
           ),
-          child: CircleAvatar(
-            backgroundColor: AppColor.white,
-            child: IconButton(
-              icon: Icon(
-                FontAwesomeIcons.arrowLeft,
-                color: AppColor.black,
-                size: 20,
-              ),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 5,
-              top: 10,
-              bottom: 10,
-            ),
-            child: CircleAvatar(
-              backgroundColor: AppColor.white,
-              child: IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: AppColor.black,
-                  size: 20,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: AppText.b14(value: 'Фильтр', color: AppColor.black),
-              style: ButtonStyleAppBar.textButton,
-            ),
-          ),
-        ],
       ),
     );
   }

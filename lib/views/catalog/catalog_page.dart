@@ -87,8 +87,8 @@ class _CatalogPageState extends State<CatalogPage> {
           case ConnectionState.waiting:
             return Center(
               child: SizedBox(
-                height: AppSize().h10 * 3,
-                width: AppSize().w10 * 3,
+                height: AppSize.h10 * 3,
+                width: AppSize.w10 * 3,
                 child: const CircularProgressIndicator(),
               ),
             );

@@ -9,7 +9,7 @@ class HomePageAppBarBuilder extends StatelessWidget with PreferredSizeWidget {
   const HomePageAppBarBuilder({Key? key}) : super(key: key);
 
   @override
-  Size get preferredSize => Size.fromHeight(AppSize().h10 * 6);
+  Size get preferredSize => Size.fromHeight(AppSize.h10 * 6);
 
   @override
   Widget build(BuildContext context) {

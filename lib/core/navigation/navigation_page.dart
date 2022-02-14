@@ -44,15 +44,15 @@ class _MyHomePageState extends State<NavigationPage> {
     List<bool> _badgeShows = List<bool>.generate(5, (index) => true);
 
     return SizedBox(
-      height: AppSize().h10 * 8,
+      height: AppSize.h10 * 8,
       child: ClipRRect(
         borderRadius: BorderRadius.only(
-          topRight: Radius.circular(AppSize().r10 * 4),
-          topLeft: Radius.circular(AppSize().r10 * 4),
+          topRight: Radius.circular(AppSize.r10 * 4),
+          topLeft: Radius.circular(AppSize.r10 * 4),
         ),
         child: CustomNavigationBar(
           //TODO: Доделать и переписать на провайдер
-          iconSize: AppSize().h10 * 2.2,
+          iconSize: AppSize.h10 * 2.2,
           selectedColor: Colors.white,
           strokeColor: Colors.white,
           unSelectedColor: const Color(0x90ffffff),

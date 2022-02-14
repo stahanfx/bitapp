@@ -49,7 +49,7 @@ class CategoryListVerticalText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppSize().h10 * 70,
+      height: AppSize.h10 * 70,
       child: ListView.builder(
         // cacheExtent: 800,
         scrollDirection: Axis.vertical,
@@ -82,16 +82,16 @@ class CategoryListTwoVerticalText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: AppSize().h10,
+        horizontal: AppSize.h10,
       ),
       child: SizedBox(
-        height: AppSize().h10 * 80,
+        height: AppSize.h10 * 80,
         child: GridView.builder(
-          padding: EdgeInsets.only(top: 0, bottom: AppSize().h10 * 18),
+          padding: EdgeInsets.only(top: 0, bottom: AppSize.h10 * 18),
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: AppSize().w10 * 20,
-            // mainAxisSpacing: AppSize().w10 * 0.1,
-            crossAxisSpacing: AppSize().w10,
+            maxCrossAxisExtent: AppSize.w10 * 20,
+            // mainAxisSpacing: AppSize.w10 * 0.1,
+            crossAxisSpacing: AppSize.w10,
             childAspectRatio: 1.5,
           ),
           // cacheExtent: 800,

@@ -17,7 +17,7 @@ class CategoryElementBuilder {
   catalogOneRow() {
     return Padding(
       padding: EdgeInsets.symmetric(
-          vertical: AppSize().w10, horizontal: AppSize().h10 * 1.5),
+          vertical: AppSize.w10, horizontal: AppSize.h10 * 1.5),
       child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -32,14 +32,14 @@ class CategoryElementBuilder {
               ]),
           child: Padding(
             padding: EdgeInsets.symmetric(
-                vertical: AppSize().w10, horizontal: AppSize().h10 * 2),
+                vertical: AppSize.w10, horizontal: AppSize.h10 * 2),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppText.b14(value: categoryItem.name, color: AppColor.black),
                 SizedBox(
-                    width: AppSize().w10 * 5,
-                    height: AppSize().h10 * 5,
+                    width: AppSize.w10 * 5,
+                    height: AppSize.h10 * 5,
                     child: GetImageApi(image: categoryItem.picture)),
               ],
             ),
@@ -50,25 +50,35 @@ class CategoryElementBuilder {
   catalogTwoColumn() {
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: AppSize().w10 * 0.5,
+        vertical: AppSize.w10 * 0.5,
       ),
       child: Container(
-          color: AppColor.white,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.05),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: Offset(0, 1), // changes position of shadow
+                ),
+              ]),
           child: Padding(
             padding: EdgeInsets.symmetric(
-              vertical: AppSize().w10,
-              horizontal: AppSize().h10,
+              vertical: AppSize.w10,
+              horizontal: AppSize.h10,
             ),
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: AppSize().w10 * 5,
-                  height: AppSize().h10 * 5,
+                  width: AppSize.w10 * 5,
+                  height: AppSize.h10 * 5,
                   child: GetImageApi(image: categoryItem.picture),
                 ),
                 SizedBox(
-                  height: AppSize().h10 * 0.5,
+                  height: AppSize.h10 * 0.5,
                 ),
                 AppText.t12(
                     textAlign: TextAlign.center,

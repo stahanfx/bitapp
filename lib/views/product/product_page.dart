@@ -97,7 +97,7 @@ class ProductBuilder extends StatelessWidget {
                 color: Colors.white,
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: AppSize().h10 * 4, bottom: AppSize().h10 * 2),
+                      top: AppSize.h10 * 4, bottom: AppSize.h10 * 2),
                   child: GetImageApi(image: productElement.detailPicture),
                 ),
               ),
@@ -106,7 +106,7 @@ class ProductBuilder extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                  vertical: AppSize().w10, horizontal: AppSize().w10),
+                  vertical: AppSize.w10, horizontal: AppSize.w10),
               child: Center(
                 child: AppText.b14(
                     value: productElement.name, color: AppColor.black),
@@ -262,9 +262,9 @@ class ProductBuilder extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.only(
-                bottom: AppSize().h10 * 10,
-                left: AppSize().w10,
-                right: AppSize().w10,
+                bottom: AppSize.h10 * 10,
+                left: AppSize.w10,
+                right: AppSize.w10,
               ),
               child: AppText.t14(
                   value: productElement.detailText, color: AppColor.black),

@@ -10,7 +10,7 @@ class ButtonStyleAppBar {
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
-          AppSize().r10 * 1.6,
+          AppSize.r10 * 1.6,
         ),
         // side: BorderSide(color: Colors.red),
       ),

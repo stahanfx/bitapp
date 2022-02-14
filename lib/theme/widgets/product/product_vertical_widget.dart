@@ -18,12 +18,12 @@ class ProductGridBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: AppSize().h10),
+      padding: EdgeInsets.symmetric(horizontal: AppSize.h10),
       sliver: SliverGrid(
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: AppSize().w10 * 20,
-          mainAxisSpacing: AppSize().w10,
-          crossAxisSpacing: AppSize().w10,
+          maxCrossAxisExtent: AppSize.w10 * 20,
+          mainAxisSpacing: AppSize.w10,
+          crossAxisSpacing: AppSize.w10,
           childAspectRatio: 0.743,
         ),
         delegate: SliverChildBuilderDelegate(
@@ -58,13 +58,13 @@ class ProductElementWidget extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSize().r10 * 1.6),
+          borderRadius: BorderRadius.circular(AppSize.r10 * 1.6),
           color: AppColor.white,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.1),
-              spreadRadius: AppSize().r10 / 10,
-              blurRadius: AppSize().r10 / 10,
+              spreadRadius: AppSize.r10 / 10,
+              blurRadius: AppSize.r10 / 10,
               offset: const Offset(0, 1), // changes position of shadow
             ),
           ],
@@ -75,17 +75,17 @@ class ProductElementWidget extends StatelessWidget {
             // ignore: sized_box_for_whitespace
             Center(
               child: Padding(
-                padding: EdgeInsets.only(top: AppSize().h10),
+                padding: EdgeInsets.only(top: AppSize.h10),
                 child: SizedBox(
-                    width: AppSize().w10 * 13,
-                    height: AppSize().h10 * 13,
+                    width: AppSize.w10 * 13,
+                    height: AppSize.h10 * 13,
                     child: Center(
                         child: GetImageApi(image: product.previewPicture))),
               ),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(
-                  AppSize().w10, AppSize().h10, AppSize().w10, AppSize().h10),
+                  AppSize.w10, AppSize.h10, AppSize.w10, AppSize.h10),
               child: AppText.b12(
                 value: product.price,
                 color: AppColor.activeButton,
@@ -93,9 +93,9 @@ class ProductElementWidget extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(
-                  AppSize().w10, AppSize().h10, AppSize().w10, AppSize().h10),
+                  AppSize.w10, AppSize.h10, AppSize.w10, AppSize.h10),
               child: SizedBox(
-                height: AppSize().h10 * 3,
+                height: AppSize.h10 * 3,
                 child: AppText.b12(
                   textAlign: TextAlign.start,
                   value: TextCleaner(

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 3,
+  "extra_config": {},
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "name": "TestServices",
+  "port": 8080,
+  "endpoints": [
+    {
+      "endpoint": "/v1/send_sms",
+      "method": "POST",
+      "extra_config": {},
+      "input_query_strings": [
+        "phone",
+        "message",
+        "sender"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/send_sms.php",
+          "method": "POST",
+          "extra_config": {},
+          "host": [
+            "http://178.219.44.74:8181"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    }
+  ]
+}
